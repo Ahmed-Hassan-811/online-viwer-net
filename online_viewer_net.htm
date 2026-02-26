@@ -1,0 +1,1755 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Offline Coding Assistant - HTML, CSS, JavaScript Reference</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: linear-gradient(to bottom right, #0f172a, #312e81, #0f172a);
+            color: white;
+            min-height: 100vh;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Header */
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .header-title {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            margin-bottom: 8px;
+        }
+
+        .header-title h1 {
+            font-size: 2.5rem;
+            background: linear-gradient(to right, #818cf8, #a78bfa);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .header p {
+            color: #d1d5db;
+            margin: 10px 0;
+        }
+
+        .stats {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            font-size: 0.9rem;
+            color: #9ca3af;
+        }
+
+        /* Termux Guide */
+        .guide-card {
+            background: rgba(30, 41, 59, 0.5);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(99, 102, 241, 0.3);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 24px;
+        }
+
+        .guide-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .guide-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+
+        .guide-content {
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(99, 102, 241, 0.2);
+            display: none;
+        }
+
+        .guide-content.show {
+            display: block;
+        }
+
+        .guide-section {
+            margin-bottom: 20px;
+        }
+
+        .guide-section h4 {
+            color: #93c5fd;
+            margin-bottom: 10px;
+        }
+
+        .guide-section ol, .guide-section ul {
+            margin-left: 20px;
+            color: #d1d5db;
+        }
+
+        .guide-section li {
+            margin: 8px 0;
+        }
+
+        /* Search and Filters */
+        .search-card {
+            background: rgba(30, 41, 59, 0.5);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(99, 102, 241, 0.2);
+            border-radius: 12px;
+            padding: 24px;
+            margin-bottom: 24px;
+        }
+
+        .search-input-wrapper {
+            position: relative;
+            margin-bottom: 16px;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 12px 12px 12px 45px;
+            background: rgba(51, 65, 85, 0.5);
+            border: 1px solid rgba(99, 102, 241, 0.3);
+            border-radius: 8px;
+            color: white;
+            font-size: 1rem;
+        }
+
+        .search-input:focus {
+            outline: none;
+            border-color: #6366f1;
+            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.2);
+        }
+
+        .search-icon {
+            position: absolute;
+            left: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #9ca3af;
+        }
+
+        .button-row {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin-bottom: 16px;
+        }
+
+        .btn {
+            padding: 10px 16px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.2s;
+        }
+
+        .btn-primary {
+            background: #6366f1;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #4f46e5;
+        }
+
+        .btn-success {
+            background: #10b981;
+            color: white;
+        }
+
+        .btn-success:hover {
+            background: #059669;
+        }
+
+        .btn-secondary {
+            background: #475569;
+            color: white;
+        }
+
+        .btn-secondary:hover {
+            background: #334155;
+        }
+
+        .btn-danger {
+            background: #ef4444;
+            color: white;
+            margin-left: auto;
+        }
+
+        .btn-danger:hover {
+            background: #dc2626;
+        }
+
+        .filter-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 16px;
+            padding-top: 16px;
+            border-top: 1px solid rgba(99, 102, 241, 0.2);
+            display: none;
+        }
+
+        .filter-grid.show {
+            display: grid;
+        }
+
+        .filter-group label {
+            display: block;
+            font-size: 0.9rem;
+            color: #d1d5db;
+            margin-bottom: 8px;
+        }
+
+        .filter-group select {
+            width: 100%;
+            padding: 10px;
+            background: rgba(51, 65, 85, 0.5);
+            border: 1px solid rgba(99, 102, 241, 0.3);
+            border-radius: 8px;
+            color: white;
+            font-size: 0.9rem;
+        }
+
+        .filter-group select:focus {
+            outline: none;
+            border-color: #6366f1;
+        }
+
+        /* Quick Tips */
+        .tips-card {
+            background: linear-gradient(to right, rgba(6, 78, 59, 0.3), rgba(30, 58, 138, 0.3));
+            border: 1px solid rgba(34, 197, 94, 0.3);
+            border-radius: 12px;
+            padding: 16px;
+            margin-bottom: 24px;
+        }
+
+        .tips-content {
+            display: flex;
+            gap: 12px;
+        }
+
+        .tips-content ul {
+            margin-left: 20px;
+        }
+
+        /* Results */
+        .results-count {
+            color: #d1d5db;
+            font-size: 0.9rem;
+            margin-bottom: 16px;
+        }
+
+        /* Snippets Grid */
+        .snippets-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+            gap: 24px;
+            margin-bottom: 40px;
+        }
+
+        @media (max-width: 768px) {
+            .snippets-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .snippet-card {
+            background: rgba(30, 41, 59, 0.5);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(99, 102, 241, 0.2);
+            border-radius: 12px;
+            overflow: hidden;
+            transition: all 0.3s;
+        }
+
+        .snippet-card:hover {
+            border-color: rgba(99, 102, 241, 0.4);
+        }
+
+        .snippet-header {
+            background: linear-gradient(to right, rgba(99, 102, 241, 0.2), rgba(168, 85, 247, 0.2));
+            padding: 16px;
+            border-bottom: 1px solid rgba(99, 102, 241, 0.2);
+            display: flex;
+            justify-content: space-between;
+            align-items: start;
+            gap: 12px;
+        }
+
+        .snippet-title {
+            flex: 1;
+        }
+
+        .snippet-title h3 {
+            font-size: 1.1rem;
+            margin-bottom: 8px;
+        }
+
+        .snippet-tags {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .tag {
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: 500;
+        }
+
+        .tag-html { background: rgba(249, 115, 22, 0.5); }
+        .tag-css { background: rgba(59, 130, 246, 0.5); }
+        .tag-javascript { background: rgba(234, 179, 8, 0.5); }
+        .tag-python { background: rgba(168, 85, 247, 0.5); }
+        .tag-other { background: rgba(99, 102, 241, 0.5); }
+
+        .copy-btn {
+            padding: 8px;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            border-radius: 8px;
+            transition: background 0.2s;
+            color: white;
+        }
+
+        .copy-btn:hover {
+            background: rgba(99, 102, 241, 0.5);
+        }
+
+        .snippet-body {
+            padding: 16px;
+        }
+
+        .code-block {
+            background: rgba(15, 23, 42, 0.5);
+            padding: 16px;
+            border-radius: 8px;
+            overflow-x: auto;
+            border: 1px solid rgba(99, 102, 241, 0.1);
+            margin-bottom: 16px;
+        }
+
+        .code-block code {
+            color: #86efac;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+
+        .explanation {
+            background: rgba(34, 197, 94, 0.2);
+            border: 1px solid rgba(34, 197, 94, 0.3);
+            border-radius: 8px;
+            padding: 12px;
+        }
+
+        .explanation h4 {
+            color: #86efac;
+            font-size: 0.9rem;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .explanation p {
+            color: #d1d5db;
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+
+        .tech-explanation {
+            background: rgba(99, 102, 241, 0.1);
+            border: 1px solid rgba(99, 102, 241, 0.3);
+            border-radius: 8px;
+            padding: 12px;
+        }
+
+        .tech-explanation h4 {
+            color: #a5b4fc;
+            font-size: 0.9rem;
+            margin-bottom: 8px;
+        }
+
+        .tech-explanation p {
+            color: #d1d5db;
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+
+        /* No Results */
+        .no-results {
+            text-align: center;
+            padding: 60px 20px;
+        }
+
+        .no-results h3 {
+            color: #9ca3af;
+            font-size: 1.5rem;
+            margin: 16px 0 8px;
+        }
+
+        .no-results p {
+            color: #6b7280;
+            margin-bottom: 20px;
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            color: #6b7280;
+            font-size: 0.9rem;
+            padding: 40px 20px;
+        }
+
+        .footer p {
+            margin: 8px 0;
+        }
+
+        /* Icons */
+        .icon {
+            width: 20px;
+            height: 20px;
+            display: inline-block;
+        }
+
+        .icon-lg {
+            width: 40px;
+            height: 40px;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .snippet-card {
+            animation: fadeIn 0.3s ease-out;
+        }
+
+        /* Code block background */
+        .code-highlight {
+            background: rgba(15, 23, 42, 0.7);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <div class="header-title">
+                <svg class="icon-lg" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path>
+                </svg>
+                <h1>Offline Coding Assistant</h1>
+            </div>
+            <p>Your complete web development reference - works offline!</p>
+            <div class="stats">
+                <span id="total-snippets">0 snippets</span>
+                <span>•</span>
+                <span id="html-count">0 HTML</span>
+                <span>•</span>
+                <span id="css-count">0 CSS</span>
+                <span>•</span>
+                <span id="js-count">0 JavaScript</span>
+            </div>
+        </div>
+
+        <!-- Termux/Acode Guide -->
+        <div class="guide-card">
+            <div class="guide-header" onclick="toggleGuide()">
+                <div>
+                    <div class="guide-title">📱 Using with Termux & Acode</div>
+                    <p style="font-size: 0.9rem; color: #9ca3af; margin-top: 4px;">Click to see setup guide</p>
+                </div>
+                <span id="guide-arrow">▼</span>
+            </div>
+            <div class="guide-content" id="guideContent">
+                <div class="guide-section">
+                    <h4>🚀 Quick Setup:</h4>
+                    <ol>
+                        <li><strong>Save this page:</strong> In your browser, tap the menu → "Save page" or bookmark it</li>
+                        <li><strong>Access offline:</strong> Open the saved HTML file in any browser - works without internet!</li>
+                        <li><strong>In Acode:</strong> Create new HTML file → Copy a snippet → Paste → Preview it!</li>
+                    </ol>
+                </div>
+
+                <div class="guide-section">
+                    <h4>💡 Workflow Tips:</h4>
+                    <ul>
+                        <li><strong>Split screen:</strong> Open this assistant + Acode side-by-side on your phone</li>
+                        <li><strong>Quick copy:</strong> Tap the copy icon on any snippet to copy code instantly</li>
+                        <li><strong>Search fast:</strong> Use search for "button", "form", "color" etc.</li>
+                        <li><strong>Filter by need:</strong> Select HTML/CSS/JavaScript to focus on what you're building</li>
+                        <li><strong>Beginner mode:</strong> Turn on for simple explanations while learning</li>
+                    </ul>
+                </div>
+
+                <div class="guide-section">
+                    <h4>🎯 Common Tasks:</h4>
+                    <ul style="font-size: 0.85rem;">
+                        <li><strong>Make a form:</strong> Search "form" → Copy "Basic Form" snippet</li>
+                        <li><strong>Add a button:</strong> Search "button" → Add to HTML → Style with CSS</li>
+                        <li><strong>Change colors:</strong> Search "color" → Use CSS color examples</li>
+                        <li><strong>Make it interactive:</strong> Search "click" → Add JavaScript event</li>
+                        <li><strong>Make responsive:</strong> Search "media" → Add responsive CSS</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Search and Filters -->
+        <div class="search-card">
+            <div class="search-input-wrapper">
+                <svg class="icon search-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                </svg>
+                <input 
+                    type="text" 
+                    class="search-input" 
+                    id="searchInput" 
+                    placeholder="Search: 'button', 'form', 'color', 'click'..."
+                    onkeyup="filterSnippets()"
+                >
+            </div>
+
+            <div class="button-row">
+                <button class="btn btn-primary" onclick="toggleFilters()">
+                    <svg class="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z"></path>
+                    </svg>
+                    <span id="filterBtnText">Show Filters</span>
+                </button>
+                
+                <button class="btn btn-success" id="simpleModeBtn" onclick="toggleSimpleMode()">
+                    <svg class="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
+                    </svg>
+                    Beginner Mode ON
+                </button>
+
+                <button class="btn btn-danger" id="clearBtn" onclick="clearFilters()" style="display: none;">
+                    <svg class="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                    </svg>
+                    Clear
+                </button>
+            </div>
+
+            <div class="filter-grid" id="filterGrid">
+                <div class="filter-group">
+                    <label for="languageFilter">Language</label>
+                    <select id="languageFilter" onchange="filterSnippets()">
+                        <option value="All">All</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label for="domainFilter">Domain/Category</label>
+                    <select id="domainFilter" onchange="filterSnippets()">
+                        <option value="All">All</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <!-- Quick Tips -->
+        <div class="tips-card" id="quickTips">
+            <div class="tips-content">
+                <svg class="icon" style="color: #86efac; flex-shrink: 0; margin-top: 4px;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                </svg>
+                <div>
+                    <h4 style="color: #86efac; margin-bottom: 8px;">👋 New to coding? Start here:</h4>
+                    <ul style="color: #d1d5db; font-size: 0.9rem;">
+                        <li><strong>Building a website?</strong> Search "Basic HTML Document" → Copy it → That's your starting point!</li>
+                        <li><strong>Want to add a button?</strong> Search "button" or filter by HTML</li>
+                        <li><strong>Change colors?</strong> Search "color" and find CSS examples</li>
+                        <li><strong>Make things clickable?</strong> Search "click" for JavaScript events</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Results Count -->
+        <div class="results-count" id="resultsCount">Loading snippets...</div>
+
+        <!-- Snippets Grid -->
+        <div class="snippets-grid" id="snippetsGrid"></div>
+
+        <!-- No Results -->
+        <div class="no-results" id="noResults" style="display: none;">
+            <svg style="width: 64px; height: 64px; margin: 0 auto; color: #6b7280;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path>
+            </svg>
+            <h3>No snippets found</h3>
+            <p>Try adjusting your search or filters</p>
+            <button class="btn btn-primary" onclick="clearFilters()">Clear All Filters</button>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">
+            <p style="font-weight: 600;">💾 Works completely offline • Perfect for Termux & Acode</p>
+            <p><span id="footer-count">0</span> code examples • HTML5, CSS3, JavaScript & more</p>
+            <p style="font-size: 0.8rem;">Save this page to your device and code anywhere, anytime!</p>
+        </div>
+    </div>
+
+    <script>
+        // Code Database
+        const codeDatabase = [
+            // HTML
+            {
+                language: "HTML",
+                domain: "Structure",
+                task: "Basic HTML Document",
+                code_example: `<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Website</title>
+</head>
+<body>
+    <h1>Hello World</h1>
+</body>
+</html>`,
+                description: "Complete HTML5 document structure with proper metadata",
+                simple_explanation: "This is the skeleton of every webpage. It tells the browser what language you're using and sets up the page. Think of it as the frame of a house before you add rooms."
+            },
+            {
+                language: "HTML",
+                domain: "Text Content",
+                task: "Headings (h1-h6)",
+                code_example: `<h1>Main Title</h1>
+<h2>Section Title</h2>
+<h3>Subsection</h3>
+<h4>Sub-subsection</h4>
+<h5>Minor Heading</h5>
+<h6>Smallest Heading</h6>`,
+                description: "Six levels of headings, h1 being the most important",
+                simple_explanation: "These create titles of different sizes. h1 is the biggest (like a book title), h6 is the smallest (like a footnote heading). Use them in order to organize your content."
+            },
+            {
+                language: "HTML",
+                domain: "Text Content",
+                task: "Paragraphs and Line Breaks",
+                code_example: `<p>This is a paragraph of text.</p>
+<p>This is another paragraph.</p>
+<br>
+<p>Line break above creates space.</p>`,
+                description: "Paragraphs automatically add spacing, br creates line breaks",
+                simple_explanation: "The <p> tag creates a paragraph with automatic spacing. The <br> tag is like pressing Enter once - it moves to the next line."
+            },
+            {
+                language: "HTML",
+                domain: "Text Formatting",
+                task: "Bold, Italic, Underline",
+                code_example: `<strong>Bold text (important)</strong>
+<b>Bold text (visual only)</b>
+<em>Italic text (emphasis)</em>
+<i>Italic text (visual only)</i>
+<u>Underlined text</u>
+<mark>Highlighted text</mark>`,
+                description: "Text formatting tags with semantic meaning",
+                simple_explanation: "These make text stand out. <strong> is for important stuff, <em> adds emphasis. <mark> is like using a highlighter pen on paper."
+            },
+            {
+                language: "HTML",
+                domain: "Links & Navigation",
+                task: "Hyperlinks",
+                code_example: `<!-- Link to another website -->
+<a href="https://google.com">Visit Google</a>
+
+<!-- Link to another page on your site -->
+<a href="about.html">About Us</a>
+
+<!-- Link that opens in new tab -->
+<a href="https://google.com" target="_blank">Open in New Tab</a>
+
+<!-- Email link -->
+<a href="mailto:email@example.com">Send Email</a>`,
+                description: "Creates clickable links to other pages or websites",
+                simple_explanation: "The <a> tag makes clickable links. 'href' is where it goes. target='_blank' opens a new tab. It's like creating a portal to another page."
+            },
+            {
+                language: "HTML",
+                domain: "Images & Media",
+                task: "Images",
+                code_example: `<!-- Basic image -->
+<img src="photo.jpg" alt="Description of photo">
+
+<!-- Image with size -->
+<img src="logo.png" alt="Company logo" width="200" height="100">
+
+<!-- Responsive image -->
+<img src="photo.jpg" alt="Photo" style="max-width: 100%; height: auto;">`,
+                description: "Displays images on the webpage",
+                simple_explanation: "Shows pictures on your page. 'src' is the image file name, 'alt' describes it for people who can't see it. Width and height control size."
+            },
+            {
+                language: "HTML",
+                domain: "Lists",
+                task: "Unordered List (Bullets)",
+                code_example: `<ul>
+    <li>First item</li>
+    <li>Second item</li>
+    <li>Third item</li>
+</ul>`,
+                description: "Creates a bulleted list",
+                simple_explanation: "Makes a list with bullet points. <ul> starts the list, each <li> is one item. Perfect for shopping lists or feature lists."
+            },
+            {
+                language: "HTML",
+                domain: "Lists",
+                task: "Ordered List (Numbered)",
+                code_example: `<ol>
+    <li>First step</li>
+    <li>Second step</li>
+    <li>Third step</li>
+</ol>`,
+                description: "Creates a numbered list",
+                simple_explanation: "Makes a numbered list. Great for step-by-step instructions or rankings. The browser automatically numbers them for you."
+            },
+            {
+                language: "HTML",
+                domain: "Tables",
+                task: "Basic Table",
+                code_example: `<table border="1">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Age</th>
+            <th>City</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>John</td>
+            <td>25</td>
+            <td>New York</td>
+        </tr>
+        <tr>
+            <td>Jane</td>
+            <td>30</td>
+            <td>London</td>
+        </tr>
+    </tbody>
+</table>`,
+                description: "Creates a data table with headers and rows",
+                simple_explanation: "Makes a table like in Excel. <th> is the header (bold), <td> is regular data. <tr> is each row. Perfect for organizing information."
+            },
+            {
+                language: "HTML",
+                domain: "Forms",
+                task: "Basic Form",
+                code_example: `<form action="/submit" method="POST">
+    <label for="name">Name:</label>
+    <input type="text" id="name" name="name" required>
+    
+    <label for="email">Email:</label>
+    <input type="email" id="email" name="email" required>
+    
+    <button type="submit">Submit</button>
+</form>`,
+                description: "Form for collecting user input",
+                simple_explanation: "Creates a form where users can type information. 'required' means they must fill it out. The button sends the info when clicked."
+            },
+            {
+                language: "HTML",
+                domain: "Forms",
+                task: "Form Input Types",
+                code_example: `<input type="text" placeholder="Enter text">
+<input type="email" placeholder="email@example.com">
+<input type="password" placeholder="Password">
+<input type="number" min="0" max="100">
+<input type="date">
+<input type="checkbox" id="agree">
+<input type="radio" name="choice" value="option1">
+<input type="file" accept="image/*">
+<input type="color">
+<input type="range" min="0" max="100">`,
+                description: "Various input types for different data",
+                simple_explanation: "Different input types for different needs: text for words, email checks for @, password hides text, checkbox for yes/no, radio for picking one option."
+            },
+            {
+                language: "HTML",
+                domain: "Forms",
+                task: "Textarea and Select",
+                code_example: `<!-- Multi-line text -->
+<textarea rows="4" cols="50" placeholder="Enter your message"></textarea>
+
+<!-- Dropdown menu -->
+<select name="country">
+    <option value="">Choose...</option>
+    <option value="usa">United States</option>
+    <option value="uk">United Kingdom</option>
+    <option value="canada">Canada</option>
+</select>`,
+                description: "Textarea for long text, select for dropdown menus",
+                simple_explanation: "Textarea is for longer messages (like a comment box). Select creates a dropdown menu where you pick one option from a list."
+            },
+            {
+                language: "HTML",
+                domain: "Semantic HTML",
+                task: "Semantic Layout Elements",
+                code_example: `<header>
+    <nav>
+        <a href="/">Home</a>
+        <a href="/about">About</a>
+    </nav>
+</header>
+
+<main>
+    <article>
+        <h2>Article Title</h2>
+        <p>Article content...</p>
+    </article>
+    
+    <aside>
+        <h3>Related Info</h3>
+    </aside>
+</main>
+
+<footer>
+    <p>&copy; 2024 My Website</p>
+</footer>`,
+                description: "Semantic elements that describe page structure",
+                simple_explanation: "These tags describe what each part of your page is for. Header is the top, footer is the bottom, main is the main content, aside is sidebar stuff."
+            },
+            {
+                language: "HTML",
+                domain: "Media",
+                task: "Video Player",
+                code_example: `<video width="640" height="360" controls>
+    <source src="video.mp4" type="video/mp4">
+    <source src="video.webm" type="video/webm">
+    Your browser doesn't support video.
+</video>`,
+                description: "Embeds a video player with controls",
+                simple_explanation: "Puts a video on your page with play/pause buttons. You can include multiple formats so it works on all browsers."
+            },
+            {
+                language: "HTML",
+                domain: "Media",
+                task: "Audio Player",
+                code_example: `<audio controls>
+    <source src="audio.mp3" type="audio/mpeg">
+    <source src="audio.ogg" type="audio/ogg">
+    Your browser doesn't support audio.
+</audio>`,
+                description: "Embeds an audio player",
+                simple_explanation: "Adds a music or sound player to your page. 'controls' shows the play/pause and volume buttons."
+            },
+            {
+                language: "HTML",
+                domain: "Container",
+                task: "Div and Span",
+                code_example: `<!-- Block container (full width) -->
+<div class="container">
+    <p>Content inside a div</p>
+</div>
+
+<!-- Inline container (stays in line) -->
+<p>This is <span style="color: red;">red text</span> in a sentence.</p>`,
+                description: "Generic containers for grouping and styling",
+                simple_explanation: "Div is a box that takes up the full width. Span is for styling just part of a line. They're like invisible containers you can style."
+            },
+
+            // CSS
+            {
+                language: "CSS",
+                domain: "Colors & Backgrounds",
+                task: "Color Properties",
+                code_example: `/* Text color */
+.text {
+    color: #FF6B6B;
+    color: rgb(255, 107, 107);
+    color: rgba(255, 107, 107, 0.5); /* 50% transparent */
+    color: hsl(0, 100%, 71%);
+}
+
+/* Background color */
+.box {
+    background-color: #4ECDC4;
+}`,
+                description: "Different ways to specify colors in CSS",
+                simple_explanation: "Colors can be written as hex codes (#FF6B6B), RGB numbers, or HSL. RGBA adds transparency - 0 is invisible, 1 is solid."
+            },
+            {
+                language: "CSS",
+                domain: "Colors & Backgrounds",
+                task: "Background Images & Gradients",
+                code_example: `/* Background image */
+.hero {
+    background-image: url('background.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+/* Gradient */
+.gradient {
+    background: linear-gradient(to right, #FF6B6B, #4ECDC4);
+    background: radial-gradient(circle, #FF6B6B, #4ECDC4);
+}`,
+                description: "Background images and gradient effects",
+                simple_explanation: "Sets a picture as background. 'cover' makes it fill the space, 'center' positions it. Gradients smoothly blend colors together."
+            },
+            {
+                language: "CSS",
+                domain: "Text Styling",
+                task: "Font Properties",
+                code_example: `p {
+    font-family: Arial, sans-serif;
+    font-size: 16px;
+    font-weight: bold; /* or 100-900 */
+    font-style: italic;
+    line-height: 1.6;
+    letter-spacing: 2px;
+    text-align: center; /* left, right, justify */
+    text-decoration: underline;
+    text-transform: uppercase; /* lowercase, capitalize */
+}`,
+                description: "Complete text and font styling",
+                simple_explanation: "Controls how text looks: font-family picks the typeface, font-size is how big, font-weight is boldness, text-align moves it left/center/right."
+            },
+            {
+                language: "CSS",
+                domain: "Box Model",
+                task: "Padding, Margin, Border",
+                code_example: `/* The Box Model */
+.box {
+    width: 200px;
+    height: 100px;
+    
+    /* Inside spacing */
+    padding: 20px;
+    padding: 10px 20px; /* top/bottom left/right */
+    padding: 10px 15px 20px 25px; /* top right bottom left */
+    
+    /* Outside spacing */
+    margin: 20px;
+    margin: 0 auto; /* center horizontally */
+    
+    /* Border */
+    border: 2px solid black;
+    border-radius: 10px; /* rounded corners */
+}`,
+                description: "Controls spacing and borders around elements",
+                simple_explanation: "Padding is space inside the box, margin is space outside. Border is the outline. border-radius makes rounded corners like buttons."
+            },
+            {
+                language: "CSS",
+                domain: "Layout",
+                task: "Display Property",
+                code_example: `/* Block: takes full width, stacks vertically */
+.block {
+    display: block;
+}
+
+/* Inline: stays in line with text */
+.inline {
+    display: inline;
+}
+
+/* Inline-block: best of both */
+.inline-block {
+    display: inline-block;
+    width: 100px;
+}
+
+/* None: completely hidden */
+.hidden {
+    display: none;
+}`,
+                description: "Controls how elements are displayed",
+                simple_explanation: "Block elements stack like paragraphs. Inline stays in line like words. Inline-block combines both. None makes it invisible and removes its space."
+            },
+            {
+                language: "CSS",
+                domain: "Layout",
+                task: "Flexbox Layout",
+                code_example: `/* Container */
+.flex-container {
+    display: flex;
+    justify-content: center; /* horizontal: flex-start, flex-end, space-between */
+    align-items: center; /* vertical: flex-start, flex-end, stretch */
+    flex-direction: row; /* row, column, row-reverse, column-reverse */
+    flex-wrap: wrap; /* allow items to wrap */
+    gap: 20px; /* space between items */
+}
+
+/* Items */
+.flex-item {
+    flex: 1; /* grow to fill space */
+}`,
+                description: "Modern flexible layout system",
+                simple_explanation: "Flexbox makes arranging things easy. justify-content moves items horizontally, align-items moves them vertically. It's like organizing books on a shelf."
+            },
+            {
+                language: "CSS",
+                domain: "Layout",
+                task: "Grid Layout",
+                code_example: `/* Container */
+.grid-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr; /* 3 equal columns */
+    grid-template-columns: repeat(3, 1fr); /* same as above */
+    grid-template-rows: 100px auto;
+    gap: 20px;
+}
+
+/* Item spanning */
+.grid-item {
+    grid-column: span 2; /* takes 2 columns */
+    grid-row: span 1;
+}`,
+                description: "Powerful 2D grid layout system",
+                simple_explanation: "Grid creates rows and columns like a spreadsheet. 'fr' means fraction (equal parts). 'span 2' makes an item take up 2 spaces. Great for photo galleries."
+            },
+            {
+                language: "CSS",
+                domain: "Positioning",
+                task: "Position Property",
+                code_example: `/* Static: normal flow (default) */
+.static {
+    position: static;
+}
+
+/* Relative: offset from normal position */
+.relative {
+    position: relative;
+    top: 10px;
+    left: 20px;
+}
+
+/* Absolute: positioned relative to parent */
+.absolute {
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+/* Fixed: stays in place when scrolling */
+.fixed {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+}
+
+/* Sticky: switches between relative and fixed */
+.sticky {
+    position: sticky;
+    top: 0;
+}`,
+                description: "Different positioning methods",
+                simple_explanation: "Static is normal. Relative moves from its spot. Absolute places it exactly where you say. Fixed stays on screen when scrolling (like a floating button). Sticky sticks to top when scrolling."
+            },
+            {
+                language: "CSS",
+                domain: "Effects",
+                task: "Shadows and Blur",
+                code_example: `/* Text shadow */
+.text-shadow {
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+}
+
+/* Box shadow */
+.box-shadow {
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2); /* larger shadow */
+    box-shadow: inset 0 2px 4px rgba(0,0,0,0.1); /* inner shadow */
+}
+
+/* Blur filter */
+.blur {
+    filter: blur(5px);
+    backdrop-filter: blur(10px); /* blurs background behind */
+}`,
+                description: "Visual effects for depth and emphasis",
+                simple_explanation: "Shadows make things look 3D and lifted off the page. The numbers are: horizontal, vertical, blur amount, and color. Blur makes things fuzzy."
+            },
+            {
+                language: "CSS",
+                domain: "Transitions & Animations",
+                task: "Transitions",
+                code_example: `/* Smooth transitions */
+.button {
+    background-color: blue;
+    transition: all 0.3s ease;
+}
+
+.button:hover {
+    background-color: red;
+    transform: scale(1.1);
+}
+
+/* Transition timing */
+.smooth {
+    transition: all 0.3s ease; /* smooth speed curve */
+}
+.linear {
+    transition: all 0.3s linear; /* constant speed */
+}`,
+                description: "Smooth transitions between states",
+                simple_explanation: "Transitions make changes smooth instead of instant. Like a fade instead of a flash. 0.3s is the duration. 'ease' makes it start slow, speed up, then slow down."
+            },
+            {
+                language: "CSS",
+                domain: "Transitions & Animations",
+                task: "Keyframe Animations",
+                code_example: `/* Define animation */
+@keyframes slideIn {
+    from {
+        transform: translateX(-100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+/* Use animation */
+.animated {
+    animation: slideIn 0.5s ease-out;
+    animation: slideIn 1s ease-in-out infinite; /* loops forever */
+}
+
+/* Pulse animation */
+@keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+}`,
+                description: "Complex multi-step animations",
+                simple_explanation: "Animations are like movie scenes. You define what happens at different times (keyframes), then apply it. 'infinite' makes it repeat forever."
+            },
+            {
+                language: "CSS",
+                domain: "Transforms",
+                task: "Transform Properties",
+                code_example: `/* Rotate */
+.rotate {
+    transform: rotate(45deg);
+}
+
+/* Scale */
+.scale {
+    transform: scale(1.5); /* 150% size */
+    transform: scale(2, 0.5); /* width 200%, height 50% */
+}
+
+/* Move */
+.move {
+    transform: translateX(50px);
+    transform: translateY(-20px);
+    transform: translate(50px, -20px);
+}
+
+/* Skew */
+.skew {
+    transform: skew(10deg, 5deg);
+}
+
+/* Combine multiple */
+.combo {
+    transform: rotate(45deg) scale(1.2) translateX(20px);
+}`,
+                description: "Transform elements in 2D space",
+                simple_explanation: "Transform changes shape and position. Rotate spins it, scale makes bigger/smaller, translate moves it, skew tilts it. You can combine them!"
+            },
+            {
+                language: "CSS",
+                domain: "Responsive Design",
+                task: "Media Queries",
+                code_example: `/* Mobile first approach */
+.container {
+    width: 100%;
+    padding: 10px;
+}
+
+/* Tablet and up */
+@media (min-width: 768px) {
+    .container {
+        width: 750px;
+        margin: 0 auto;
+    }
+}
+
+/* Desktop and up */
+@media (min-width: 1024px) {
+    .container {
+        width: 1000px;
+    }
+}`,
+                description: "Responsive styles for different screen sizes",
+                simple_explanation: "Media queries change styles based on screen size. Mobile-first means start with phone styles, then add larger screen styles. Makes websites work on all devices."
+            },
+            {
+                language: "CSS",
+                domain: "Hover & Interactive",
+                task: "Pseudo-classes",
+                code_example: `/* Link states */
+a:link { color: blue; }
+a:visited { color: purple; }
+a:hover { color: red; }
+a:active { color: orange; }
+
+/* Form states */
+input:focus {
+    border: 2px solid blue;
+    outline: none;
+}
+
+input:disabled {
+    opacity: 0.5;
+}
+
+/* Structural */
+li:first-child { font-weight: bold; }
+li:last-child { margin-bottom: 0; }
+li:nth-child(odd) { background: #f0f0f0; }
+li:nth-child(even) { background: white; }`,
+                description: "Style elements based on state or position",
+                simple_explanation: "These add styles when things happen: :hover when you move mouse over, :focus when you click in an input, :nth-child colors every other row."
+            },
+
+            // JavaScript
+            {
+                language: "JavaScript",
+                domain: "DOM Manipulation",
+                task: "Selecting Elements",
+                code_example: `// Get single element
+const element = document.getElementById('myId');
+const element2 = document.querySelector('.myClass');
+const element3 = document.querySelector('#myId');
+
+// Get multiple elements
+const elements = document.querySelectorAll('.myClass');
+
+// Modern way (preferred)
+const item = document.querySelector('.item');
+const items = document.querySelectorAll('.item');`,
+                description: "Various methods to select HTML elements",
+                simple_explanation: "These find elements on your page so you can work with them. querySelector is the modern way - use '.' for classes, '#' for IDs. querySelectorAll gets multiple items."
+            },
+            {
+                language: "JavaScript",
+                domain: "DOM Manipulation",
+                task: "Changing Content",
+                code_example: `// Change text content
+element.textContent = 'New text';
+
+// Change HTML content
+element.innerHTML = '<strong>Bold text</strong>';
+
+// Change attributes
+element.setAttribute('src', 'image.jpg');
+element.src = 'image.jpg'; // shorthand
+
+// Change classes
+element.className = 'new-class';
+element.classList.add('active');
+element.classList.remove('inactive');
+element.classList.toggle('highlight');
+
+// Change styles
+element.style.color = 'red';
+element.style.backgroundColor = 'yellow';`,
+                description: "Modify element content, attributes, and styles",
+                simple_explanation: "textContent changes text, innerHTML can add HTML tags. classList.add adds a class, .toggle switches it on/off. style.property changes CSS directly."
+            },
+            {
+                language: "JavaScript",
+                domain: "Events",
+                task: "Event Listeners",
+                code_example: `// Click event
+button.addEventListener('click', function() {
+    console.log('Button clicked!');
+});
+
+// Modern arrow function
+button.addEventListener('click', () => {
+    console.log('Clicked!');
+});
+
+// Input event
+input.addEventListener('input', (e) => {
+    console.log('User typed:', e.target.value);
+});
+
+// Form submit
+form.addEventListener('submit', (e) => {
+    e.preventDefault(); // stop page reload
+    console.log('Form submitted');
+});
+
+// Mouse events
+element.addEventListener('mouseover', () => {
+    console.log('Mouse over!');
+});`,
+                description: "Attach functions to user interactions",
+                simple_explanation: "Event listeners wait for things to happen (clicks, typing, etc) then run your code. e.preventDefault() stops default behavior like form submission."
+            },
+            {
+                language: "JavaScript",
+                domain: "Variables & Data",
+                task: "Variables and Constants",
+                code_example: `// Modern way (preferred)
+let age = 25; // can be changed
+const name = 'John'; // cannot be changed
+const PI = 3.14159;
+
+// Multiple declarations
+let x = 1, y = 2, z = 3;`,
+                description: "Declare variables and constants",
+                simple_explanation: "Use 'let' for values that change, 'const' for values that stay the same. Const is like a locked box, let is like a regular box you can refill."
+            },
+            {
+                language: "JavaScript",
+                domain: "Functions",
+                task: "Functions",
+                code_example: `// Function declaration
+function greet(name) {
+    return 'Hello ' + name;
+}
+
+// Arrow function (modern)
+const greet2 = (name) => {
+    return 'Hello ' + name;
+};
+
+// Short arrow function
+const greet3 = name => 'Hello ' + name;
+
+// Function with default parameters
+const greet4 = (name = 'Guest') => {
+    return 'Hello ' + name;
+};
+
+// Call functions
+console.log(greet('John')); // Hello John`,
+                description: "Different ways to create functions",
+                simple_explanation: "Functions are reusable blocks of code. Arrow functions (=>) are the modern way. 'return' sends a value back. Default parameters give values if none provided."
+            },
+            {
+                language: "JavaScript",
+                domain: "Conditionals",
+                task: "If Statements",
+                code_example: `// Basic if
+if (age >= 18) {
+    console.log('Adult');
+}
+
+// If-else
+if (age >= 18) {
+    console.log('Adult');
+} else {
+    console.log('Minor');
+}
+
+// If-else if-else
+if (score >= 90) {
+    console.log('A');
+} else if (score >= 80) {
+    console.log('B');
+} else {
+    console.log('F');
+}
+
+// Ternary operator (shorthand)
+const result = age >= 18 ? 'Adult' : 'Minor';`,
+                description: "Conditional logic and decision making",
+                simple_explanation: "If statements make decisions. 'if' checks a condition, 'else' runs when it's false. && means 'and', || means 'or'. Ternary is a one-line if-else."
+            },
+            {
+                language: "JavaScript",
+                domain: "Loops",
+                task: "For and While Loops",
+                code_example: `// For loop
+for (let i = 0; i < 5; i++) {
+    console.log(i); // 0, 1, 2, 3, 4
+}
+
+// For...of loop (arrays)
+const items = ['apple', 'banana', 'orange'];
+for (const item of items) {
+    console.log(item);
+}
+
+// While loop
+let count = 0;
+while (count < 5) {
+    console.log(count);
+    count++;
+}
+
+// forEach method
+items.forEach(item => {
+    console.log(item);
+});`,
+                description: "Different looping methods",
+                simple_explanation: "Loops repeat code. For loops count, for...of loops through arrays, while loops until a condition is false. forEach is a modern way to loop through arrays."
+            },
+            {
+                language: "JavaScript",
+                domain: "Arrays",
+                task: "Array Methods",
+                code_example: `const arr = [1, 2, 3, 4, 5];
+
+// Add/remove
+arr.push(6); // add to end
+arr.pop(); // remove from end
+
+// Transform
+const doubled = arr.map(x => x * 2); // [2, 4, 6, 8, 10]
+const filtered = arr.filter(x => x > 2); // [3, 4, 5]
+
+// Find
+const found = arr.find(x => x > 3); // 4
+const exists = arr.includes(3); // true
+
+// Other
+const joined = arr.join(', '); // '1, 2, 3, 4, 5'`,
+                description: "Common array manipulation methods",
+                simple_explanation: "push adds to end, pop removes from end. map transforms every item, filter keeps some items. find searches for one item, includes checks if it exists."
+            },
+            {
+                language: "JavaScript",
+                domain: "Objects",
+                task: "Working with Objects",
+                code_example: `// Create object
+const person = {
+    name: 'John',
+    age: 30,
+    greet: function() {
+        console.log('Hello!');
+    }
+};
+
+// Access properties
+console.log(person.name); // John
+console.log(person['name']); // John
+
+// Add/modify properties
+person.email = 'john@email.com';
+person.age = 31;
+
+// Object methods
+const keys = Object.keys(person); // ['name', 'age', 'email']
+const values = Object.values(person);`,
+                description: "Object creation and manipulation",
+                simple_explanation: "Objects store related data as key:value pairs. Use dot notation (person.name) to access. Object.keys gets all keys, you can add properties anytime."
+            },
+            {
+                language: "JavaScript",
+                domain: "Async",
+                task: "Async/Await",
+                code_example: `// Fetch data from API
+async function getData() {
+    try {
+        const response = await fetch('https://api.example.com/data');
+        const data = await response.json();
+        console.log(data);
+        return data;
+    } catch (error) {
+        console.error('Error:', error);
+    }
+}
+
+// Call async function
+getData();`,
+                description: "Modern asynchronous programming with async/await",
+                simple_explanation: "Async/await makes waiting for things (like loading data) easier to read. 'await' pauses until data arrives. Try/catch handles errors."
+            },
+            {
+                language: "JavaScript",
+                domain: "Timing",
+                task: "Timers",
+                code_example: `// Run once after delay
+setTimeout(() => {
+    console.log('Runs after 2 seconds');
+}, 2000);
+
+// Run repeatedly
+const intervalId = setInterval(() => {
+    console.log('Runs every 1 second');
+}, 1000);
+
+// Stop interval
+clearInterval(intervalId);`,
+                description: "Delayed and repeated execution",
+                simple_explanation: "setTimeout runs code once after a delay. setInterval repeats forever until you clearInterval. Time is in milliseconds (1000ms = 1 second)."
+            }
+        ];
+
+        // State
+        let simpleMode = true;
+        let allSnippets = [];
+        let filteredSnippets = [];
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            allSnippets = codeDatabase;
+            populateFilters();
+            updateStats();
+            renderSnippets();
+        });
+
+        // Toggle Guide
+        function toggleGuide() {
+            const content = document.getElementById('guideContent');
+            const arrow = document.getElementById('guide-arrow');
+            content.classList.toggle('show');
+            arrow.textContent = content.classList.contains('show') ? '▲' : '▼';
+        }
+
+        // Toggle Filters
+        function toggleFilters() {
+            const grid = document.getElementById('filterGrid');
+            const btnText = document.getElementById('filterBtnText');
+            grid.classList.toggle('show');
+            btnText.textContent = grid.classList.contains('show') ? 'Hide Filters' : 'Show Filters';
+        }
+
+        // Toggle Simple Mode
+        function toggleSimpleMode() {
+            simpleMode = !simpleMode;
+            const btn = document.getElementById('simpleModeBtn');
+            if (simpleMode) {
+                btn.classList.remove('btn-secondary');
+                btn.classList.add('btn-success');
+                btn.innerHTML = `<svg class="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path></svg>Beginner Mode ON`;
+            } else {
+                btn.classList.remove('btn-success');
+                btn.classList.add('btn-secondary');
+                btn.innerHTML = `<svg class="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path></svg>Beginner Mode OFF`;
+            }
+            renderSnippets();
+        }
+
+        // Populate Filters
+        function populateFilters() {
+            const languages = [...new Set(codeDatabase.map(s => s.language))].sort();
+            const domains = [...new Set(codeDatabase.map(s => s.domain))].sort();
+
+            const langSelect = document.getElementById('languageFilter');
+            const domainSelect = document.getElementById('domainFilter');
+
+            languages.forEach(lang => {
+                const count = codeDatabase.filter(s => s.language === lang).length;
+                const option = document.createElement('option');
+                option.value = lang;
+                option.textContent = `${lang} (${count})`;
+                langSelect.appendChild(option);
+            });
+
+            domains.forEach(domain => {
+                const option = document.createElement('option');
+                option.value = domain;
+                option.textContent = domain;
+                domainSelect.appendChild(option);
+            });
+        }
+
+        // Update Stats
+        function updateStats() {
+            const htmlCount = codeDatabase.filter(s => s.language === 'HTML').length;
+            const cssCount = codeDatabase.filter(s => s.language === 'CSS').length;
+            const jsCount = codeDatabase.filter(s => s.language === 'JavaScript').length;
+
+            document.getElementById('total-snippets').textContent = `${codeDatabase.length} snippets`;
+            document.getElementById('html-count').textContent = `${htmlCount} HTML`;
+            document.getElementById('css-count').textContent = `${cssCount} CSS`;
+            document.getElementById('js-count').textContent = `${jsCount} JavaScript`;
+            document.getElementById('footer-count').textContent = codeDatabase.length;
+        }
+
+        // Filter Snippets
+        function filterSnippets() {
+            const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+            const language = document.getElementById('languageFilter').value;
+            const domain = document.getElementById('domainFilter').value;
+
+            filteredSnippets = codeDatabase.filter(snippet => {
+                const matchesSearch = searchTerm === '' || 
+                    snippet.task.toLowerCase().includes(searchTerm) ||
+                    snippet.language.toLowerCase().includes(searchTerm) ||
+                    snippet.description.toLowerCase().includes(searchTerm) ||
+                    (snippet.simple_explanation && snippet.simple_explanation.toLowerCase().includes(searchTerm));
+                
+                const matchesLanguage = language === 'All' || snippet.language === language;
+                const matchesDomain = domain === 'All' || snippet.domain === domain;
+                
+                return matchesSearch && matchesLanguage && matchesDomain;
+            });
+
+            // Show/hide clear button
+            const clearBtn = document.getElementById('clearBtn');
+            if (searchTerm || language !== 'All' || domain !== 'All') {
+                clearBtn.style.display = 'flex';
+            } else {
+                clearBtn.style.display = 'none';
+            }
+
+            // Show/hide quick tips
+            const tips = document.getElementById('quickTips');
+            if (filteredSnippets.length === codeDatabase.length && !searchTerm) {
+                tips.style.display = 'block';
+            } else {
+                tips.style.display = 'none';
+            }
+
+            renderSnippets();
+        }
+
+        // Clear Filters
+        function clearFilters() {
+            document.getElementById('searchInput').value = '';
+            document.getElementById('languageFilter').value = 'All';
+            document.getElementById('domainFilter').value = 'All';
+            filterSnippets();
+        }
+
+        // Render Snippets
+        function renderSnippets() {
+            const grid = document.getElementById('snippetsGrid');
+            const noResults = document.getElementById('noResults');
+            const resultsCount = document.getElementById('resultsCount');
+
+            const snippetsToShow = filteredSnippets.length > 0 ? filteredSnippets : 
+                                   (document.getElementById('searchInput').value || 
+                                    document.getElementById('languageFilter').value !== 'All' || 
+                                    document.getElementById('domainFilter').value !== 'All') ? [] : allSnippets;
+
+            resultsCount.textContent = `Found ${snippetsToShow.length} snippet${snippetsToShow.length !== 1 ? 's' : ''}`;
+
+            if (snippetsToShow.length === 0) {
+                grid.style.display = 'none';
+                noResults.style.display = 'block';
+                return;
+            }
+
+            grid.style.display = 'grid';
+            noResults.style.display = 'none';
+            grid.innerHTML = '';
+
+            snippetsToShow.forEach((snippet, index) => {
+                const card = createSnippetCard(snippet, index);
+                grid.appendChild(card);
+            });
+        }
+
+        // Create Snippet Card
+        function createSnippetCard(snippet, index) {
+            const card = document.createElement('div');
+            card.className = 'snippet-card';
+
+            const tagClass = snippet.language === 'HTML' ? 'tag-html' :
+                            snippet.language === 'CSS' ? 'tag-css' :
+                            snippet.language === 'JavaScript' ? 'tag-javascript' :
+                            snippet.language === 'Python' ? 'tag-python' : 'tag-other';
+
+            card.innerHTML = `
+                <div class="snippet-header">
+                    <div class="snippet-title">
+                        <h3>${snippet.task}</h3>
+                        <div class="snippet-tags">
+                            <span class="tag ${tagClass}">${snippet.language}</span>
+                            <span class="tag tag-other">${snippet.domain}</span>
+                        </div>
+                    </div>
+                    <button class="copy-btn" onclick="copyCode(${index})" title="Copy code">
+                        <svg class="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path>
+                        </svg>
+                    </button>
+                </div>
+                <div class="snippet-body">
+                    <div class="code-block">
+                        <code>${escapeHtml(snippet.code_example)}</code>
+                    </div>
+                    ${simpleMode && snippet.simple_explanation ? `
+                        <div class="explanation">
+                            <h4>
+                                <svg class="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
+                                </svg>
+                                Simple Explanation
+                            </h4>
+                            <p>${snippet.simple_explanation}</p>
+                        </div>
+                    ` : `
+                        <div class="tech-explanation">
+                            <h4>Technical Description</h4>
+                            <p>${snippet.description}</p>
+                        </div>
+                    `}
+                </div>
+            `;
+
+            return card;
+        }
+
+        // Copy Code
+        function copyCode(index) {
+            const snippets = filteredSnippets.length > 0 ? filteredSnippets : allSnippets;
+            const code = snippets[index].code_example;
+            
+            navigator.clipboard.writeText(code).then(() => {
+                // Visual feedback
+                const buttons = document.querySelectorAll('.copy-btn');
+                const btn = buttons[index];
+                const originalHTML = btn.innerHTML;
+                
+                btn.innerHTML = `<svg class="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" style="color: #86efac;">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                </svg>`;
+                
+                setTimeout(() => {
+                    btn.innerHTML = originalHTML;
+                }, 2000);
+            });
+        }
+
+        // Escape HTML
+        function escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+    </script>
+</body>
+</html>
