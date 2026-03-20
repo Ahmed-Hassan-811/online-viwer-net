@@ -39,7 +39,7 @@ The app opens with a branded splash screen, then loads the full snippet library.
 1. Fork this repository
 2. Go to **Settings → Pages**
 3. Set the source to your main branch
-4. The file will be live at `https://<your-username>.github.io/<repo-name>/online_viewer_net.html`
+4. The file will be live at `https://github.com/Ahmed-Hassan-811/online-viwer-net/blob/main/index.html`
 
 ### Option 3 — Termux & Acode (Android)
 1. Copy `online_viewer_net.html` to your device storage
