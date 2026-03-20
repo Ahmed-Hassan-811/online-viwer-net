@@ -8,7 +8,7 @@ Built for developers and beginners who want instant access to HTML, CSS, and Jav
 
 ## ✨ Features
 
-- **100% Offline** — a single `.htm` file with zero external dependencies
+- **100% Offline** — a single `.html` file with zero external dependencies
 - **Animated Splash Screen** — polished intro animation on load
 - **Searchable Snippet Library** — instantly filter by keyword across all snippets
 - **Language & Category Filters** — narrow results by HTML, CSS, JavaScript, or domain
@@ -22,7 +22,7 @@ Built for developers and beginners who want instant access to HTML, CSS, and Jav
 
 ## 📸 Preview
 
-> Open `online_viewer_net.htm` directly in your browser — no build step needed.
+> Open `online_viewer_net.html` directly in your browser — no build step needed.
 
 The app opens with a branded splash screen, then loads the full snippet library. The dark indigo/violet theme is designed for comfortable extended use.
 
@@ -32,17 +32,17 @@ The app opens with a branded splash screen, then loads the full snippet library.
 
 ### Option 1 — Direct Use
 1. Download or clone this repository
-2. Open `online_viewer_net.htm` in any modern browser
+2. Open `online_viewer_net.html` in any modern browser
 3. Start searching and copying snippets
 
 ### Option 2 — GitHub Pages
 1. Fork this repository
 2. Go to **Settings → Pages**
 3. Set the source to your main branch
-4. The file will be live at `https://<your-username>.github.io/<repo-name>/online_viewer_net.htm`
+4. The file will be live at `https://<your-username>.github.io/<repo-name>/online_viewer_net.html`
 
 ### Option 3 — Termux & Acode (Android)
-1. Copy `online_viewer_net.htm` to your device storage
+1. Copy `online_viewer_net.html` to your device storage
 2. Open the file in **Acode** or any browser (e.g. Firefox, Chrome)
 3. Bookmark it for offline use — works with no data connection
 
@@ -89,7 +89,7 @@ Click the clipboard icon on any snippet card to copy the code. The icon turns gr
 This is intentionally a single-file project.
 
 ```
-online_viewer_net.htm
+online_viewer_net.html
 │
 ├── <style>          — All CSS, including splash screen, layout, cards, animations
 ├── <body>
