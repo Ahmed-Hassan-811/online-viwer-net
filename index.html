@@ -463,9 +463,200 @@
         .code-highlight {
             background: rgba(15, 23, 42, 0.7);
         }
+
+        /* ── Splash Screen ── */
+        #splash {
+            position: fixed;
+            inset: 0;
+            z-index: 9999;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 50%, #0f172a 100%);
+            transition: opacity 0.6s ease, visibility 0.6s ease;
+        }
+
+        #splash.hidden {
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+        }
+
+        /* Animated grid background */
+        #splash::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-image:
+                linear-gradient(rgba(99,102,241,0.06) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(99,102,241,0.06) 1px, transparent 1px);
+            background-size: 40px 40px;
+            animation: gridScroll 8s linear infinite;
+        }
+
+        @keyframes gridScroll {
+            0%   { background-position: 0 0; }
+            100% { background-position: 40px 40px; }
+        }
+
+        /* Glowing orb behind logo */
+        .splash-glow {
+            position: absolute;
+            width: 340px;
+            height: 340px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(99,102,241,0.25) 0%, transparent 70%);
+            animation: pulse 2.4s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1);   opacity: 0.7; }
+            50%       { transform: scale(1.15); opacity: 1;   }
+        }
+
+        /* Logo icon wrapper */
+        .splash-icon-ring {
+            position: relative;
+            width: 110px;
+            height: 110px;
+            border-radius: 28px;
+            background: linear-gradient(135deg, #4f46e5, #7c3aed);
+            box-shadow: 0 0 0 1px rgba(255,255,255,0.12),
+                        0 20px 60px rgba(99,102,241,0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: iconDrop 0.7s cubic-bezier(0.34,1.56,0.64,1) both;
+            margin-bottom: 32px;
+        }
+
+        @keyframes iconDrop {
+            from { opacity: 0; transform: translateY(-40px) scale(0.7); }
+            to   { opacity: 1; transform: translateY(0)     scale(1);   }
+        }
+
+        .splash-icon-ring svg {
+            width: 56px;
+            height: 56px;
+            color: white;
+            filter: drop-shadow(0 2px 8px rgba(0,0,0,0.4));
+        }
+
+        /* Orbit ring */
+        .splash-icon-ring::after {
+            content: '';
+            position: absolute;
+            inset: -12px;
+            border-radius: 38px;
+            border: 2px solid transparent;
+            border-top-color: rgba(129,140,248,0.8);
+            border-right-color: rgba(167,139,250,0.4);
+            animation: orbit 1.8s linear infinite;
+        }
+
+        @keyframes orbit {
+            to { transform: rotate(360deg); }
+        }
+
+        /* Text */
+        .splash-title {
+            font-size: 2.1rem;
+            font-weight: 700;
+            background: linear-gradient(to right, #818cf8, #a78bfa, #c4b5fd);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: -0.5px;
+            animation: fadeUp 0.6s 0.3s ease both;
+            position: relative;
+        }
+
+        .splash-sub {
+            margin-top: 10px;
+            font-size: 1rem;
+            color: #94a3b8;
+            animation: fadeUp 0.6s 0.45s ease both;
+            position: relative;
+        }
+
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(16px); }
+            to   { opacity: 1; transform: translateY(0);    }
+        }
+
+        /* Progress bar */
+        .splash-progress-track {
+            position: relative;
+            width: 220px;
+            height: 3px;
+            background: rgba(99,102,241,0.15);
+            border-radius: 99px;
+            overflow: hidden;
+            margin-top: 40px;
+            animation: fadeUp 0.6s 0.6s ease both;
+        }
+
+        .splash-progress-fill {
+            height: 100%;
+            width: 0%;
+            border-radius: 99px;
+            background: linear-gradient(to right, #6366f1, #a78bfa);
+            box-shadow: 0 0 10px rgba(99,102,241,0.7);
+            animation: loadBar 1.6s 0.5s cubic-bezier(0.4,0,0.2,1) forwards;
+        }
+
+        @keyframes loadBar {
+            0%   { width: 0%; }
+            60%  { width: 75%; }
+            100% { width: 100%; }
+        }
+
+        /* Tag pills */
+        .splash-tags {
+            display: flex;
+            gap: 10px;
+            margin-top: 28px;
+            animation: fadeUp 0.6s 0.75s ease both;
+            position: relative;
+        }
+
+        .splash-tag {
+            padding: 4px 12px;
+            border-radius: 99px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
     </style>
 </head>
 <body>
+
+    <!-- ── Splash Screen ── -->
+    <div id="splash">
+        <div class="splash-glow"></div>
+
+        <div class="splash-icon-ring">
+            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8"
+                      d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"/>
+            </svg>
+        </div>
+
+        <div class="splash-title">Offline Coding Assistant</div>
+        <div class="splash-sub">Your web development reference — works offline</div>
+
+        <div class="splash-tags">
+            <span class="splash-tag" style="background:rgba(249,115,22,0.25);color:#fb923c;">HTML</span>
+            <span class="splash-tag" style="background:rgba(59,130,246,0.25);color:#60a5fa;">CSS</span>
+            <span class="splash-tag" style="background:rgba(234,179,8,0.25);color:#facc15;">JavaScript</span>
+        </div>
+
+        <div class="splash-progress-track">
+            <div class="splash-progress-fill"></div>
+        </div>
+    </div>
+
     <div class="container">
         <!-- Header -->
         <div class="header">
@@ -1750,6 +1941,20 @@ clearInterval(intervalId);`,
             div.textContent = text;
             return div.innerHTML;
         }
+
+        // ── Splash dismiss ──
+        (function () {
+            // The progress bar animation takes ~2.1s total (0.5s delay + 1.6s fill).
+            // Wait just a touch longer so the bar fully completes, then fade out.
+            const splash = document.getElementById('splash');
+            setTimeout(function () {
+                splash.classList.add('hidden');
+                // Remove from DOM after fade completes so it can't be tabbed into
+                splash.addEventListener('transitionend', function () {
+                    splash.remove();
+                }, { once: true });
+            }, 2400);
+        })();
     </script>
 </body>
 </html>
