@@ -189,9 +189,6 @@ Please keep snippets practical, copy-paste ready, and beginner-friendly where po
 
 ---
 
-## 📄 License
-
-This project is open source and available under the [MIT License](LICENSE).
 
 ---
 
