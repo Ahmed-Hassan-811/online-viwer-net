@@ -189,7 +189,4 @@ Please keep snippets practical, copy-paste ready, and beginner-friendly where po
 
 ---
 
-
----
-
 *Save it. Open it. Code anywhere.*
