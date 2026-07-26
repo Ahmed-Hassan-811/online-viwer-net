@@ -54,10 +54,15 @@
 
         .stats {
             display: flex;
+            flex-wrap: wrap;
             justify-content: center;
-            gap: 15px;
-            font-size: 0.9rem;
+            gap: 8px 14px;
+            font-size: 0.85rem;
             color: #9ca3af;
+        }
+
+        .stats .sep {
+            color: #4b5563;
         }
 
         /* Termux Guide */
@@ -666,15 +671,25 @@
                 </svg>
                 <h1>Offline Coding Assistant</h1>
             </div>
-            <p>Your complete web development reference - works offline!</p>
+            <p>Your complete coding reference — HTML, CSS, JS, Python, Java, Rust, React &amp; Kotlin. Works offline!</p>
             <div class="stats">
                 <span id="total-snippets">0 snippets</span>
-                <span>•</span>
+                <span class="sep">•</span>
                 <span id="html-count">0 HTML</span>
-                <span>•</span>
+                <span class="sep">•</span>
                 <span id="css-count">0 CSS</span>
-                <span>•</span>
+                <span class="sep">•</span>
                 <span id="js-count">0 JavaScript</span>
+                <span class="sep">•</span>
+                <span id="py-count">0 Python</span>
+                <span class="sep">•</span>
+                <span id="java-count">0 Java</span>
+                <span class="sep">•</span>
+                <span id="rust-count">0 Rust</span>
+                <span class="sep">•</span>
+                <span id="react-count">0 React</span>
+                <span class="sep">•</span>
+                <span id="kotlin-count">0 Kotlin</span>
             </div>
         </div>
 
@@ -1703,7 +1718,3837 @@ const intervalId = setInterval(() => {
 clearInterval(intervalId);`,
                 description: "Delayed and repeated execution",
                 simple_explanation: "setTimeout runs code once after a delay. setInterval repeats forever until you clearInterval. Time is in milliseconds (1000ms = 1 second)."
+            },
+
+// ─── EXTRA HTML ───
+            {
+                language: "HTML",
+                domain: "Head & Meta",
+                task: "Meta Tags for SEO",
+                code_example: `<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="A brief description for search engines">
+    <meta name="keywords" content="html, css, javascript">
+    <meta name="author" content="Your Name">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Open Graph for social sharing -->
+    <meta property="og:title" content="Page Title">
+    <meta property="og:description" content="Page description">
+    <meta property="og:image" content="thumbnail.jpg">
+</head>`,
+                description: "Meta tags that improve SEO and social media link previews",
+                simple_explanation: "Meta tags are invisible instructions in your page head. The description shows up in Google search results. Open Graph controls how your page looks when shared on Facebook or Twitter."
+            },
+            {
+                language: "HTML",
+                domain: "Head & Meta",
+                task: "Favicon and App Icons",
+                code_example: `<head>
+    <!-- Classic favicon -->
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <!-- PNG favicon (modern) -->
+    <link rel="icon" type="image/png" href="/favicon.png" sizes="32x32">
+    <!-- Apple touch icon for iOS -->
+    <link rel="apple-touch-icon" href="/apple-icon.png">
+    <!-- Web App Manifest -->
+    <link rel="manifest" href="/manifest.json">
+</head>`,
+                description: "Icons that appear in browser tabs and on mobile home screens",
+                simple_explanation: "Favicons are the tiny icons you see in browser tabs. Apple touch icons appear when someone saves your site to their phone home screen."
+            },
+            {
+                language: "HTML",
+                domain: "Interactive",
+                task: "Details and Summary (Native Accordion)",
+                code_example: `<details>
+    <summary>Click to expand</summary>
+    <p>This content is hidden until the user clicks the summary.</p>
+</details>
+
+<details open>
+    <summary>This one starts open</summary>
+    <p>The 'open' attribute makes it visible by default.</p>
+</details>`,
+                description: "Native HTML accordion that shows/hides content — no JavaScript needed",
+                simple_explanation: "Details/summary is a built-in collapsible section. The summary is always visible, clicking it toggles the hidden content. Works without any JavaScript or CSS libraries."
+            },
+            {
+                language: "HTML",
+                domain: "Interactive",
+                task: "Dialog Modal Element",
+                code_example: `<!-- The dialog element -->
+<dialog id="myDialog">
+    <h2>Modal Title</h2>
+    <p>Dialog content goes here.</p>
+    <button onclick="document.getElementById('myDialog').close()">
+        Close
+    </button>
+</dialog>
+
+<!-- Buttons to open it -->
+<button onclick="document.getElementById('myDialog').showModal()">
+    Open Modal (with backdrop)
+</button>`,
+                description: "Native HTML dialog element for modals — no CSS framework required",
+                simple_explanation: "Dialog is a built-in popup window. showModal() creates a proper modal with a dark backdrop. close() dismisses it. No extra libraries needed."
+            },
+            {
+                language: "HTML",
+                domain: "Progress & Meters",
+                task: "Progress Bar and Meter",
+                code_example: `<!-- Progress bar (tasks, loading) -->
+<label>Download: <progress value="70" max="100">70%</progress></label>
+
+<!-- Meter (ratings, disk usage) -->
+<label>Disk usage:
+    <meter value="6" min="0" max="10" low="3" high="7" optimum="1">
+        6/10
+    </meter>
+</label>
+
+<!-- Indeterminate (unknown progress) -->
+<progress>Loading...</progress>`,
+                description: "Native HTML progress and meter elements without any CSS needed",
+                simple_explanation: "Progress shows how far along a task is (like a loading bar). Meter shows a value within a range (like a battery level). Both work without JavaScript or CSS."
+            },
+            {
+                language: "HTML",
+                domain: "Media",
+                task: "Picture Element (Responsive Images)",
+                code_example: `<picture>
+    <!-- Modern format for browsers that support it -->
+    <source srcset="image.webp" type="image/webp">
+    <!-- Smaller image for mobile screens -->
+    <source media="(max-width: 600px)" srcset="image-mobile.jpg">
+    <!-- Fallback img (always required) -->
+    <img src="image.jpg" alt="Description" loading="lazy">
+</picture>`,
+                description: "Responsive image that serves the best format per browser/device",
+                simple_explanation: "Picture lets the browser pick the best image. Newer browsers use WebP (smaller files), older ones fall back to JPEG. loading='lazy' delays loading until the image is about to appear on screen."
+            },
+            {
+                language: "HTML",
+                domain: "Embedding",
+                task: "iFrame Embed",
+                code_example: `<!-- Embed another webpage -->
+<iframe
+    src="https://www.example.com"
+    width="800"
+    height="600"
+    title="Embedded page"
+    loading="lazy">
+</iframe>
+
+<!-- Embed a YouTube video -->
+<iframe
+    width="560"
+    height="315"
+    src="https://www.youtube.com/embed/VIDEO_ID"
+    title="YouTube video"
+    allowfullscreen>
+</iframe>`,
+                description: "Embed external content like maps, videos, and other websites",
+                simple_explanation: "iFrame puts another webpage inside yours — like a window into another site. Used for YouTube videos, Google Maps, and payment widgets. Always add a 'title' for accessibility."
+            },
+            {
+                language: "HTML",
+                domain: "Media",
+                task: "Canvas Element",
+                code_example: `<canvas id="myCanvas" width="400" height="300"
+    style="border: 1px solid black;">
+    Your browser does not support canvas.
+</canvas>
+
+<script>
+    const canvas = document.getElementById('myCanvas');
+    const ctx = canvas.getContext('2d');
+
+    // Draw a filled rectangle
+    ctx.fillStyle = '#6366f1';
+    ctx.fillRect(50, 50, 150, 100);
+
+    // Draw a circle
+    ctx.beginPath();
+    ctx.arc(300, 150, 50, 0, Math.PI * 2);
+    ctx.fillStyle = '#a78bfa';
+    ctx.fill();
+<\/script>`,
+                description: "HTML5 canvas for drawing 2D graphics with JavaScript",
+                simple_explanation: "Canvas is a digital whiteboard you draw on using JavaScript. getContext('2d') gives you the drawing tools. Used for games, charts, image editors, and custom animations."
+            },
+            {
+                language: "HTML",
+                domain: "Forms",
+                task: "Fieldset and Legend",
+                code_example: `<form>
+    <fieldset>
+        <legend>Personal Information</legend>
+        <label for="fname">First Name:</label>
+        <input type="text" id="fname" name="fname"><br>
+        <label for="dob">Date of Birth:</label>
+        <input type="date" id="dob" name="dob">
+    </fieldset>
+
+    <fieldset>
+        <legend>Account Settings</legend>
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email">
+    </fieldset>
+</form>`,
+                description: "Group related form inputs with a visible border and label",
+                simple_explanation: "Fieldset draws a box around related inputs and Legend is the title for that box. It makes long forms easier to understand by grouping related fields together."
+            },
+            {
+                language: "HTML",
+                domain: "Text Content",
+                task: "Inline Semantic Elements",
+                code_example: `<!-- Abbreviation with tooltip -->
+<p><abbr title="HyperText Markup Language">HTML</abbr> is the language of the web.</p>
+
+<!-- Inline code -->
+<p>Use the <code>console.log()</code> function to debug.</p>
+
+<!-- Keyboard shortcut -->
+<p>Press <kbd>Ctrl</kbd> + <kbd>C</kbd> to copy.</p>
+
+<!-- Superscript and subscript -->
+<p>H<sub>2</sub>O and E=mc<sup>2</sup></p>
+
+<!-- Highlighted text -->
+<p>The most <mark>important</mark> part is highlighted.</p>`,
+                description: "Semantic inline tags that carry meaning beyond just styling",
+                simple_explanation: "abbr shows a tooltip with the full word. code styles code snippets. kbd represents keyboard keys. sub/sup move text below or above the baseline. mark is like a yellow highlighter."
+            },
+            {
+                language: "HTML",
+                domain: "Lists",
+                task: "Definition List",
+                code_example: `<dl>
+    <dt>HTML</dt>
+    <dd>HyperText Markup Language — the structure of web pages</dd>
+
+    <dt>CSS</dt>
+    <dd>Cascading Style Sheets — the styling of web pages</dd>
+
+    <dt>JavaScript</dt>
+    <dd>A programming language that makes web pages interactive</dd>
+</dl>`,
+                description: "Definition list for glossaries, FAQs, and key-value data",
+                simple_explanation: "Definition lists are perfect for glossaries and FAQs. dt is the term (like a dictionary word) and dd is the definition. The browser automatically indents the definitions."
+            },
+            {
+                language: "HTML",
+                domain: "Data",
+                task: "Data Attributes",
+                code_example: `<!-- Store extra data directly on HTML elements -->
+<button
+    data-product-id="42"
+    data-price="9.99"
+    data-category="electronics"
+    onclick="addToCart(this)">
+    Add to Cart
+</button>
+
+<script>
+    function addToCart(btn) {
+        const id    = btn.dataset.productId; // "42"
+        const price = btn.dataset.price;     // "9.99"
+        console.log('Adding:', id, 'for $', price);
+    }
+<\/script>`,
+                description: "Custom data-* attributes for embedding extra data in HTML",
+                simple_explanation: "Data attributes let you attach extra information to any element. Start the attribute name with 'data-', then read it in JavaScript with .dataset. Great for storing IDs and config without hidden inputs."
+            },
+            {
+                language: "HTML",
+                domain: "Media",
+                task: "Inline SVG Graphics",
+                code_example: `<svg width="200" height="200" viewBox="0 0 200 200">
+    <!-- Circle -->
+    <circle cx="100" cy="100" r="80" fill="#6366f1" opacity="0.7"/>
+
+    <!-- Rectangle with rounded corners -->
+    <rect x="40" y="40" width="120" height="80" fill="#a78bfa" rx="10"/>
+
+    <!-- Text centered -->
+    <text x="100" y="115" text-anchor="middle" fill="white" font-size="18">
+        SVG Text
+    </text>
+
+    <!-- Line -->
+    <line x1="20" y1="180" x2="180" y2="180"
+          stroke="#86efac" stroke-width="3"/>
+</svg>`,
+                description: "Scalable Vector Graphics drawn directly in HTML",
+                simple_explanation: "SVG lets you draw shapes using code — circles, rectangles, lines, and text. They scale to any size without becoming blurry because they're mathematical shapes, not pixels."
+            },
+            {
+                language: "HTML",
+                domain: "Media",
+                task: "Figure and Figcaption",
+                code_example: `<!-- Image with caption -->
+<figure>
+    <img src="chart.png" alt="Sales data for Q3">
+    <figcaption>
+        Fig. 1 — Q3 Sales Performance (2024)
+    </figcaption>
+</figure>
+
+<!-- Code block with caption -->
+<figure>
+    <pre><code>console.log("Hello, World!");</code></pre>
+    <figcaption>Example 1: Basic JavaScript output</figcaption>
+</figure>`,
+                description: "Semantic figure with an accessible, linked caption",
+                simple_explanation: "Figure wraps standalone content (images, charts, code blocks). Figcaption provides a visible label below it. Screen readers automatically connect the caption to the figure."
+            },
+            {
+                language: "HTML",
+                domain: "Head & Meta",
+                task: "External CSS and JS Links",
+                code_example: `<head>
+    <!-- External stylesheet -->
+    <link rel="stylesheet" href="styles.css">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap"
+          rel="stylesheet">
+</head>
+<body>
+    <!-- JS at bottom (loads after HTML parses) -->
+    <script src="app.js"><\/script>
+
+    <!-- defer: loads in parallel, runs after HTML -->
+    <script src="analytics.js" defer><\/script>
+
+    <!-- async: loads and runs independently -->
+    <script src="widget.js" async><\/script>
+</body>`,
+                description: "Linking external stylesheets and JavaScript files correctly",
+                simple_explanation: "Link tags connect your HTML to CSS files. Scripts at the bottom mean users see the page faster. 'defer' loads the script without blocking the page and runs it after HTML is ready. 'async' runs as soon as downloaded."
+            },
+            {
+                language: "HTML",
+                domain: "Template",
+                task: "HTML Template Element",
+                code_example: `<!-- Template — hidden, reusable HTML -->
+<template id="card-template">
+    <div class="card">
+        <h2 class="card-title">Default Title</h2>
+        <p class="card-body">Default content.</p>
+    </div>
+</template>
+
+<div id="container"></div>
+
+<script>
+    const template = document.getElementById('card-template');
+    const container = document.getElementById('container');
+
+    // Clone and customize the template
+    const clone = template.content.cloneNode(true);
+    clone.querySelector('.card-title').textContent = 'My Card';
+    clone.querySelector('.card-body').textContent = 'Hello!';
+
+    // Append to the page
+    container.appendChild(clone);
+<\/script>`,
+                description: "HTML template element for stamping out reusable markup",
+                simple_explanation: "Template is hidden HTML you can copy as many times as you need. cloneNode(true) makes a deep copy including children. It's like a cookie cutter — define the shape once, stamp it out repeatedly."
+            },
+
+            // ─── EXTRA CSS ───
+            {
+                language: "CSS",
+                domain: "Variables",
+                task: "CSS Custom Properties (Variables)",
+                code_example: `/* Define variables on :root (global) */
+:root {
+    --primary:      #6366f1;
+    --secondary:    #a78bfa;
+    --text:         #1f2937;
+    --bg:           #ffffff;
+    --spacing-sm:   8px;
+    --spacing-md:   16px;
+    --radius:       8px;
+}
+
+/* Use variables */
+.button {
+    background:    var(--primary);
+    color:         var(--bg);
+    padding:       var(--spacing-sm) var(--spacing-md);
+    border-radius: var(--radius);
+}
+
+/* Override in a specific scope */
+.dark-theme {
+    --bg:   #0f172a;
+    --text: #f1f5f9;
+}`,
+                description: "CSS custom properties for maintaining consistent design tokens",
+                simple_explanation: "CSS variables store values you reuse across your stylesheet. Change the variable once and every element using it updates automatically. Think of :root variables as global settings for your entire design."
+            },
+            {
+                language: "CSS",
+                domain: "Typography",
+                task: "Fluid Typography with clamp()",
+                code_example: `/* clamp(minimum, preferred, maximum) */
+h1 {
+    /* Scales from 1.5rem on mobile to 3rem on desktop */
+    font-size: clamp(1.5rem, 4vw + 1rem, 3rem);
+}
+
+p {
+    font-size: clamp(1rem, 2.5vw, 1.25rem);
+    /* Limit line length for readability */
+    max-width: clamp(45ch, 60%, 75ch);
+}
+
+/* Fluid padding — no media queries needed */
+.section {
+    padding: clamp(2rem, 5vw, 6rem);
+    gap:     clamp(1rem, 3vw, 2rem);
+}`,
+                description: "Smoothly scaling font sizes using the clamp() function",
+                simple_explanation: "clamp() sets a min, preferred, and max value. The font smoothly grows as the screen widens — no media queries needed. 'ch' is a unit equal to the width of the character '0', great for controlling line length."
+            },
+            {
+                language: "CSS",
+                domain: "Layout",
+                task: "CSS Grid Template Areas",
+                code_example: `/* Visual layout with named areas */
+.page {
+    display: grid;
+    grid-template-columns: 250px 1fr;
+    grid-template-rows: auto 1fr auto;
+    grid-template-areas:
+        "header  header"
+        "sidebar main  "
+        "footer  footer";
+    min-height: 100vh;
+    gap: 16px;
+}
+
+header  { grid-area: header;  }
+.sidebar { grid-area: sidebar; }
+main    { grid-area: main;    }
+footer  { grid-area: footer;  }
+
+/* Mobile: stack everything */
+@media (max-width: 768px) {
+    .page {
+        grid-template-columns: 1fr;
+        grid-template-areas: "header" "main" "sidebar" "footer";
+    }
+}`,
+                description: "Draw your layout visually using named grid template areas",
+                simple_explanation: "Template areas let you sketch your layout right in CSS. The ASCII art pattern shows where each element goes. Change the layout for mobile by just redrawing the pattern."
+            },
+            {
+                language: "CSS",
+                domain: "Layout",
+                task: "Aspect Ratio",
+                code_example: `/* Maintain 16:9 (widescreen video) */
+.video-wrapper {
+    aspect-ratio: 16 / 9;
+    width: 100%;
+}
+
+/* Perfect circle */
+.avatar {
+    aspect-ratio: 1;
+    border-radius: 50%;
+    width: 100px;
+    object-fit: cover;
+}
+
+/* Portrait card grid */
+.card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+}
+.card-grid .card {
+    aspect-ratio: 3 / 4;
+}`,
+                description: "Maintain proportional dimensions at any size without padding hacks",
+                simple_explanation: "aspect-ratio keeps width and height proportional. A 16/9 box stays widescreen no matter the width. 1 is a perfect square. It replaces the old padding-bottom percentage hack."
+            },
+            {
+                language: "CSS",
+                domain: "Colors & Backgrounds",
+                task: "Dark Mode with prefers-color-scheme",
+                code_example: `/* Base (light) theme using CSS variables */
+:root {
+    --bg:      #ffffff;
+    --text:    #1f2937;
+    --card-bg: #f9fafb;
+    --border:  #e5e7eb;
+}
+
+/* Automatic dark mode from OS preference */
+@media (prefers-color-scheme: dark) {
+    :root {
+        --bg:      #0f172a;
+        --text:    #f1f5f9;
+        --card-bg: #1e293b;
+        --border:  #334155;
+    }
+}
+
+body {
+    background: var(--bg);
+    color:      var(--text);
+    transition: background 0.3s, color 0.3s;
+}`,
+                description: "Automatic dark mode that matches the user's OS preference",
+                simple_explanation: "prefers-color-scheme detects if the user's device uses dark mode. Pair it with CSS variables so you only swap the values — not every individual rule. The transition makes the switch smooth."
+            },
+            {
+                language: "CSS",
+                domain: "Effects",
+                task: "Glassmorphism Effect",
+                code_example: `/* Frosted glass card */
+.glass-card {
+    background:         rgba(255, 255, 255, 0.1);
+    backdrop-filter:    blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border:             1px solid rgba(255, 255, 255, 0.2);
+    border-radius:      16px;
+    padding:            24px;
+    box-shadow:         0 8px 32px rgba(0, 0, 0, 0.2);
+}
+
+/* Container needs a visible background for the blur to work */
+.glass-container {
+    background: linear-gradient(135deg, #6366f1, #a78bfa);
+    padding:    40px;
+}`,
+                description: "Frosted glass UI effect using backdrop-filter and transparency",
+                simple_explanation: "Glassmorphism blurs everything behind an element. backdrop-filter does the heavy lifting. The element needs transparency (rgba) so the blur shows through. The container needs a colorful background for the effect to be visible."
+            },
+            {
+                language: "CSS",
+                domain: "Layout",
+                task: "Scroll Snap",
+                code_example: `/* Fullscreen sections that snap on scroll */
+.scroll-container {
+    height:           100vh;
+    overflow-y:       scroll;
+    scroll-snap-type: y mandatory;
+}
+
+.section {
+    height:            100vh;
+    scroll-snap-align: start;
+    display:           flex;
+    align-items:       center;
+    justify-content:   center;
+}
+
+/* Horizontal image carousel */
+.carousel {
+    display:          flex;
+    overflow-x:       scroll;
+    scroll-snap-type: x mandatory;
+    gap:              16px;
+}
+.carousel .slide {
+    flex:              0 0 300px;
+    scroll-snap-align: start;
+}`,
+                description: "CSS-only snapping scroll for carousels and slide sections",
+                simple_explanation: "Scroll snap makes scrolling jump to specific points — like slides in a presentation. 'mandatory' always snaps. 'proximity' only snaps when close. Works for both vertical sections and horizontal carousels without any JavaScript."
+            },
+            {
+                language: "CSS",
+                domain: "Effects",
+                task: "Clip Path Shapes",
+                code_example: `/* Triangle */
+.triangle {
+    clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+}
+
+/* Diagonal cut on a hero section */
+.hero {
+    clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
+}
+
+/* Circle crop */
+.circle-crop {
+    clip-path: circle(50% at center);
+}
+
+/* Animated reveal */
+.reveal {
+    clip-path: inset(0 100% 0 0);
+    transition: clip-path 0.6s ease;
+}
+.reveal:hover,
+.reveal.visible {
+    clip-path: inset(0 0% 0 0);
+}`,
+                description: "Clip elements into custom shapes and animate between them",
+                simple_explanation: "clip-path cuts an element into any shape you define. polygon() draws custom outlines, circle() makes a circle, inset() crops from the edges. You can even animate between shapes for reveal effects."
+            },
+            {
+                language: "CSS",
+                domain: "Positioning",
+                task: "Centering Techniques",
+                code_example: `/* 1. Flexbox (most common) */
+.center-flex {
+    display:         flex;
+    justify-content: center;
+    align-items:     center;
+    height:          100vh;
+}
+
+/* 2. Grid — one-liner */
+.center-grid {
+    display:     grid;
+    place-items: center;
+    height:      100vh;
+}
+
+/* 3. Absolute positioning */
+.center-abs {
+    position:  absolute;
+    top:       50%;
+    left:      50%;
+    transform: translate(-50%, -50%);
+}
+
+/* 4. Block element — horizontal only */
+.center-margin {
+    width:  800px;
+    margin: 0 auto;
+}`,
+                description: "Four reliable techniques for centering elements in CSS",
+                simple_explanation: "Flexbox and Grid are the modern ways to center. place-items: center is the shortest (Grid). The transform trick still works for absolutely positioned elements. 'margin: 0 auto' centers block elements horizontally."
+            },
+            {
+                language: "CSS",
+                domain: "Positioning",
+                task: "Sticky Header and Sidebar",
+                code_example: `/* Navigation that sticks to the top on scroll */
+header {
+    position:   sticky;
+    top:        0;
+    z-index:    100;
+    background: #1e293b;
+    padding:    16px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+}
+
+/* Sticky sidebar in a two-column layout */
+.sidebar {
+    position:   sticky;
+    top:        80px; /* account for header height */
+    height:     calc(100vh - 80px);
+    overflow-y: auto;
+}
+
+/* Table of contents */
+.toc {
+    position:   sticky;
+    top:        16px;
+    align-self: start; /* prevents stretching in grid/flex */
+}`,
+                description: "Sticky positioning for persistent navigation elements",
+                simple_explanation: "Sticky elements scroll normally then stick at the given position. Unlike 'fixed', they still occupy space in the layout. align-self: start is needed inside Grid/Flex or the sidebar stretches to full column height."
+            },
+            {
+                language: "CSS",
+                domain: "Layout",
+                task: "Object-Fit for Images",
+                code_example: `/* Fill container, crop excess */
+.thumbnail {
+    width:           300px;
+    height:          200px;
+    object-fit:      cover;
+    object-position: center top;
+}
+
+/* Show entire image (letterbox effect) */
+.logo {
+    width:        150px;
+    height:       150px;
+    object-fit:   contain;
+    background:   #f0f0f0;
+}
+
+/* Responsive hero image */
+.hero-img {
+    width:      100%;
+    height:     400px;
+    object-fit: cover;
+}`,
+                description: "Control how images and videos fit inside a container",
+                simple_explanation: "object-fit controls images inside a fixed box. 'cover' fills the box and crops, like a photo in a frame. 'contain' shows the full image with empty space. object-position sets which part stays visible."
+            },
+            {
+                language: "CSS",
+                domain: "Selectors",
+                task: "Modern Selectors: :is(), :has(), :not()",
+                code_example: `/* :is() — one rule for multiple selectors */
+:is(h1, h2, h3, h4) {
+    font-weight: bold;
+    line-height: 1.2;
+}
+
+/* :has() — parent selector (style based on children) */
+.card:has(img) {
+    padding: 0; /* remove padding when card has an image */
+}
+
+/* Style form when it has invalid inputs */
+form:has(input:invalid) .submit-btn {
+    opacity:        0.5;
+    pointer-events: none;
+}
+
+/* :not() — exclude elements */
+li:not(:last-child) {
+    border-bottom: 1px solid #e5e7eb;
+}
+
+/* Combine them */
+:is(article, section):not(.hero) {
+    padding: 2rem;
+}`,
+                description: "Powerful modern CSS selectors for precise targeting",
+                simple_explanation: ":is() groups selectors so you write one rule for many elements. :has() is the long-awaited parent selector — style a parent based on what's inside it. :not() excludes matching elements."
+            },
+            {
+                language: "CSS",
+                domain: "Responsive Design",
+                task: "Container Queries",
+                code_example: `/* Make a container queryable */
+.card-wrapper {
+    container-type: inline-size;
+    container-name: card;
+}
+
+/* Style children based on CONTAINER width (not viewport) */
+@container card (min-width: 400px) {
+    .card {
+        display:        flex;
+        flex-direction: row;
+    }
+    .card img {
+        width: 200px;
+    }
+}
+
+@container card (max-width: 399px) {
+    .card {
+        flex-direction: column;
+    }
+}`,
+                description: "Style components relative to their container, not the viewport",
+                simple_explanation: "Container queries are like media queries but for a specific container. The same component can look different in a narrow sidebar vs a wide main area. Better for truly reusable components."
+            },
+            {
+                language: "CSS",
+                domain: "Counters",
+                task: "CSS Counters",
+                code_example: `/* Auto-numbering chapters */
+body {
+    counter-reset: chapter;
+}
+
+h2 {
+    counter-increment: chapter;
+}
+
+h2::before {
+    content:     "Chapter " counter(chapter) ": ";
+    color:       #6366f1;
+    font-weight: bold;
+}
+
+/* Nested counters (1.1, 1.2, 2.1) */
+ol {
+    counter-reset: item;
+    list-style:    none;
+}
+ol li {
+    counter-increment: item;
+}
+ol li::before {
+    content: counters(item, ".") " ";
+}`,
+                description: "Automatic numbering using CSS counters and pseudo-elements",
+                simple_explanation: "CSS counters automatically number things without changing your HTML. counter-reset creates the counter, counter-increment adds 1, and content: counter() displays the number. Great for auto-numbering chapters or steps."
+            },
+            {
+                language: "CSS",
+                domain: "Effects",
+                task: "Custom Scrollbar",
+                code_example: `/* Webkit browsers: Chrome, Edge, Safari */
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: #1e293b;
+}
+
+::-webkit-scrollbar-thumb {
+    background:    #6366f1;
+    border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #4f46e5;
+}
+
+/* Firefox */
+* {
+    scrollbar-width: thin;
+    scrollbar-color: #6366f1 #1e293b;
+}`,
+                description: "Styled scrollbars for a consistent dark-theme aesthetic",
+                simple_explanation: "You can completely restyle scrollbars with CSS. -webkit-scrollbar targets Chrome/Edge/Safari. Firefox uses the simpler scrollbar-color property. Great for dark-themed UIs that need a polished look."
+            },
+
+// ─── EXTRA JAVASCRIPT ───
+            {
+                language: "JavaScript",
+                domain: "Modern Syntax",
+                task: "Destructuring",
+                code_example: `// Array destructuring
+const [first, second, ...rest] = [1, 2, 3, 4, 5];
+console.log(first);  // 1
+console.log(rest);   // [3, 4, 5]
+
+// Object destructuring with default values
+const { name, age, city = 'Unknown' } = { name: 'Alice', age: 30 };
+console.log(city);  // 'Unknown'
+
+// Rename while destructuring
+const { name: fullName } = { name: 'Bob' };
+console.log(fullName);  // 'Bob'
+
+// In function parameters
+function display({ name, age }) {
+    console.log(name, age);
+}`,
+                description: "Extract values from arrays and objects in one clean line",
+                simple_explanation: "Destructuring unpacks values into variables. The 'rest' syntax (...rest) collects remaining items. You can set default values and rename variables on the fly — all without multiple assignment lines."
+            },
+            {
+                language: "JavaScript",
+                domain: "Modern Syntax",
+                task: "Spread and Rest Operators",
+                code_example: `// Spread: expand an array or object
+const arr1 = [1, 2, 3];
+const arr2 = [...arr1, 4, 5]; // [1, 2, 3, 4, 5]
+
+// Merge objects (latter keys win)
+const defaults = { color: 'blue', size: 'md' };
+const custom   = { size: 'lg', weight: 'bold' };
+const merged   = { ...defaults, ...custom };
+
+// Shallow copy without shared reference
+const copy = { ...original };
+
+// Rest: collect remaining arguments into an array
+function sum(...numbers) {
+    return numbers.reduce((total, n) => total + n, 0);
+}
+sum(1, 2, 3, 4);  // 10
+
+// Pass array as individual arguments
+const nums = [5, 3, 8];
+Math.max(...nums);  // 8`,
+                description: "Spread expands iterables; rest collects remaining values",
+                simple_explanation: "Spread (...) pours the contents of an array or object into another. Rest (...) in a function collects extra arguments into an array. They look identical but do opposite things depending on context."
+            },
+            {
+                language: "JavaScript",
+                domain: "Modern Syntax",
+                task: "Template Literals",
+                code_example: `const name = 'World';
+
+// Interpolation — no more messy + signs
+console.log(\`Hello, \${name}!\`);
+
+// Multi-line strings
+const html = \`
+    <div class="card">
+        <h2>\${name}</h2>
+    </div>
+\`;
+
+// Expressions inside \${}
+const a = 5, b = 10;
+console.log(\`Sum: \${a + b}\`);             // Sum: 15
+console.log(\`Even: \${a % 2 === 0}\`);      // Even: false
+
+// Tagged template (advanced)
+function highlight(strings, ...values) {
+    return strings.reduce((out, str, i) =>
+        out + str + (values[i] !== undefined ? \`<b>\${values[i]}</b>\` : ''), '');
+}
+const result = highlight\`Hello \${name}!\`;`,
+                description: "Template literals for string interpolation and multi-line text",
+                simple_explanation: "Template literals use backticks and \${} to embed variables directly in strings — no more + concatenation. They also support true multi-line strings. Tagged templates (a function before the backtick) let you process the string pieces."
+            },
+            {
+                language: "JavaScript",
+                domain: "Async",
+                task: "Promises",
+                code_example: `// Creating a promise
+const myPromise = new Promise((resolve, reject) => {
+    const ok = true;
+    if (ok) resolve('Data loaded!');
+    else    reject('Something went wrong');
+});
+
+// Consuming
+myPromise
+    .then(result  => console.log(result))
+    .catch(error  => console.error(error))
+    .finally(()   => console.log('Always runs'));
+
+// Promise.all — wait for every promise (fails fast)
+const [users, posts] = await Promise.all([
+    fetch('/api/users').then(r => r.json()),
+    fetch('/api/posts').then(r => r.json())
+]);
+
+// Promise.allSettled — wait for all, don't fail
+const results = await Promise.allSettled([p1, p2, p3]);
+results.forEach(r => console.log(r.status, r.value ?? r.reason));`,
+                description: "Promises represent a value that will be available in the future",
+                simple_explanation: "A Promise is a placeholder for future data. .then() handles success, .catch() handles errors, .finally() always runs. Promise.all() waits for everything and fails if any fail. Promise.allSettled() waits for everything regardless."
+            },
+            {
+                language: "JavaScript",
+                domain: "Storage",
+                task: "LocalStorage and SessionStorage",
+                code_example: `// localStorage persists across sessions
+localStorage.setItem('theme', 'dark');
+const theme = localStorage.getItem('theme'); // 'dark'
+localStorage.removeItem('theme');
+localStorage.clear(); // wipe everything
+
+// Store objects — must serialize to JSON
+const user = { name: 'Alice', role: 'admin' };
+localStorage.setItem('user', JSON.stringify(user));
+const saved = JSON.parse(localStorage.getItem('user'));
+
+// sessionStorage — cleared when tab closes
+sessionStorage.setItem('draft', 'some text');
+
+// Check if a key exists
+if (localStorage.getItem('token') !== null) {
+    console.log('User is logged in');
+}`,
+                description: "Persist data in the browser without a server or database",
+                simple_explanation: "localStorage saves data that survives tab and browser closes. sessionStorage clears when the tab closes. Both only store strings, so use JSON.stringify() for objects and JSON.parse() to read them back."
+            },
+            {
+                language: "JavaScript",
+                domain: "Data",
+                task: "JSON Methods",
+                code_example: `const obj = { name: 'Alice', age: 30, tags: ['dev', 'coffee'] };
+
+// Object → JSON string
+const str = JSON.stringify(obj);
+// '{"name":"Alice","age":30,"tags":["dev","coffee"]}'
+
+// Pretty-print with indentation
+const pretty = JSON.stringify(obj, null, 2);
+
+// JSON string → object
+const parsed = JSON.parse(str);
+console.log(parsed.name); // 'Alice'
+
+// Simple deep clone
+const clone = JSON.parse(JSON.stringify(obj));
+
+// Handle bad JSON safely
+try {
+    const data = JSON.parse(untrustedString);
+} catch (e) {
+    console.error('Invalid JSON:', e.message);
+}`,
+                description: "Serialize JavaScript objects to JSON and parse them back",
+                simple_explanation: "JSON.stringify() converts an object to text so it can be sent over the internet or stored. JSON.parse() converts it back. It's how frontends and backends exchange data. The clone trick only works for plain data (no functions or Dates)."
+            },
+            {
+                language: "JavaScript",
+                domain: "Data",
+                task: "Date and Time",
+                code_example: `const now = new Date();
+
+// Get parts
+now.getFullYear();  // e.g. 2025
+now.getMonth();     // 0-11 (0 = January!)
+now.getDate();      // day of month
+now.getHours();     // 0-23
+now.getDay();       // 0-6 (0 = Sunday)
+
+// Locale-aware formatting (Intl API)
+const fmt = new Intl.DateTimeFormat('en-US', {
+    weekday: 'long',
+    year:    'numeric',
+    month:   'long',
+    day:     'numeric'
+});
+console.log(fmt.format(now)); // "Wednesday, July 10, 2025"
+
+// Timestamps
+const ts      = Date.now();            // ms since Jan 1 1970
+const elapsed = Date.now() - ts;       // duration in ms
+const inFuture = new Date(Date.now() + 86400000); // tomorrow`,
+                description: "Create, read, and format dates in JavaScript",
+                simple_explanation: "Date objects represent a moment in time. getMonth() is 0-indexed — January is 0, which trips everyone up. Intl.DateTimeFormat is the modern, locale-aware way to format dates for users."
+            },
+            {
+                language: "JavaScript",
+                domain: "Error Handling",
+                task: "Try / Catch / Finally",
+                code_example: `// Basic error handling
+try {
+    const result = riskyOperation();
+} catch (error) {
+    console.error(error.name);    // e.g. 'TypeError'
+    console.error(error.message); // human-readable message
+} finally {
+    console.log('Cleanup — always runs');
+}
+
+// Throw your own errors
+function divide(a, b) {
+    if (b === 0) throw new Error('Cannot divide by zero');
+    return a / b;
+}
+
+// Custom error class
+class ValidationError extends Error {
+    constructor(message, field) {
+        super(message);
+        this.name  = 'ValidationError';
+        this.field = field;
+    }
+}
+
+throw new ValidationError('Required', 'email');`,
+                description: "Graceful error handling with try/catch/finally and custom errors",
+                simple_explanation: "try wraps risky code. catch handles the error (error.message tells you what went wrong). finally always runs — perfect for cleanup like closing a connection. throw lets you create your own errors."
+            },
+            {
+                language: "JavaScript",
+                domain: "OOP",
+                task: "ES6 Classes",
+                code_example: `class Animal {
+    #sound; // private field
+
+    constructor(name, sound) {
+        this.name  = name;
+        this.#sound = sound;
+    }
+
+    speak() {
+        return \`\${this.name} says \${this.#sound}\`;
+    }
+
+    static create(name) { // called on the class, not an instance
+        return new Animal(name, '...');
+    }
+}
+
+class Dog extends Animal {
+    constructor(name) {
+        super(name, 'Woof'); // call parent constructor
+        this.tricks = [];
+    }
+
+    learn(trick) {
+        this.tricks.push(trick);
+        return this;  // enable chaining
+    }
+}
+
+const dog = new Dog('Rex');
+dog.learn('sit').learn('shake');
+console.log(dog.speak()); // Rex says Woof`,
+                description: "Object-oriented programming with ES6 class syntax",
+                simple_explanation: "Classes are blueprints for objects. constructor runs when you create one. extends inherits from another class. super() calls the parent constructor. # makes a field private — only accessible inside the class."
+            },
+            {
+                language: "JavaScript",
+                domain: "Data",
+                task: "Map and Set",
+                code_example: `// Set — unique values only
+const tags = new Set(['css', 'html', 'css', 'js']);
+console.log(tags); // Set {'css', 'html', 'js'}
+tags.add('python');
+tags.has('html');  // true
+tags.delete('js');
+const arr = [...tags]; // convert to array
+
+// Map — key/value with any key type
+const cache = new Map();
+cache.set('user:1', { name: 'Alice' });
+cache.set(42, 'The answer');
+cache.get('user:1');  // { name: 'Alice' }
+cache.has(42);        // true
+cache.size;           // 2
+
+// Iterate
+for (const [key, val] of cache) {
+    console.log(key, '->', val);
+}`,
+                description: "Map for any-type key/value pairs; Set for unique value collections",
+                simple_explanation: "Set is an array that automatically removes duplicates. Map is like an object but keys can be anything — not just strings. Both maintain insertion order and have a .size property. Both are faster than plain objects for frequent add/delete."
+            },
+            {
+                language: "JavaScript",
+                domain: "Modern Syntax",
+                task: "Optional Chaining and Nullish Coalescing",
+                code_example: `const user = { profile: { name: 'Alice' } };
+
+// ?. — safe property access (won't throw if undefined/null)
+const city  = user?.profile?.address?.city;  // undefined, no crash
+const len   = user?.profile?.name?.length;   // 5
+
+// Call methods safely
+const val = obj?.method?.();
+
+// Access array safely
+const first = arr?.[0]?.name;
+
+// ?? — default ONLY for null/undefined (not 0 or '')
+const city2 = user.profile.address?.city ?? 'Unknown'; // 'Unknown'
+const count = user.count ?? 0;  // 0 if count is null/undefined
+
+// Logical nullish assignment
+user.settings ??= {};   // only sets if null/undefined
+user.count    += 1;`,
+                description: "Safely access nested properties and provide null-safe defaults",
+                simple_explanation: "?. (optional chaining) stops execution and returns undefined instead of crashing when a property doesn't exist. ?? (nullish coalescing) gives a default only for null/undefined — unlike || which also replaces 0 and empty strings."
+            },
+            {
+                language: "JavaScript",
+                domain: "Arrays",
+                task: "Array.reduce() and Advanced Methods",
+                code_example: `const nums = [1, 2, 3, 4, 5];
+
+// reduce — fold array into a single value
+const sum = nums.reduce((acc, n) => acc + n, 0); // 15
+
+// Count occurrences
+const words  = ['cat', 'dog', 'cat', 'bird', 'dog', 'cat'];
+const counts = words.reduce((acc, w) => {
+    acc[w] = (acc[w] || 0) + 1;
+    return acc;
+}, {}); // { cat: 3, dog: 2, bird: 1 }
+
+// flat and flatMap
+[[1,2],[3,4],[5]].flat();                          // [1,2,3,4,5]
+[[1,2],[3,4]].flatMap(a => a.map(x => x * 2));    // [2,4,6,8]
+
+// Array.from — create arrays from anything
+const range = Array.from({ length: 5 }, (_, i) => i + 1); // [1,2,3,4,5]
+
+// find / findIndex
+const found = nums.find(n => n > 3);       // 4
+const idx   = nums.findIndex(n => n > 3);  // 3`,
+                description: "reduce() and other power-user array methods",
+                simple_explanation: "reduce() is the Swiss army knife of array methods — it builds up any result from an array. flat() unwraps nested arrays. Array.from() converts anything iterable into an array. find() returns the first match, findIndex() returns its position."
+            },
+            {
+                language: "JavaScript",
+                domain: "DOM",
+                task: "Create and Remove Elements",
+                code_example: `// Create
+const div = document.createElement('div');
+div.className   = 'card';
+div.textContent = 'Hello!';
+
+// Insert
+document.body.appendChild(div);           // end of body
+container.prepend(div);                   // start of container
+
+// Insert relative to an element
+el.insertAdjacentHTML('beforeend', '<p>New paragraph</p>');
+// positions: 'beforebegin' | 'afterbegin' | 'beforeend' | 'afterend'
+
+// Remove
+div.remove();
+
+// Clone (true = deep clone including children)
+const clone = div.cloneNode(true);
+document.body.appendChild(clone);
+
+// Replace
+oldEl.replaceWith(newEl);`,
+                description: "Dynamically build, insert, and remove DOM elements",
+                simple_explanation: "createElement builds a new element in memory. appendChild/prepend puts it on the page. insertAdjacentHTML is the fastest way to inject HTML strings. remove() deletes the element. cloneNode(true) copies it and all its children."
+            },
+            {
+                language: "JavaScript",
+                domain: "Modern Syntax",
+                task: "Regular Expressions",
+                code_example: `// Create a regex
+const pattern = /hello/i;           // i = case-insensitive
+const same    = new RegExp('hello', 'i');
+
+// Test for a match
+/[0-9]+/.test('abc123');            // true
+/^\\d{5}$/.test('90210');           // true — 5-digit zip
+
+// Extract matches
+'user@example.com'.match(/([^@]+)@(.+)/);
+// [full, 'user', 'example.com']
+
+// Replace
+'Hello World'.replace(/world/i, 'JS');      // 'Hello JS'
+'a1b2c3'.replace(/[0-9]/g, '-');            // 'a-b-c-'  g = global
+
+// Useful patterns
+const emailRx = /^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/;
+const urlRx   = /^https?:\\/\\/.+\\..+/;
+emailRx.test('me@site.com'); // true`,
+                description: "Pattern matching and text transformation with regular expressions",
+                simple_explanation: "Regex are patterns for searching text. /pattern/ is the syntax; flags like 'i' (case-insensitive) and 'g' (find all) go after the closing slash. test() returns true/false; match() extracts values; replace() swaps text."
+            },
+            {
+                language: "JavaScript",
+                domain: "Modules",
+                task: "ES Modules — import and export",
+                code_example: `// --- math.js ---
+export const PI = 3.14159;
+export function add(a, b) { return a + b; }
+
+// Default export (one per file)
+export default class Calculator {
+    result = 0;
+    add(n) { this.result += n; return this; }
+}
+
+// --- app.js ---
+// Named imports
+import { PI, add } from './math.js';
+
+// Rename on import
+import { add as sum } from './math.js';
+
+// Default import (choose any name)
+import Calculator from './math.js';
+
+// Import everything as a namespace
+import * as Math from './math.js';
+Math.add(1, 2); // 3
+
+// Dynamic import — lazy load a module
+const module = await import('./heavy.js');`,
+                description: "ES module system for splitting code across multiple files",
+                simple_explanation: "export makes things available to other files; import brings them in. Default export is the main thing a file provides. Named exports let a file export many things. Dynamic import() lazy-loads a module only when you need it."
+            },
+
+            // ─── PYTHON ───
+            {
+                language: "Python",
+                domain: "Basics",
+                task: "Hello World and Print",
+                code_example: `# Hello, World!
+print("Hello, World!")
+
+# f-string — modern, preferred (Python 3.6+)
+name = "Alice"
+print(f"Hello, {name}!")
+
+# .format() style
+print("Hello, {}!".format(name))
+
+# Multiple values
+print("Name:", name, "Age:", 25)
+
+# Custom separator and line ending
+print("a", "b", "c", sep="-", end="!\n")  # a-b-c!`,
+                description: "Output text to the console in various formats",
+                simple_explanation: "print() outputs to the console. F-strings (f'Hello {name}') are the modern way to embed variables in strings. sep controls what goes between values, end replaces the default newline at the end."
+            },
+            {
+                language: "Python",
+                domain: "Variables",
+                task: "Variables and Data Types",
+                code_example: `name       = "Alice"   # str
+age        = 30        # int
+height     = 5.9       # float
+is_student = True      # bool
+nothing    = None      # NoneType
+
+# Type checking
+print(type(age))            # <class 'int'>
+print(isinstance(age, int)) # True
+
+# Type conversion
+number   = int("42")        # str → int
+text     = str(3.14)        # float → str
+binary   = bin(10)          # → '0b1010'
+
+# Multiple assignment
+x, y, z = 1, 2, 3
+a = b = c = 0
+
+# None check
+if age is not None:
+    print(f"Age is {age}")`,
+                description: "Python's dynamic typing and type conversion functions",
+                simple_explanation: "Python infers types automatically. int is whole numbers, float has decimals, str is text, bool is True/False, None means 'no value'. Use int(), str(), float() to convert between types."
+            },
+            {
+                language: "Python",
+                domain: "Data Structures",
+                task: "Lists",
+                code_example: `fruits = ["apple", "banana", "cherry"]
+
+# Access (negative index counts from end)
+print(fruits[0])    # "apple"
+print(fruits[-1])   # "cherry"
+
+# Slicing [start:stop:step]
+print(fruits[0:2])  # ["apple", "banana"]
+print(fruits[::-1]) # reversed
+
+# Modify
+fruits.append("mango")        # add to end
+fruits.insert(1, "avocado")   # insert at index
+fruits.remove("banana")       # remove by value
+last = fruits.pop()           # remove and return last
+
+# Useful operations
+fruits.sort()
+print(len(fruits))             # length
+print("apple" in fruits)       # True/False`,
+                description: "Python's ordered, mutable list data structure",
+                simple_explanation: "Lists hold items in order. Access with [0] (first), [-1] (last). Slicing [start:stop] extracts a portion. append() adds to the end, remove() deletes by value, pop() removes and returns the last item."
+            },
+            {
+                language: "Python",
+                domain: "Data Structures",
+                task: "Dictionaries",
+                code_example: `person = {"name": "Alice", "age": 30, "city": "Tokyo"}
+
+# Access
+print(person["name"])               # "Alice"
+print(person.get("email", "N/A"))   # safe, returns default
+
+# Modify
+person["email"] = "a@example.com"  # add or update
+del person["city"]                  # delete key
+
+# Iterate
+for key, value in person.items():
+    print(f"{key}: {value}")
+
+# Useful methods
+list(person.keys())
+list(person.values())
+
+# Merge (Python 3.9+)
+combined = person | {"job": "developer"}
+
+# Dictionary comprehension
+squares = {x: x**2 for x in range(1, 6)}
+# {1: 1, 2: 4, 3: 9, 4: 16, 5: 25}`,
+                description: "Python dictionaries for fast key-value lookups",
+                simple_explanation: "Dicts store key-value pairs like a real dictionary. .get() is safer than [] because it won't crash if the key doesn't exist. items() gives you both key and value. Dict comprehensions build dicts in one line."
+            },
+            {
+                language: "Python",
+                domain: "Control Flow",
+                task: "If / Elif / Else",
+                code_example: `score = 85
+
+if score >= 90:
+    grade = "A"
+elif score >= 80:
+    grade = "B"
+elif score >= 70:
+    grade = "C"
+else:
+    grade = "F"
+
+# Ternary (one-liner)
+status = "pass" if score >= 60 else "fail"
+
+# Logical operators read like English
+age = 25
+if age >= 18 and age < 65:
+    print("Working age")
+
+# Membership test
+fruits = ["apple", "banana"]
+if "apple" in fruits:
+    print("Found it!")
+
+# Identity check
+if nothing is None:
+    print("No value")`,
+                description: "Conditional statements with Python's readable syntax",
+                simple_explanation: "Python uses indentation instead of {}. elif is 'else if'. Python's and, or, not, in, is read like plain English. The one-liner ternary (value if condition else other) is great for simple cases."
+            },
+            {
+                language: "Python",
+                domain: "Loops",
+                task: "For and While Loops",
+                code_example: `# for — iterate any sequence
+for fruit in ["apple", "banana"]:
+    print(fruit)
+
+# range()
+for i in range(5):          # 0 1 2 3 4
+    print(i)
+
+for i in range(1, 10, 2):  # 1 3 5 7 9 (start, stop, step)
+    print(i)
+
+# enumerate — index + value
+for i, fruit in enumerate(["apple", "banana"]):
+    print(f"{i}: {fruit}")
+
+# while
+count = 0
+while count < 5:
+    print(count)
+    count += 1
+
+# Loop control
+for i in range(10):
+    if i == 3: continue  # skip
+    if i == 7: break     # stop
+    print(i)`,
+                description: "for loops, while loops, range(), enumerate(), and loop control",
+                simple_explanation: "Python's for loop works directly over any sequence. range() generates numbers. enumerate() gives you both the index and value simultaneously. break exits the loop early; continue skips to the next iteration."
+            },
+            {
+                language: "Python",
+                domain: "Functions",
+                task: "Functions and Arguments",
+                code_example: `# Basic function
+def greet(name):
+    return f"Hello, {name}!"
+
+# Default parameters
+def greet(name="World", greeting="Hello"):
+    return f"{greeting}, {name}!"
+
+# *args — variable positional arguments
+def add(*numbers):
+    return sum(numbers)
+
+add(1, 2, 3, 4, 5)  # 15
+
+# **kwargs — variable keyword arguments
+def display(**info):
+    for key, val in info.items():
+        print(f"{key}: {val}")
+
+display(name="Alice", age=30)
+
+# Type hints
+def multiply(a: int, b: int) -> int:
+    return a * b
+
+# Multiple return values
+def min_max(nums):
+    return min(nums), max(nums)
+
+low, high = min_max([3, 1, 4, 5, 9])`,
+                description: "Defining functions with various argument patterns",
+                simple_explanation: "*args collects extra positional arguments into a tuple. **kwargs collects keyword arguments into a dict. Type hints describe expected types but Python doesn't enforce them — they're for documentation and tools."
+            },
+            {
+                language: "Python",
+                domain: "OOP",
+                task: "Classes and Objects",
+                code_example: `class Car:
+    wheels = 4  # class attribute (shared)
+
+    def __init__(self, make, model, year):
+        self.make  = make   # instance attributes
+        self.model = model
+        self.year  = year
+        self._mileage = 0   # _ = private by convention
+
+    def drive(self, miles):
+        self._mileage += miles
+        return f"Drove {miles} miles"
+
+    def __str__(self):         # called by print()
+        return f"{self.year} {self.make} {self.model}"
+
+    def __repr__(self):        # developer-friendly
+        return f"Car('{self.make}', '{self.model}', {self.year})"
+
+my_car = Car("Toyota", "Camry", 2024)
+print(my_car)           # 2024 Toyota Camry
+my_car.drive(100)`,
+                description: "Class definition with attributes, methods, and dunder methods",
+                simple_explanation: "__init__ is the constructor — runs when you create an object. self refers to the current instance. __str__ controls what print() shows. A single underscore prefix hints that the attribute is 'private'."
+            },
+            {
+                language: "Python",
+                domain: "OOP",
+                task: "Inheritance",
+                code_example: `class Animal:
+    def __init__(self, name):
+        self.name = name
+
+    def speak(self):
+        raise NotImplementedError("Subclass must implement this")
+
+class Dog(Animal):
+    def speak(self):
+        return "Woof!"
+
+class Cat(Animal):
+    def speak(self):
+        return "Meow!"
+
+# Polymorphism — same interface, different behavior
+animals = [Dog("Rex"), Cat("Whiskers")]
+for a in animals:
+    print(f"{a.name}: {a.speak()}")
+
+# super() — call the parent method
+class Puppy(Dog):
+    def __init__(self, name, age):
+        super().__init__(name)
+        self.age = age
+
+print(isinstance(Dog("x"), Animal))  # True`,
+                description: "Inheritance, method overriding, super(), and polymorphism",
+                simple_explanation: "A child class inherits everything from the parent. Override a method by redefining it in the child. super() calls the parent's version. Polymorphism means different classes respond differently to the same method call."
+            },
+            {
+                language: "Python",
+                domain: "File I/O",
+                task: "Reading and Writing Files",
+                code_example: `# Write a file
+with open("output.txt", "w") as f:
+    f.write("Hello, World!\n")
+    f.write("Second line\n")
+
+# Append
+with open("output.txt", "a") as f:
+    f.write("Appended\n")
+
+# Read entire file
+with open("output.txt", "r") as f:
+    content = f.read()
+
+# Read line by line (memory-efficient)
+with open("output.txt") as f:
+    for line in f:
+        print(line.strip())
+
+# Read all lines into a list
+with open("output.txt") as f:
+    lines = f.readlines()
+
+# CSV
+import csv
+with open("data.csv", "w", newline="") as f:
+    writer = csv.writer(f)
+    writer.writerow(["Name", "Age"])`,
+                description: "Reading and writing files using context managers",
+                simple_explanation: "The 'with' statement automatically closes the file when done — never forget file.close() again. 'r' reads, 'w' writes (overwrites), 'a' appends. strip() removes newlines when reading line by line."
+            },
+            {
+                language: "Python",
+                domain: "Error Handling",
+                task: "Exception Handling",
+                code_example: `try:
+    result = 10 / 0
+except ZeroDivisionError:
+    print("Cannot divide by zero")
+
+# Multiple exceptions
+try:
+    val = int(input("Enter a number: "))
+    print(100 / val)
+except ValueError:
+    print("Not a number!")
+except ZeroDivisionError:
+    print("Can't divide by zero!")
+except Exception as e:
+    print(f"Unexpected: {e}")
+else:
+    print("Success!")   # runs if no exception
+finally:
+    print("Always runs")
+
+# Raise your own
+def validate_age(age):
+    if age < 0:
+        raise ValueError(f"Age cannot be negative: {age}")
+
+# Custom exception
+class DatabaseError(Exception):
+    pass`,
+                description: "Catching specific exceptions and raising your own",
+                simple_explanation: "try contains risky code, except catches specific errors. else runs only if no error occurred. finally always runs (use for cleanup). raise creates your own errors. Catching Exception as e gives you access to the error message."
+            },
+            {
+                language: "Python",
+                domain: "Comprehensions",
+                task: "Comprehensions",
+                code_example: `# List comprehension
+squares = [x**2 for x in range(1, 11)]
+evens   = [x for x in range(20) if x % 2 == 0]
+
+# FizzBuzz in one line
+fb = ["FizzBuzz" if i%15==0 else "Fizz" if i%3==0
+      else "Buzz" if i%5==0 else str(i) for i in range(1, 21)]
+
+# Dict comprehension
+lengths = {word: len(word) for word in ["hello", "world"]}
+# {'hello': 5, 'world': 5}
+
+# Set comprehension (unique values)
+initials = {name[0] for name in ["Alice", "Bob", "Anna"]}
+# {'a', 'b'}
+
+# Generator expression — lazy, memory efficient
+total = sum(x**2 for x in range(1_000_000))`,
+                description: "Compact syntax for building lists, dicts, and sets",
+                simple_explanation: "Comprehensions are compact loops that build collections. Read left to right: 'give me x² for each x in range(10) if x is even'. Generators use () and compute values one at a time — great for large datasets."
+            },
+            {
+                language: "Python",
+                domain: "Functions",
+                task: "Lambda Functions",
+                code_example: `# Lambda: anonymous one-line function
+square = lambda x: x ** 2
+print(square(5))  # 25
+
+add = lambda a, b: a + b
+
+# Most common use: custom sort key
+students = [
+    {"name": "Alice", "grade": 88},
+    {"name": "Bob",   "grade": 95},
+]
+students.sort(key=lambda s: s["grade"], reverse=True)
+
+# With map() and filter()
+numbers = [1, 2, 3, 4, 5, 6]
+doubled = list(map(lambda x: x * 2, numbers))
+evens   = list(filter(lambda x: x % 2 == 0, numbers))
+
+# Sort by length
+words = ["banana", "fig", "apple"]
+sorted(words, key=lambda w: len(w))`,
+                description: "Concise anonymous functions for short, throwaway operations",
+                simple_explanation: "Lambda creates a small function without a name — one expression only. Great for sorting, map(), and filter(). If your lambda gets complicated, write a regular def instead for readability."
+            },
+            {
+                language: "Python",
+                domain: "Functions",
+                task: "Decorators",
+                code_example: `import time, functools
+
+def timer(func):
+    @functools.wraps(func)       # keeps original name/docs
+    def wrapper(*args, **kwargs):
+        start  = time.time()
+        result = func(*args, **kwargs)
+        end    = time.time()
+        print(f"{func.__name__} took {end - start:.4f}s")
+        return result
+    return wrapper
+
+@timer
+def slow():
+    time.sleep(0.5)
+
+slow()  # "slow took 0.500s"
+
+# Decorator with arguments
+def repeat(n):
+    def decorator(func):
+        @functools.wraps(func)
+        def wrapper(*args, **kwargs):
+            for _ in range(n):
+                func(*args, **kwargs)
+        return wrapper
+    return decorator
+
+@repeat(3)
+def say_hi():
+    print("Hi!")`,
+                description: "Wrap functions with extra behavior using the decorator pattern",
+                simple_explanation: "A decorator wraps a function to add behavior before/after it runs. @timer applies the wrapper. functools.wraps preserves the original function's name and docstring. Decorators with arguments need three layers of nesting."
+            },
+            {
+                language: "Python",
+                domain: "Generators",
+                task: "Generators and Yield",
+                code_example: `# Generator function uses yield instead of return
+def count_up(start, end):
+    while start <= end:
+        yield start          # pause and emit a value
+        start += 1
+
+for n in count_up(1, 5):
+    print(n)  # 1 2 3 4 5
+
+# Manually advance with next()
+gen = count_up(1, 3)
+print(next(gen))  # 1
+print(next(gen))  # 2
+
+# Infinite generator — only computes on demand
+def fibonacci():
+    a, b = 0, 1
+    while True:
+        yield a
+        a, b = b, a + b
+
+fib = fibonacci()
+for _ in range(8):
+    print(next(fib))  # 0 1 1 2 3 5 8 13
+
+# Generator expression (lazy)
+squares = (x**2 for x in range(1_000_000))`,
+                description: "Memory-efficient iterators using the yield keyword",
+                simple_explanation: "Generators produce values one at a time instead of building the whole list. yield pauses the function and sends a value. Use generators for large sequences or infinite streams to avoid running out of memory."
+            },
+            {
+                language: "Python",
+                domain: "Modules",
+                task: "Importing Modules",
+                code_example: `# Standard library
+import os, sys, math, random, datetime, json, re
+
+# Selective import
+from math import pi, sqrt
+from os import getcwd, path
+from datetime import datetime, date
+
+# Aliased import
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+
+# Usage examples
+print(math.sqrt(16))          # 4.0
+print(random.randint(1, 6))   # dice roll
+print(datetime.now())         # current timestamp
+print(os.getcwd())            # current directory
+
+# JSON
+data = {"key": "value"}
+print(json.dumps(data))       # '{"key": "value"}'
+
+# Install third-party packages:
+# pip install requests numpy pandas`,
+                description: "Importing from Python's standard library and third-party packages",
+                simple_explanation: "Python includes a huge standard library — batteries included. import gives full access; 'from module import x' lets you use x without the prefix. pip installs packages from PyPI. Aliases (as np) shorten long names."
+            },
+
+            // ─── JAVA ───
+            {
+                language: "Java",
+                domain: "Basics",
+                task: "Hello World",
+                code_example: `public class HelloWorld {
+    public static void main(String[] args) {
+        System.out.println("Hello, World!");
+
+        // Print without newline
+        System.out.print("No newline ");
+        System.out.print("here.\n");
+
+        // Formatted output (like printf)
+        String name = "Alice";
+        int age = 30;
+        System.out.printf("Name: %s, Age: %d%n", name, age);
+
+        // Build a string with formatting
+        String msg = String.format("Hello, %s!", name);
+        System.out.println(msg);
+    }
+}`,
+                description: "Java program entry point and console output methods",
+                simple_explanation: "Every Java program needs a class and a main method. System.out.println adds a newline; System.out.print doesn't. %s is for strings, %d for integers in printf-style formatting."
+            },
+            {
+                language: "Java",
+                domain: "Variables",
+                task: "Primitive Data Types",
+                code_example: `public class DataTypes {
+    public static void main(String[] args) {
+        byte    b = 127;           // -128 to 127
+        short   s = 32767;         // ±32,767
+        int     i = 2_147_483_647; // ±2.1 billion
+        long    l = 9_999_999_999L; // L suffix required
+
+        float  f = 3.14f;          // f suffix required
+        double d = 3.14159265;     // default for decimals
+
+        char    c = 'A';           // single Unicode char
+        boolean flag = true;
+
+        // Wrapper classes (box a primitive into an Object)
+        Integer numObj = 42;       // autoboxing
+        int     num    = numObj;   // unboxing
+
+        // Type inference (Java 10+)
+        var text = "Hello"; // inferred as String
+    }
+}`,
+                description: "Java's eight primitive types, wrapper classes, and var",
+                simple_explanation: "Java has strict types. Add 'f' after float literals and 'L' after long literals or you'll get a compile error. Wrapper classes (Integer, Double) box primitives into objects so you can store them in collections."
+            },
+            {
+                language: "Java",
+                domain: "Arrays",
+                task: "Arrays",
+                code_example: `public class ArraysExample {
+    public static void main(String[] args) {
+        int[] numbers = {1, 2, 3, 4, 5};
+        String[] names = new String[3]; // size fixed, null-filled
+        names[0] = "Alice";
+
+        System.out.println(numbers[0]);     // 1
+        System.out.println(numbers.length); // 5
+
+        // Classic for loop
+        for (int i = 0; i < numbers.length; i++) {
+            System.out.println(numbers[i]);
+        }
+
+        // Enhanced for-each
+        for (int n : numbers) System.out.println(n);
+
+        // 2D array
+        int[][] matrix = {{1,2,3},{4,5,6},{7,8,9}};
+        System.out.println(matrix[1][2]); // 6
+
+        // Sort and print
+        java.util.Arrays.sort(numbers);
+        System.out.println(java.util.Arrays.toString(numbers));
+    }
+}`,
+                description: "Fixed-size arrays, access, iteration, and sorting",
+                simple_explanation: "Java arrays have a fixed size. Access with [index] starting at 0. .length (no parentheses) gives the size. Arrays.sort() sorts in place. For resizable arrays, use ArrayList."
+            },
+            {
+                language: "Java",
+                domain: "Collections",
+                task: "ArrayList",
+                code_example: `import java.util.*;
+
+public class ListExample {
+    public static void main(String[] args) {
+        ArrayList<String> fruits = new ArrayList<>();
+        fruits.add("Apple");
+        fruits.add("Banana");
+        fruits.add("Cherry");
+        fruits.add(1, "Avocado"); // insert at index
+
+        System.out.println(fruits.get(0));     // "Apple"
+        fruits.set(0, "Mango");                // replace at index
+        fruits.remove("Banana");               // remove by value
+        fruits.remove(0);                      // remove by index
+
+        System.out.println(fruits.contains("Cherry")); // true
+        System.out.println(fruits.size());
+
+        for (String f : fruits) System.out.println(f);
+
+        Collections.sort(fruits);
+        Collections.reverse(fruits);
+    }
+}`,
+                description: "Dynamic resizable list with ArrayList",
+                simple_explanation: "ArrayList is a resizable array. The generic <String> specifies what type it holds. get() retrieves by index, add() appends, remove() deletes, size() returns count. Unlike arrays, it grows automatically."
+            },
+            {
+                language: "Java",
+                domain: "Control Flow",
+                task: "If/Else and Switch",
+                code_example: `public class ControlFlow {
+    public static void main(String[] args) {
+        int score = 85;
+
+        if (score >= 90) {
+            System.out.println("A");
+        } else if (score >= 80) {
+            System.out.println("B");
+        } else {
+            System.out.println("F");
+        }
+
+        // Ternary
+        String result = score >= 60 ? "Pass" : "Fail";
+
+        // Switch expression (Java 14+)
+        int day = 3;
+        String name = switch (day) {
+            case 1 -> "Monday";
+            case 2 -> "Tuesday";
+            case 3 -> "Wednesday";
+            default -> "Other";
+        };
+
+        System.out.println(name); // Wednesday
+    }
+}`,
+                description: "if/else chains, ternary operator, and modern switch expression",
+                simple_explanation: "Java's if/else works like most languages. The ternary (? :) is a one-liner if/else. The modern switch expression (Java 14+) uses -> arrows instead of case/break and can return a value directly."
+            },
+            {
+                language: "Java",
+                domain: "Loops",
+                task: "For, While, and Do-While Loops",
+                code_example: `public class Loops {
+    public static void main(String[] args) {
+        // Standard for
+        for (int i = 0; i < 5; i++) System.out.println(i);
+
+        // Enhanced for-each
+        int[] nums = {10, 20, 30};
+        for (int n : nums) System.out.println(n);
+
+        // While
+        int count = 0;
+        while (count < 5) {
+            System.out.println(count++);
+        }
+
+        // Do-while (always runs at least once)
+        do {
+            System.out.println("At least once");
+        } while (false);
+
+        // Break and continue
+        for (int i = 0; i < 10; i++) {
+            if (i == 3) continue;
+            if (i == 7) break;
+            System.out.println(i);
+        }
+    }
+}`,
+                description: "Three loop types with break and continue control",
+                simple_explanation: "for loops count iterations, for-each loops over collections. while checks before each run, do-while checks after (always runs at least once). break exits the loop entirely; continue skips to the next iteration."
+            },
+            {
+                language: "Java",
+                domain: "Methods",
+                task: "Methods and Overloading",
+                code_example: `public class Methods {
+    // Static — call without creating an object
+    public static int add(int a, int b) { return a + b; }
+
+    // Overloading — same name, different parameters
+    public static double add(double a, double b) { return a + b; }
+
+    // Varargs — any number of arguments
+    public static int sum(int... nums) {
+        int total = 0;
+        for (int n : nums) total += n;
+        return total;
+    }
+
+    // Void method
+    public void printGreeting(String name) {
+        System.out.println("Hello, " + name + "!");
+    }
+
+    public static void main(String[] args) {
+        System.out.println(add(3, 5));          // 8 (int version)
+        System.out.println(add(3.5, 1.5));      // 5.0 (double version)
+        System.out.println(sum(1, 2, 3, 4, 5)); // 15
+    }
+}`,
+                description: "Static methods, overloading, and varargs in Java",
+                simple_explanation: "static methods belong to the class — call them without making an object. Overloading means same method name with different parameter types. Varargs (int...) accepts any number of arguments and treats them as an array."
+            },
+            {
+                language: "Java",
+                domain: "OOP",
+                task: "Classes and Encapsulation",
+                code_example: `public class BankAccount {
+    private String owner;   // hidden from outside
+    private double balance;
+
+    public BankAccount(String owner, double initial) {
+        this.owner   = owner;
+        this.balance = initial;
+    }
+
+    public String getOwner()  { return owner; }
+    public double getBalance(){ return balance; }
+
+    public void deposit(double amount) {
+        if (amount > 0) balance += amount;
+    }
+
+    public boolean withdraw(double amount) {
+        if (amount > 0 && amount <= balance) {
+            balance -= amount;
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public String toString() {
+        return String.format("Account[%s: $%.2f]", owner, balance);
+    }
+}`,
+                description: "Encapsulated class with private fields and public accessors",
+                simple_explanation: "Encapsulation hides data (private) and exposes behavior through methods (public). Getters provide read access. @Override means you're replacing a parent class method. toString() controls what System.out.println shows."
+            },
+            {
+                language: "Java",
+                domain: "OOP",
+                task: "Inheritance and Abstract Classes",
+                code_example: `abstract class Shape {
+    protected String color;
+
+    public Shape(String color) { this.color = color; }
+
+    // Subclasses MUST implement this
+    public abstract double area();
+
+    // Concrete method — shared by all subclasses
+    public void describe() {
+        System.out.printf("%s shape, area=%.2f%n", color, area());
+    }
+}
+
+class Circle extends Shape {
+    private double radius;
+    public Circle(String color, double r) {
+        super(color);
+        radius = r;
+    }
+    @Override
+    public double area() { return Math.PI * radius * radius; }
+}
+
+class Rectangle extends Shape {
+    private double w, h;
+    public Rectangle(String color, double w, double h) {
+        super(color); this.w = w; this.h = h;
+    }
+    @Override
+    public double area() { return w * h; }
+}`,
+                description: "Abstract classes define a template; subclasses fill in the details",
+                simple_explanation: "Abstract classes can't be instantiated directly. Abstract methods declare what subclasses must provide. extends inherits everything. super() calls the parent constructor. @Override guarantees you're actually overriding a parent method."
+            },
+            {
+                language: "Java",
+                domain: "OOP",
+                task: "Interfaces",
+                code_example: `interface Drawable {
+    void draw();  // implicitly public abstract
+
+    default void display() {  // default implementation (Java 8+)
+        System.out.print("Displaying: ");
+        draw();
+    }
+}
+
+interface Resizable {
+    void resize(double factor);
+}
+
+// Implement multiple interfaces
+class Circle implements Drawable, Resizable {
+    private double radius;
+    public Circle(double r) { radius = r; }
+
+    @Override
+    public void draw() {
+        System.out.println("Circle r=" + radius);
+    }
+
+    @Override
+    public void resize(double f) { radius *= f; }
+}
+
+// Use the interface type
+Drawable d = new Circle(5.0);
+d.draw();
+d.display();`,
+                description: "Interfaces define contracts; a class can implement many",
+                simple_explanation: "Interfaces are contracts — any class that implements one must provide those methods. Unlike abstract classes, a class can implement multiple interfaces. 'default' methods provide optional implementations."
+            },
+            {
+                language: "Java",
+                domain: "Error Handling",
+                task: "Exception Handling",
+                code_example: `import java.io.*;
+
+public class Exceptions {
+    // Declare checked exceptions with 'throws'
+    static int divide(int a, int b) throws ArithmeticException {
+        if (b == 0) throw new ArithmeticException("Divide by zero");
+        return a / b;
+    }
+
+    public static void main(String[] args) {
+        try {
+            System.out.println(divide(10, 0));
+        } catch (ArithmeticException e) {
+            System.out.println("Math error: " + e.getMessage());
+        } finally {
+            System.out.println("Always runs");
+        }
+
+        // Try-with-resources — auto-closes
+        try (var reader = new java.io.FileReader("file.txt")) {
+            // reader auto-closed when done
+        } catch (IOException e) {
+            System.out.println("File error: " + e.getMessage());
+        }
+    }
+}`,
+                description: "Checked/unchecked exceptions, try-catch-finally, and try-with-resources",
+                simple_explanation: "Checked exceptions must be declared or handled. RuntimeExceptions don't. try-with-resources automatically closes anything that implements AutoCloseable (files, connections). finally always runs — even after an exception."
+            },
+            {
+                language: "Java",
+                domain: "Collections",
+                task: "HashMap",
+                code_example: `import java.util.*;
+
+public class HashMapDemo {
+    public static void main(String[] args) {
+        HashMap<String, Integer> scores = new HashMap<>();
+        scores.put("Alice", 95);
+        scores.put("Bob",   87);
+        scores.put("Carol", 92);
+
+        System.out.println(scores.get("Alice"));            // 95
+        System.out.println(scores.getOrDefault("Dave", 0)); // 0
+
+        scores.remove("Bob");
+        System.out.println(scores.containsKey("Bob"));      // false
+        System.out.println(scores.size());                  // 2
+
+        // Iterate over all pairs
+        for (Map.Entry<String, Integer> e : scores.entrySet()) {
+            System.out.println(e.getKey() + ": " + e.getValue());
+        }
+
+        // Iterate over keys
+        for (String name : scores.keySet()) {
+            System.out.println(name);
+        }
+    }
+}`,
+                description: "HashMap for fast key-value lookups in Java",
+                simple_explanation: "HashMap stores key-value pairs. put() adds, get() retrieves, remove() deletes. getOrDefault() avoids null checks. entrySet() iterates over all pairs. HashMap does NOT guarantee order — use LinkedHashMap if order matters."
+            },
+            {
+                language: "Java",
+                domain: "Strings",
+                task: "String Methods",
+                code_example: `public class Strings {
+    public static void main(String[] args) {
+        String s = "  Hello, World!  ";
+
+        s.length();                    // 18
+        s.trim();                      // "Hello, World!"
+        s.toLowerCase();               // "  hello, world!  "
+        s.toUpperCase();               // "  HELLO, WORLD!  "
+        s.contains("World");           // true
+        s.indexOf("World");            // 9
+        s.replace("World", "Java");    // "  Hello, Java!  "
+        s.substring(7, 12);            // "Hello"
+        s.startsWith("  H");           // true
+
+        // Split on delimiter
+        "Alice,Bob,Carol".split(",");  // ["Alice","Bob","Carol"]
+
+        // ALWAYS use .equals() — not ==
+        "hello".equals("hello");            // true
+        "hello".equalsIgnoreCase("HELLO");  // true
+
+        // Efficient concatenation in loops
+        StringBuilder sb = new StringBuilder();
+        sb.append("Hello").append(", ").append("World!");
+        System.out.println(sb.toString());
+    }
+}`,
+                description: "Essential String methods and StringBuilder for Java",
+                simple_explanation: "Never compare strings with == — it compares memory addresses, not content. Use .equals() instead. StringBuilder is much faster than + in loops because strings in Java are immutable (+ creates a new object each time)."
+            },
+            {
+                language: "Java",
+                domain: "Streams",
+                task: "Lambda Expressions and Streams",
+                code_example: `import java.util.*;
+import java.util.stream.*;
+
+public class Streams {
+    public static void main(String[] args) {
+        List<Integer> nums = List.of(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
+
+        // Pipeline: filter → map → collect
+        List<Integer> evenSquares = nums.stream()
+            .filter(n -> n % 2 == 0)
+            .map(n -> n * n)
+            .collect(Collectors.toList());
+        // [4, 16, 36, 64, 100]
+
+        // Sum with reduce
+        int sum = nums.stream().reduce(0, Integer::sum);
+
+        // Group by
+        Map<String, List<Integer>> grouped = nums.stream()
+            .collect(Collectors.groupingBy(n -> n % 2 == 0 ? "even" : "odd"));
+
+        // Sort with lambda
+        List<String> names = new ArrayList<>(List.of("Charlie", "Alice", "Bob"));
+        names.sort((a, b) -> a.compareTo(b));
+    }
+}`,
+                description: "Functional-style data processing with the Java Stream API",
+                simple_explanation: "Streams process collections like an assembly line: filter keeps matching items, map transforms each, collect gathers results. Lambdas (n -> n * n) replace anonymous classes. Method references (Integer::sum) are even shorter."
+            },
+            {
+                language: "Java",
+                domain: "Generics",
+                task: "Generics",
+                code_example: `// Generic class — T is a placeholder for any type
+public class Box<T> {
+    private T content;
+
+    public Box(T content) { this.content = content; }
+    public T get() { return content; }
+
+    @Override
+    public String toString() { return "Box[" + content + "]"; }
+}
+
+// Generic method — works on any Comparable type
+public static <T extends Comparable<T>> T max(T a, T b) {
+    return a.compareTo(b) >= 0 ? a : b;
+}
+
+// Wildcard — accepts any subtype of Number
+public static double sum(List<? extends Number> list) {
+    return list.stream().mapToDouble(Number::doubleValue).sum();
+}
+
+public static void main(String[] args) {
+    Box<String>  strBox = new Box<>("Hello");
+    Box<Integer> intBox = new Box<>(42);
+
+    System.out.println(max(10, 20));          // 20
+    System.out.println(max("apple", "mango")); // mango
+}`,
+                description: "Generic classes and methods for type-safe reusable code",
+                simple_explanation: "Generics let one class or method work with any type. <T> is a placeholder filled in at usage. Wildcards (? extends Number) allow flexible input types. Generics are checked at compile time, preventing ClassCastExceptions at runtime."
+            },
+
+// ─── RUST ───
+            {
+                language: "Rust",
+                domain: "Basics",
+                task: "Hello World",
+                code_example: `fn main() {
+    println!("Hello, World!");
+
+    let name = "Alice";
+    let age  = 30;
+    println!("Name: {}, Age: {}", name, age);
+
+    // Named placeholders (Rust 1.58+)
+    println!("{name} is {age} years old");
+
+    // Debug printing
+    let v = vec![1, 2, 3];
+    println!("{:?}", v);    // compact
+    println!("{:#?}", v);   // pretty-printed
+
+    // Print without newline
+    print!("No newline ");
+    println!("but here");
+}`,
+                description: "Rust's entry point and the println! macro family",
+                simple_explanation: "println! is a macro (macros end with !), not a regular function. {} inserts values, {:?} prints the debug representation of any type that implements Debug. fn defines a function."
+            },
+            {
+                language: "Rust",
+                domain: "Variables",
+                task: "Variables and Mutability",
+                code_example: `fn main() {
+    // Immutable by default
+    let x = 5;
+    // x = 6; // ERROR: cannot assign twice
+
+    // Mutable with 'mut'
+    let mut y = 5;
+    y += 1; // fine
+
+    // Constants — always immutable, type required
+    const MAX: u32 = 100;
+
+    // Shadowing — redeclare the same name
+    let z = 5;
+    let z = z + 1;  // shadows previous z (now 6)
+    let z = z * 2;  // now 12
+    println!("{}", z);
+
+    // Shadowing can change type
+    let spaces = "   ";
+    let spaces = spaces.len(); // now a usize
+}`,
+                description: "Immutable-by-default variables, mut, and shadowing",
+                simple_explanation: "Rust variables are immutable by default — you must add 'mut' to allow changes. This prevents accidental mutation. Shadowing (let x = ...) lets you 'reuse' a name with a new value or even a different type."
+            },
+            {
+                language: "Rust",
+                domain: "Types",
+                task: "Data Types",
+                code_example: `fn main() {
+    // Integers: i8/i16/i32/i64, u8/u16/u32/u64
+    let a: i32 = -42;
+    let b: u64 = 1_000_000; // underscores = readability
+
+    // Floating point
+    let pi: f64 = 3.14159;
+
+    // Boolean
+    let flag: bool = true;
+
+    // Char (full Unicode, single quotes)
+    let crab: char = '🦀';
+
+    // Tuple (mixed types, fixed size)
+    let tup: (i32, f64, bool) = (500, 6.4, true);
+    let (x, y, z) = tup;     // destructuring
+    println!("{}", tup.0);   // index access
+
+    // Array (same type, fixed size)
+    let arr = [1, 2, 3, 4, 5];
+    let zeroes = [0; 5];     // [0, 0, 0, 0, 0]
+    println!("{}", arr.len());
+}`,
+                description: "Rust's scalar and compound primitive types",
+                simple_explanation: "Rust is strictly typed. Signed integers (i32) can be negative; unsigned (u32) can't. Tuples hold mixed types; arrays hold the same type. Rust's char is full Unicode, not just ASCII."
+            },
+            {
+                language: "Rust",
+                domain: "Ownership",
+                task: "Ownership and Borrowing",
+                code_example: `fn main() {
+    // Ownership: one owner at a time
+    let s1 = String::from("hello");
+    let s2 = s1;  // s1 is MOVED — now invalid
+    // println!("{}", s1); // ERROR
+
+    // Clone for a deep copy
+    let s3 = s2.clone();
+    println!("{} {}", s2, s3); // both valid
+
+    // Borrowing with references (&)
+    let s4 = String::from("world");
+    let len = length(&s4); // borrow, don't move
+    println!("{} has {} chars", s4, len); // s4 still valid
+}
+
+fn length(s: &String) -> usize {
+    s.len()
+}  // s is dropped here but the original is unaffected
+
+fn append(s: &mut String) {   // mutable borrow
+    s.push_str(" world");
+}`,
+                description: "Rust's ownership system — the key to memory safety",
+                simple_explanation: "Every value has exactly one owner. Assigning moves it — the old variable becomes invalid. Use & to borrow (reference) without taking ownership. &mut borrows mutably. This eliminates entire classes of memory bugs at compile time."
+            },
+            {
+                language: "Rust",
+                domain: "Structs",
+                task: "Structs and impl",
+                code_example: `#[derive(Debug)]  // enables {:?} printing
+struct User {
+    username: String,
+    email:    String,
+    age:      u32,
+    active:   bool,
+}
+
+impl User {
+    // Associated function (constructor-like, no 'self')
+    fn new(username: &str, email: &str) -> User {
+        User {
+            username: String::from(username),
+            email:    String::from(email),
+            age:      0,
+            active:   true,
+        }
+    }
+
+    // Method (borrows self read-only)
+    fn greet(&self) {
+        println!("Hi, I'm {}!", self.username);
+    }
+}
+
+fn main() {
+    let mut u = User::new("alice", "a@example.com");
+    u.age = 30;
+    u.greet();
+
+    // Struct update syntax
+    let u2 = User { email: String::from("b@b.com"), ..u };
+    println!("{:?}", u2);
+}`,
+                description: "Custom data types with struct and method implementations",
+                simple_explanation: "Structs group related data. impl adds methods. &self borrows the struct (read-only); &mut self allows modification. Associated functions (no self) act as constructors. #[derive(Debug)] auto-implements debug printing."
+            },
+            {
+                language: "Rust",
+                domain: "Enums",
+                task: "Enums and Pattern Matching",
+                code_example: `#[derive(Debug)]
+enum Direction { North, South, East, West }
+
+// Enums can hold data
+enum Message {
+    Quit,
+    Move { x: i32, y: i32 },
+    Write(String),
+    Color(u8, u8, u8),
+}
+
+fn main() {
+    let dir = Direction::North;
+
+    // match is exhaustive — must cover all cases
+    match dir {
+        Direction::North => println!("Going North"),
+        Direction::South => println!("Going South"),
+        Direction::East | Direction::West => println!("East/West"),
+    }
+
+    // Match with destructuring
+    let msg = Message::Move { x: 10, y: 20 };
+    match msg {
+        Message::Quit         => println!("Quit"),
+        Message::Move {x, y} => println!("Move to ({}, {})", x, y),
+        Message::Write(text)  => println!("Write: {}", text),
+        Message::Color(r,g,b) => println!("{},{},{}", r, g, b),
+    }
+}`,
+                description: "Enums that hold data and exhaustive pattern matching",
+                simple_explanation: "Rust enums are far more powerful than in other languages — each variant can hold different data. match must cover every case, catching bugs at compile time instead of runtime. The compiler tells you if you forget a case."
+            },
+            {
+                language: "Rust",
+                domain: "Error Handling",
+                task: "Option and Result",
+                code_example: `fn divide(a: f64, b: f64) -> Option<f64> {
+    if b == 0.0 { None } else { Some(a / b) }
+}
+
+fn parse_age(s: &str) -> Result<u32, std::num::ParseIntError> {
+    s.parse::<u32>()
+}
+
+fn main() {
+    // Option<T> — value might not exist
+    match divide(10.0, 2.0) {
+        Some(val) => println!("Result: {}", val),
+        None      => println!("Cannot divide by zero"),
+    }
+
+    // Shorthand
+    if let Some(val) = divide(10.0, 3.0) {
+        println!("Got: {}", val);
+    }
+
+    let safe = divide(5.0, 0.0).unwrap_or(0.0);
+
+    // Result<T, E> — operation might fail
+    match parse_age("25") {
+        Ok(n)  => println!("Age: {}", n),
+        Err(e) => println!("Error: {}", e),
+    }
+
+    // ? propagates errors automatically
+    fn try_double(s: &str) -> Result<u32, _> {
+        Ok(s.parse::<u32>()? * 2)
+    }
+}`,
+                description: "Explicit error handling with Option<T> and Result<T,E>",
+                simple_explanation: "Option replaces null — Some(value) or None. Result replaces exceptions — Ok(value) or Err(error). The ? operator is shorthand for 'return the error if this failed'. Rust forces you to handle both cases, eliminating surprise crashes."
+            },
+            {
+                language: "Rust",
+                domain: "Collections",
+                task: "Vectors",
+                code_example: `fn main() {
+    let mut v = Vec::new();
+    let v2    = vec![1, 2, 3, 4, 5]; // macro shorthand
+
+    v.push(10);
+    v.push(20);
+    v.push(30);
+
+    // Safe access (returns Option)
+    if let Some(val) = v.get(2) {
+        println!("Third: {}", val);
+    }
+
+    // Direct access — panics if out of bounds
+    println!("First: {}", v[0]);
+
+    // Iterate (borrow)
+    for n in &v2 { println!("{}", n); }
+
+    // Iterate and mutate
+    let mut v3 = vec![1, 2, 3];
+    for n in &mut v3 { *n *= 2; }  // dereference to modify
+    println!("{:?}", v3); // [2, 4, 6]
+
+    v.pop();          // remove last
+    v.len();          // length
+    v2.contains(&3);  // true
+    let slice = &v2[1..3]; // [2, 3]
+}`,
+                description: "Vec<T> — Rust's growable heap-allocated array",
+                simple_explanation: "Vec is a dynamic array. push adds, pop removes the last. Use .get() for safe access (returns Option) or [index] for direct access (panics if out of bounds). Use &v to iterate while borrowing — this keeps ownership in the caller."
+            },
+            {
+                language: "Rust",
+                domain: "Traits",
+                task: "Traits",
+                code_example: `trait Animal {
+    fn name(&self) -> &str;
+    fn speak(&self) -> String;
+
+    // Default method
+    fn describe(&self) -> String {
+        format!("{} says: {}", self.name(), self.speak())
+    }
+}
+
+struct Dog { name: String }
+struct Cat { name: String }
+
+impl Animal for Dog {
+    fn name(&self)  -> &str    { &self.name }
+    fn speak(&self) -> String  { String::from("Woof!") }
+}
+
+impl Animal for Cat {
+    fn name(&self)  -> &str    { &self.name }
+    fn speak(&self) -> String  { String::from("Meow!") }
+}
+
+// Accept any type implementing Animal
+fn make_noise(a: &impl Animal) {
+    println!("{}", a.describe());
+}
+
+fn main() {
+    make_noise(&Dog { name: String::from("Rex") });
+    make_noise(&Cat { name: String::from("Luna") });
+}`,
+                description: "Traits define shared behavior across different types",
+                simple_explanation: "Traits are like interfaces — they define methods a type must have. impl Trait for Type adds that behavior. impl Animal in a function parameter means 'accept any type implementing Animal', enabling polymorphism."
+            },
+            {
+                language: "Rust",
+                domain: "Closures",
+                task: "Closures and Iterators",
+                code_example: `fn main() {
+    // Closure — anonymous function that captures scope
+    let multiply = |x: i32, y: i32| x * y;
+    println!("{}", multiply(3, 4)); // 12
+
+    // Capture from surrounding scope
+    let offset = 10;
+    let add_offset = |x| x + offset;
+    println!("{}", add_offset(5)); // 15
+
+    // Iterator chain
+    let nums = vec![1, 2, 3, 4, 5, 6];
+
+    let evens: Vec<i32> = nums.iter()
+        .filter(|&&x| x % 2 == 0)
+        .cloned()
+        .collect();
+
+    let doubled: Vec<i32> = nums.iter()
+        .map(|&x| x * 2)
+        .collect();
+
+    let sum: i32 = nums.iter().sum();
+
+    // Range pipeline
+    let result: Vec<i32> = (1..=10)
+        .filter(|x| x % 2 == 0)
+        .map(|x| x * x)
+        .take(3)
+        .collect(); // [4, 16, 36]
+}`,
+                description: "Closures capture their environment; iterators are lazy",
+                simple_explanation: "Closures use | | instead of fn. They can capture variables from the surrounding scope. Rust's iterators are lazy — no work happens until .collect() or another terminal method is called, making long chains very efficient."
+            },
+            {
+                language: "Rust",
+                domain: "Strings",
+                task: "String vs &str",
+                code_example: `fn main() {
+    // &str — borrowed string slice, immutable
+    let greeting: &str = "Hello"; // stored in binary
+
+    // String — owned, heap-allocated, growable
+    let mut owned = String::from("Hello");
+    owned.push_str(", World!");
+    owned.push('!');
+
+    // Convert between them
+    let s: String  = greeting.to_string();
+    let slice: &str = &owned;      // deref coercion
+    let part  = &owned[0..5];     // "Hello"
+
+    // Common methods
+    let text = String::from("  Hello, Rust!  ");
+    println!("{}", text.trim());
+    println!("{}", text.to_lowercase());
+    println!("{}", text.replace("Rust", "World"));
+    println!("{}", text.contains("Rust")); // true
+
+    // Split into a Vec
+    let parts: Vec<&str> = "a,b,c".split(',').collect();
+    println!("{:?}", parts); // ["a", "b", "c"]
+}`,
+                description: "The difference between owned String and borrowed &str",
+                simple_explanation: "&str is a lightweight window into existing text — can't be modified or grown. String is owned, heap-allocated, and can grow. Use &str for function parameters when you only need to read; use String when you need ownership."
+            },
+            {
+                language: "Rust",
+                domain: "Collections",
+                task: "HashMap",
+                code_example: `use std::collections::HashMap;
+
+fn main() {
+    let mut scores: HashMap<String, i32> = HashMap::new();
+    scores.insert(String::from("Alice"), 95);
+    scores.insert(String::from("Bob"),   87);
+
+    // Insert only if key absent
+    scores.entry(String::from("Carol")).or_insert(75);
+
+    // Safe access (returns Option)
+    if let Some(s) = scores.get("Alice") {
+        println!("Alice: {}", s);
+    }
+
+    // Update existing value
+    let e = scores.entry(String::from("Alice")).or_insert(0);
+    *e += 5; // dereference to modify
+
+    // Iterate
+    for (name, score) in &scores {
+        println!("{}: {}", name, score);
+    }
+
+    // Word frequency counter
+    let text = "the quick brown fox the";
+    let mut freq: HashMap<&str, u32> = HashMap::new();
+    for word in text.split_whitespace() {
+        *freq.entry(word).or_insert(0) += 1;
+    }
+    println!("{:?}", freq);
+}`,
+                description: "HashMap for key-value storage using the idiomatic entry API",
+                simple_explanation: "entry().or_insert() is the idiomatic way to insert-or-update: it returns a mutable reference to the value. Dereference (*) to modify it. Iterating with &scores borrows it so you can still use it after the loop."
+            },
+            {
+                language: "Rust",
+                domain: "Control Flow",
+                task: "Control Flow Expressions",
+                code_example: `fn main() {
+    // if is an expression — returns a value
+    let num = 7;
+    let label = if num % 2 == 0 { "even" } else { "odd" };
+
+    // loop can return a value via break
+    let mut count = 0;
+    let result = loop {
+        count += 1;
+        if count == 10 { break count * 2; } // break returns 20
+    };
+
+    // for with ranges
+    for i in 0..5  { print!("{} ", i); } // 0–4 exclusive
+    for i in 0..=5 { print!("{} ", i); } // 0–5 inclusive
+
+    // if let — pattern-match shorthand
+    let opt: Option<i32> = Some(42);
+    if let Some(val) = opt {
+        println!("Got: {}", val);
+    }
+
+    // while let — loop until pattern fails
+    let mut stack = vec![1, 2, 3];
+    while let Some(top) = stack.pop() {
+        println!("{}", top);
+    }
+}`,
+                description: "Rust's expression-based control flow — if, loop, for, while let",
+                simple_explanation: "In Rust, if and loop are expressions that return values! loop with break returns the break value. 0..5 is exclusive (doesn't include 5); 0..=5 is inclusive. while let automatically exits when the pattern doesn't match."
+            },
+            {
+                language: "Rust",
+                domain: "Concurrency",
+                task: "Threads and Arc<Mutex<T>>",
+                code_example: `use std::thread;
+use std::sync::{Arc, Mutex};
+
+fn main() {
+    // Spawn a thread
+    let handle = thread::spawn(|| {
+        println!("Hello from thread!");
+    });
+    handle.join().unwrap();
+
+    // Move closure transfers ownership into the thread
+    let data = vec![1, 2, 3];
+    let h = thread::spawn(move || {
+        println!("Thread owns: {:?}", data);
+    });
+    h.join().unwrap();
+
+    // Shared state: Arc (shared ownership) + Mutex (exclusive access)
+    let counter = Arc::new(Mutex::new(0));
+    let mut handles = vec![];
+
+    for _ in 0..5 {
+        let c = Arc::clone(&counter);
+        handles.push(thread::spawn(move || {
+            *c.lock().unwrap() += 1;
+        }));
+    }
+    for h in handles { h.join().unwrap(); }
+    println!("Counter: {}", *counter.lock().unwrap()); // 5
+}`,
+                description: "Safe concurrent threads using Arc and Mutex",
+                simple_explanation: "Rust prevents data races at compile time. move closures transfer ownership into threads. Arc lets multiple threads share data. Mutex ensures only one thread accesses it at a time. The borrow checker enforces these rules without a garbage collector."
+            },
+            {
+                language: "Rust",
+                domain: "Memory",
+                task: "Lifetimes",
+                code_example: `// 'a means both inputs live at least as long as the output
+fn longest<'a>(x: &'a str, y: &'a str) -> &'a str {
+    if x.len() > y.len() { x } else { y }
+}
+
+// Struct holding a reference needs a lifetime
+struct Excerpt<'a> {
+    text: &'a str,
+}
+
+impl<'a> Excerpt<'a> {
+    fn level(&self) -> i32 { 3 }
+    fn announce(&self) -> &str { self.text }
+}
+
+fn main() {
+    let s1 = String::from("long string");
+    let result;
+    {
+        let s2 = String::from("xyz");
+        result = longest(s1.as_str(), s2.as_str());
+        println!("Longest: {}", result); // must use here
+    } // s2 dropped — result can't be used after this
+
+    let novel = String::from("Call me Ishmael. Some years...");
+    let first = novel.split('.').next().unwrap();
+    let ex = Excerpt { text: first };
+    println!("{}", ex.announce());
+}`,
+                description: "Lifetime annotations prevent dangling references",
+                simple_explanation: "Lifetimes tell Rust how long references live relative to each other. 'a is a lifetime parameter name. By annotating 'the return lives as long as both inputs', the compiler can verify you never use a reference after the data it points to is freed."
+            },
+
+            // ─── REACT ───
+            {
+                language: "React",
+                domain: "Components",
+                task: "Functional Component",
+                code_example: `// Named function component
+function Greeting({ name, age }) {
+    return (
+        <div className="card">
+            <h1>Hello, {name}!</h1>
+            <p>You are {age} years old.</p>
+        </div>
+    );
+}
+
+// Arrow function component with default prop
+const Button = ({ label, onClick, disabled = false }) => (
+    <button onClick={onClick} disabled={disabled} className="btn">
+        {label}
+    </button>
+);
+
+// App wires them together
+function App() {
+    return (
+        <div>
+            <Greeting name="Alice" age={30} />
+            <Button label="Click me" onClick={() => alert('Hi!')} />
+        </div>
+    );
+}
+
+export default App;`,
+                description: "React functional components receiving and rendering props",
+                simple_explanation: "Functional components are just JS functions that return JSX (HTML-like syntax). Props are passed like HTML attributes and destructured in the parameters. JSX uses className instead of class. Export default makes the component importable."
+            },
+            {
+                language: "React",
+                domain: "Hooks",
+                task: "useState Hook",
+                code_example: `import { useState } from 'react';
+
+function Counter() {
+    // [value, setter] = useState(initialValue)
+    const [count, setCount] = useState(0);
+    const [name,  setName]  = useState('');
+    const [items, setItems] = useState([]);
+
+    const increment = () => setCount(prev => prev + 1); // functional update
+
+    const addItem = (item) => {
+        setItems(prev => [...prev, item]); // never mutate directly!
+    };
+
+    return (
+        <div>
+            <p>Count: {count}</p>
+            <button onClick={increment}>+</button>
+            <button onClick={() => setCount(0)}>Reset</button>
+
+            <input
+                value={name}
+                onChange={e => setName(e.target.value)}
+                placeholder="Type here..."
+            />
+        </div>
+    );
+}`,
+                description: "useState manages component-local state and triggers re-renders",
+                simple_explanation: "useState returns [value, setter]. Call the setter to update state — React re-renders the component. Never modify state directly (like arr.push). The functional form (prev => prev + 1) prevents stale-state bugs in async scenarios."
+            },
+            {
+                language: "React",
+                domain: "Hooks",
+                task: "useEffect Hook",
+                code_example: `import { useState, useEffect } from 'react';
+
+function DataLoader({ userId }) {
+    const [user,    setUser]    = useState(null);
+    const [loading, setLoading] = useState(true);
+
+    // Run ONCE on mount
+    useEffect(() => {
+        console.log('mounted');
+        return () => console.log('unmounted'); // cleanup
+    }, []);
+
+    // Run when userId changes
+    useEffect(() => {
+        setLoading(true);
+        fetch(\`/api/users/\${userId}\`)
+            .then(r => r.json())
+            .then(data => { setUser(data); setLoading(false); });
+    }, [userId]);
+
+    if (loading) return <p>Loading...</p>;
+    return <h1>{user?.name}</h1>;
+}`,
+                description: "useEffect manages side effects and component lifecycle",
+                simple_explanation: "useEffect runs code after rendering. The dependency array controls when: [] runs once on mount, [value] runs when value changes, nothing means every render. Return a cleanup function that runs when the component unmounts or before the next effect."
+            },
+            {
+                language: "React",
+                domain: "Hooks",
+                task: "useRef Hook",
+                code_example: `import { useRef, useEffect, useState } from 'react';
+
+function TextInput() {
+    const inputRef    = useRef(null);  // DOM reference
+    const renderCount = useRef(0);     // persists without re-render
+
+    const [value, setValue] = useState('');
+
+    useEffect(() => {
+        inputRef.current.focus(); // auto-focus on mount
+    }, []);
+
+    useEffect(() => {
+        renderCount.current += 1; // count without triggering a re-render
+    });
+
+    return (
+        <div>
+            <p>Renders: {renderCount.current}</p>
+            <input
+                ref={inputRef}
+                value={value}
+                onChange={e => setValue(e.target.value)}
+            />
+            <button onClick={() => { setValue(''); inputRef.current.focus(); }}>
+                Clear
+            </button>
+        </div>
+    );
+}`,
+                description: "useRef for DOM access and mutable values without re-renders",
+                simple_explanation: "useRef creates a box that holds a value across renders without triggering re-renders. Attach it to DOM elements with ref={myRef} and access the element via .current. Also useful for timers, previous values, and counters."
+            },
+            {
+                language: "React",
+                domain: "Hooks",
+                task: "useContext Hook",
+                code_example: `import { createContext, useContext, useState } from 'react';
+
+// 1. Create context with a default value
+const ThemeContext = createContext('light');
+
+// 2. Provider makes value available to the whole tree
+function ThemeProvider({ children }) {
+    const [theme, setTheme] = useState('light');
+    return (
+        <ThemeContext.Provider value={{ theme, setTheme }}>
+            {children}
+        </ThemeContext.Provider>
+    );
+}
+
+// 3. Any nested component can read the context
+function ThemedButton() {
+    const { theme, setTheme } = useContext(ThemeContext);
+    return (
+        <button
+            style={{ background: theme === 'dark' ? '#333' : '#eee' }}
+            onClick={() => setTheme(t => t === 'dark' ? 'light' : 'dark')}
+        >
+            Toggle ({theme})
+        </button>
+    );
+}
+
+function App() {
+    return <ThemeProvider><ThemedButton /></ThemeProvider>;
+}`,
+                description: "useContext avoids prop drilling by sharing state through a tree",
+                simple_explanation: "Context lets any component read a value without passing props through every level in between. Create a context, wrap components in its Provider, and useContext() reads the value anywhere in the tree. Perfect for themes, auth, and language."
+            },
+            {
+                language: "React",
+                domain: "Hooks",
+                task: "useReducer Hook",
+                code_example: `import { useReducer } from 'react';
+
+const initialState = { count: 0, step: 1 };
+
+function reducer(state, action) {
+    switch (action.type) {
+        case 'INCREMENT': return { ...state, count: state.count + state.step };
+        case 'DECREMENT': return { ...state, count: state.count - state.step };
+        case 'RESET':     return initialState;
+        case 'SET_STEP':  return { ...state, step: action.payload };
+        default: throw new Error('Unknown action: ' + action.type);
+    }
+}
+
+function Counter() {
+    const [state, dispatch] = useReducer(reducer, initialState);
+    return (
+        <div>
+            <p>Count: {state.count} (step: {state.step})</p>
+            <button onClick={() => dispatch({ type: 'INCREMENT' })}>+</button>
+            <button onClick={() => dispatch({ type: 'DECREMENT' })}>-</button>
+            <button onClick={() => dispatch({ type: 'RESET' })}>Reset</button>
+            <input type="number" value={state.step}
+                onChange={e => dispatch({ type: 'SET_STEP', payload: +e.target.value })} />
+        </div>
+    );
+}`,
+                description: "useReducer for predictable multi-field state management",
+                simple_explanation: "useReducer is useState for complex state. Dispatch sends an action object, the reducer function computes the new state. Good when the next state depends on the previous state or when multiple state values change together."
+            },
+            {
+                language: "React",
+                domain: "Hooks",
+                task: "Custom Hooks",
+                code_example: `import { useState, useEffect } from 'react';
+
+// Custom hook — must start with 'use'
+function useFetch(url) {
+    const [data,    setData]    = useState(null);
+    const [loading, setLoading] = useState(true);
+    const [error,   setError]   = useState(null);
+
+    useEffect(() => {
+        const ctrl = new AbortController();
+        setLoading(true);
+
+        fetch(url, { signal: ctrl.signal })
+            .then(r => { if (!r.ok) throw Error(r.statusText); return r.json(); })
+            .then(d  => { setData(d); setLoading(false); })
+            .catch(e => { if (e.name !== 'AbortError') setError(e.message); });
+
+        return () => ctrl.abort(); // cancel on cleanup
+    }, [url]);
+
+    return { data, loading, error };
+}
+
+// Use like any built-in hook
+function UserCard({ id }) {
+    const { data: user, loading, error } = useFetch(\`/api/users/\${id}\`);
+    if (loading) return <p>Loading...</p>;
+    if (error)   return <p>Error: {error}</p>;
+    return <h2>{user?.name}</h2>;
+}`,
+                description: "Extract reusable stateful logic into custom hooks",
+                simple_explanation: "Custom hooks are regular functions starting with 'use' that call other hooks. They let you extract and share stateful logic across components. useFetch encapsulates data fetching, including cleanup with AbortController."
+            },
+            {
+                language: "React",
+                domain: "Rendering",
+                task: "Conditional Rendering",
+                code_example: `function Dashboard({ user, isLoading, error }) {
+    // Early return pattern
+    if (isLoading) return <Spinner />;
+    if (error)     return <p>Error: {error}</p>;
+    if (!user)     return <p>Please log in.</p>;
+
+    return (
+        <div>
+            {/* && — render right side only if left is truthy */}
+            {user.isAdmin && <AdminPanel />}
+
+            {/* Ternary — inline if/else */}
+            {user.isPremium ? <PremiumBadge /> : <UpgradeButton />}
+
+            {/* Show count badge only when > 0 */}
+            {user.notifications.length > 0 && (
+                <span className="badge">{user.notifications.length}</span>
+            )}
+
+            {/* Nullish coalescing for defaults */}
+            <p>{user.bio ?? 'No bio yet.'}</p>
+        </div>
+    );
+}`,
+                description: "Patterns for conditionally rendering JSX elements",
+                simple_explanation: "Inside JSX you can't use if statements directly. Use && (renders if truthy), ternary (condition ? a : b), or return early from the function. Careful with &&: {0 && <X/>} renders '0' (not nothing) — use {count > 0 && <X/>} instead."
+            },
+            {
+                language: "React",
+                domain: "Rendering",
+                task: "List Rendering with Keys",
+                code_example: `function TodoList({ todos }) {
+    return (
+        <ul>
+            {todos.map(todo => (
+                // key must be stable and unique — use an ID, not the index
+                <li key={todo.id}>
+                    <input type="checkbox" checked={todo.done} readOnly />
+                    <span style={{
+                        textDecoration: todo.done ? 'line-through' : 'none'
+                    }}>
+                        {todo.text}
+                    </span>
+                </li>
+            ))}
+        </ul>
+    );
+}
+
+// Usage
+const todos = [
+    { id: 1, text: 'Learn React', done: true },
+    { id: 2, text: 'Build a project', done: false },
+];
+<TodoList todos={todos} />`,
+                description: "Render arrays of data using map() with unique key props",
+                simple_explanation: "Use .map() to turn an array into JSX elements. Every element needs a unique key prop — React uses it to efficiently update only the items that changed. Use stable IDs from your data, never the array index (it causes bugs when the list reorders)."
+            },
+            {
+                language: "React",
+                domain: "Performance",
+                task: "useMemo and useCallback",
+                code_example: `import { useState, useMemo, useCallback } from 'react';
+
+function ExpensiveList({ items, filter }) {
+    // Recompute only when items or filter changes
+    const filtered = useMemo(() => {
+        console.log('Filtering...');
+        return items.filter(i => i.includes(filter));
+    }, [items, filter]);
+
+    return <ul>{filtered.map(i => <li key={i}>{i}</li>)}</ul>;
+}
+
+function Parent() {
+    const [count,  setCount]  = useState(0);
+    const [filter, setFilter] = useState('');
+    const items = ['apple', 'apricot', 'banana', 'cherry'];
+
+    // Stable function reference — prevents child re-renders
+    const handleSelect = useCallback((item) => {
+        console.log('Selected:', item);
+    }, []);
+
+    return (
+        <div>
+            <button onClick={() => setCount(c => c + 1)}>Count: {count}</button>
+            <input value={filter} onChange={e => setFilter(e.target.value)} />
+            <ExpensiveList items={items} filter={filter} />
+        </div>
+    );
+}`,
+                description: "Memoize values and functions to avoid unnecessary work",
+                simple_explanation: "useMemo caches a computed value between renders — only recalculates when dependencies change. useCallback caches a function reference so child components wrapped in React.memo don't re-render. Only add these when you've measured a real performance problem."
+            },
+            {
+                language: "React",
+                domain: "Forms",
+                task: "Controlled Form",
+                code_example: `import { useState } from 'react';
+
+function SignupForm() {
+    const [form,   setForm]   = useState({ username: '', email: '', role: 'user', agree: false });
+    const [errors, setErrors] = useState({});
+
+    const handleChange = ({ target: { name, value, type, checked } }) => {
+        setForm(prev => ({ ...prev, [name]: type === 'checkbox' ? checked : value }));
+    };
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        const errs = {};
+        if (!form.username) errs.username = 'Required';
+        if (!form.email.includes('@')) errs.email = 'Invalid email';
+        if (Object.keys(errs).length) { setErrors(errs); return; }
+        console.log('Submit:', form);
+    };
+
+    return (
+        <form onSubmit={handleSubmit}>
+            <input name="username" value={form.username} onChange={handleChange} />
+            {errors.username && <span>{errors.username}</span>}
+            <button type="submit">Sign Up</button>
+        </form>
+    );
+}`,
+                description: "Controlled inputs keep form state in React",
+                simple_explanation: "Controlled forms store input values in React state. onChange updates state, value={state.x} makes React the single source of truth. e.preventDefault() stops the page from reloading. Validate before processing and show errors."
+            },
+            {
+                language: "React",
+                domain: "Data",
+                task: "Fetching Data from an API",
+                code_example: `import { useState, useEffect } from 'react';
+
+function PostsList() {
+    const [posts,   setPosts]   = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [error,   setError]   = useState(null);
+
+    useEffect(() => {
+        async function load() {
+            try {
+                const res = await fetch('https://jsonplaceholder.typicode.com/posts?_limit=5');
+                if (!res.ok) throw new Error(\`HTTP \${res.status}\`);
+                setPosts(await res.json());
+            } catch (e) {
+                setError(e.message);
+            } finally {
+                setLoading(false);
             }
+        }
+        load();
+    }, []);
+
+    if (loading) return <p>Loading...</p>;
+    if (error)   return <p>Error: {error}</p>;
+    return (
+        <ul>
+            {posts.map(p => <li key={p.id}><b>{p.title}</b></li>)}
+        </ul>
+    );
+}`,
+                description: "Fetch API data inside useEffect with loading and error states",
+                simple_explanation: "Put async logic inside a local async function within useEffect. Always handle three states: loading (show spinner), error (show message), and success (show data). finally ensures loading is always set to false."
+            },
+            {
+                language: "React",
+                domain: "Components",
+                task: "Fragments and Portals",
+                code_example: `import { Fragment, createPortal } from 'react';
+
+// Fragment — group elements without extra DOM nodes
+function TableRows() {
+    return (
+        <Fragment>
+            <tr><td>Row 1</td></tr>
+            <tr><td>Row 2</td></tr>
+        </Fragment>
+    );
+}
+
+// Short syntax (can't take props like key)
+function App() {
+    return (
+        <>
+            <Header />
+            <Main />
+            <Footer />
+        </>
+    );
+}
+
+// Portal — render outside the React root (e.g., for modals)
+function Modal({ children, onClose }) {
+    return createPortal(
+        <div className="overlay" onClick={onClose}>
+            <div className="modal" onClick={e => e.stopPropagation()}>
+                {children}
+            </div>
+        </div>,
+        document.getElementById('modal-root') // outside #root
+    );
+}`,
+                description: "Fragments avoid wrapper divs; portals escape the DOM hierarchy",
+                simple_explanation: "Fragment (<></>) returns multiple elements without adding a wrapper div to the DOM. Portals render JSX outside the normal React root — essential for modals so they're not clipped by parent overflow:hidden."
+            },
+            {
+                language: "React",
+                domain: "Routing",
+                task: "React Router v6",
+                code_example: `import { BrowserRouter, Routes, Route, Link, useParams, useNavigate } from 'react-router-dom';
+
+function Navbar() {
+    return (
+        <nav>
+            <Link to="/">Home</Link>
+            <Link to="/about">About</Link>
+        </nav>
+    );
+}
+
+function UserProfile() {
+    const { userId } = useParams();     // reads :userId from URL
+    const navigate   = useNavigate();
+    return (
+        <div>
+            <h1>User {userId}</h1>
+            <button onClick={() => navigate(-1)}>Back</button>
+        </div>
+    );
+}
+
+function App() {
+    return (
+        <BrowserRouter>
+            <Navbar />
+            <Routes>
+                <Route path="/"              element={<Home />} />
+                <Route path="/about"         element={<About />} />
+                <Route path="/users/:userId" element={<UserProfile />} />
+                <Route path="*"              element={<NotFound />} />
+            </Routes>
+        </BrowserRouter>
+    );
+}`,
+                description: "Client-side navigation with React Router v6",
+                simple_explanation: "React Router handles page navigation without full reloads. <Link> replaces <a> tags. <Route> maps paths to components. useParams() reads URL variables like :userId. useNavigate() lets you redirect programmatically."
+            },
+
+            // ─── KOTLIN ───
+            {
+                language: "Kotlin",
+                domain: "Basics",
+                task: "Hello World",
+                code_example: `fun main() {
+    println("Hello, World!")
+
+    // String templates with $
+    val name = "Alice"
+    val age  = 30
+    println("Hello, $name!")
+    println("Next year: \${age + 1}")   // expression needs {}
+
+    print("No newline ")
+    println("but here")
+
+    // Formatted string
+    val pi = 3.14159
+    println("Pi: %.2f".format(pi))
+}`,
+                description: "Kotlin entry point, println, and string templates",
+                simple_explanation: "Kotlin programs start in fun main(). println adds a newline, print doesn't. String templates embed variables with $ and expressions with \${} — no + concatenation needed."
+            },
+            {
+                language: "Kotlin",
+                domain: "Variables",
+                task: "val and var",
+                code_example: `fun main() {
+    val name = "Alice"  // immutable — like Java's final
+    // name = "Bob"     // ERROR
+
+    var age = 30        // mutable
+    age = 31            // fine
+
+    // Kotlin is null-safe by default
+    val notNull: String = "always a string"
+    var maybeNull: String? = null   // ? marks nullable
+
+    // Type is usually inferred
+    val n  = 42         // Int
+    val s  = "text"     // String
+    val b  = true       // Boolean
+    val d  = 3.14       // Double
+
+    // Constants
+    companion object {
+        const val MAX = 100
+    }
+}`,
+                description: "val for immutability, var for mutability, and Kotlin's null safety",
+                simple_explanation: "Use val for things that won't change (like Java's final) and var for things that will. Kotlin infers types so you rarely need to write them. ? after a type means it can hold null — Kotlin forces you to handle this."
+            },
+            {
+                language: "Kotlin",
+                domain: "Control Flow",
+                task: "When Expression",
+                code_example: `fun describe(x: Any): String = when (x) {
+    is Int       -> "Integer: $x"
+    is String    -> "String length \${x.length}"
+    is List<*>   -> "List size \${x.size}"
+    in 1..10     -> "Between 1 and 10"
+    !in 10..20   -> "Not 10–20"
+    else         -> "Unknown"
+}
+
+fun grade(score: Int) = when {
+    score >= 90 -> "A"
+    score >= 80 -> "B"
+    score >= 70 -> "C"
+    else        -> "F"
+}
+
+fun dayType(day: String) = when (day.lowercase()) {
+    "saturday", "sunday"                          -> "Weekend"
+    "monday","tuesday","wednesday","thursday","friday" -> "Weekday"
+    else -> "Unknown"
+}
+
+fun main() {
+    println(describe(42))        // Integer: 42
+    println(grade(85))           // B
+    println(dayType("Monday"))   // Weekday
+}`,
+                description: "when is Kotlin's supercharged switch — it's also an expression",
+                simple_explanation: "when replaces switch and is far more powerful. It checks types (is Int), ranges (in 1..10), multiple values (comma-separated), or acts as an if-else chain. It's an expression — it returns a value."
+            },
+            {
+                language: "Kotlin",
+                domain: "Data Classes",
+                task: "Data Classes",
+                code_example: `// data class auto-generates equals, hashCode, toString, copy
+data class User(
+    val id:    Int,
+    val name:  String,
+    val email: String,
+    val age:   Int = 18   // default value
+)
+
+fun main() {
+    val u1 = User(1, "Alice", "a@a.com", 30)
+    val u2 = User(1, "Alice", "a@a.com", 30)
+
+    println(u1 == u2)   // true (structural equality)
+    println(u1)         // User(id=1, name=Alice, ...)
+
+    // copy — modify just some fields
+    val updated = u1.copy(age = 31, email = "new@a.com")
+
+    // Destructuring
+    val (id, name, email) = u1
+    println("$id: $name ($email)")
+
+    // Useful in collections
+    val users = listOf(u1, updated)
+    val sorted = users.sortedBy { it.name }
+}`,
+                description: "Data classes generate all boilerplate in one line",
+                simple_explanation: "Data classes auto-generate equals(), hashCode(), toString(), and copy(). What takes 50+ lines in Java takes one line in Kotlin. copy() creates a modified duplicate — perfect for immutable state updates."
+            },
+            {
+                language: "Kotlin",
+                domain: "Null Safety",
+                task: "Null Safety",
+                code_example: `fun main() {
+    var name: String? = null    // nullable
+
+    // Safe call — returns null instead of crashing
+    println(name?.length)       // null
+
+    // Elvis — default if null
+    val len = name?.length ?: 0
+    println(len)                // 0
+
+    // Smart cast after null check
+    if (name != null) {
+        println(name.length)    // name is String here, not String?
+    }
+
+    // let — run block only when not null
+    name?.let {
+        println("Name: $it")
+    }
+
+    // Safe cast — null if cast fails
+    val obj: Any = "Hello"
+    val str = obj as? String    // "Hello"
+    val num = obj as? Int       // null (no crash)
+
+    // !! — throws KotlinNPE if null (use sparingly)
+    // name!!.length
+}`,
+                description: "Kotlin's compile-time null safety: ?., ?:, let, and smart casts",
+                simple_explanation: "? after a type allows null. ?. (safe call) returns null instead of crashing. ?: (Elvis) provides a default. Smart casts: after 'if (x != null)', the compiler knows x is non-null. let{} runs only when not null."
+            },
+            {
+                language: "Kotlin",
+                domain: "Functions",
+                task: "Functions and Extension Functions",
+                code_example: `// Single-expression function
+fun square(x: Int) = x * x
+
+// Default and named parameters
+fun greet(name: String = "World", times: Int = 1): String {
+    return "Hello, $name! ".repeat(times).trim()
+}
+
+// Extension function — add methods to any type
+fun String.isPalindrome() = this == this.reversed()
+fun Int.isEven()          = this % 2 == 0
+
+// Higher-order function — takes a function parameter
+fun operate(a: Int, b: Int, op: (Int, Int) -> Int) = op(a, b)
+
+// Vararg
+fun sum(vararg nums: Int) = nums.sum()
+
+fun main() {
+    println(square(5))                       // 25
+    println(greet(times = 2))               // Hello, World! Hello, World!
+    println("racecar".isPalindrome())        // true
+    println(42.isEven())                     // true
+    println(operate(10, 3) { a, b -> a * b }) // 30
+    println(sum(1, 2, 3, 4, 5))             // 15
+}`,
+                description: "Functions, extension functions, and higher-order functions",
+                simple_explanation: "Extension functions add methods to existing classes without subclassing — even built-in types like String or Int. Default parameters eliminate overloading. Named arguments let you pass in any order. Higher-order functions take functions as parameters."
+            },
+            {
+                language: "Kotlin",
+                domain: "Classes",
+                task: "Classes and Inheritance",
+                code_example: `// Classes are final (non-inheritable) by default!
+open class Animal(val name: String) {
+    open fun speak(): String = "..."
+    fun describe() = "$name says: \${speak()}"
+}
+
+class Dog(name: String, val breed: String) : Animal(name) {
+    override fun speak() = "Woof!"
+}
+
+abstract class Shape {
+    abstract fun area(): Double
+    fun describe() = "Area: \${area()}"
+}
+
+class Circle(val r: Double) : Shape() {
+    override fun area() = Math.PI * r * r
+}
+
+interface Flyable {
+    val maxSpeed: Int
+    fun fly() = "Flying at $maxSpeed km/h"  // default impl
+}
+
+class Bird(name: String) : Animal(name), Flyable {
+    override val maxSpeed = 100
+    override fun speak() = "Tweet!"
+}
+
+fun main() {
+    val dog  = Dog("Rex", "Lab")
+    println(dog.describe())         // Rex says: Woof!
+
+    val bird = Bird("Tweety")
+    println(bird.fly())             // Flying at 100 km/h
+}`,
+                description: "Kotlin classes, inheritance, abstract classes, and interfaces",
+                simple_explanation: "Kotlin classes are final by default — add 'open' to allow inheritance. override replaces a parent method. Interfaces can have default implementations. A class can implement many interfaces but inherit only one class."
+            },
+            {
+                language: "Kotlin",
+                domain: "Collections",
+                task: "Collections",
+                code_example: `fun main() {
+    // Immutable (read-only)
+    val fruits   = listOf("apple", "banana", "cherry")
+    val capitals = mapOf("Japan" to "Tokyo", "France" to "Paris")
+    val unique   = setOf(1, 2, 2, 3, 3)   // {1, 2, 3}
+
+    // Mutable
+    val list = mutableListOf("a", "b")
+    list.add("c");  list.removeAt(0)
+
+    val map  = mutableMapOf("x" to 1)
+    map["y"] = 2
+
+    // Functional operations
+    val numbers = listOf(1, 2, 3, 4, 5, 6)
+    val result  = numbers
+        .filter  { it % 2 == 0 }   // [2, 4, 6]
+        .map     { it * it }        // [4, 16, 36]
+    println(result)
+
+    println(numbers.sum())           // 21
+    println(numbers.any  { it > 5 }) // true
+    println(numbers.all  { it > 0 }) // true
+    println(numbers.count{ it % 2 == 0 }) // 3
+}`,
+                description: "Read-only and mutable collections with functional operations",
+                simple_explanation: "Kotlin separates immutable (listOf, mapOf) from mutable (mutableListOf) collections by default. 'to' creates key-value pairs. Collections support filter(), map(), and other functional operations. 'it' is the default lambda parameter name."
+            },
+            {
+                language: "Kotlin",
+                domain: "Object",
+                task: "Object and Companion Object",
+                code_example: `// object — Kotlin's singleton
+object Config {
+    val apiUrl = "https://api.example.com"
+    val timeout = 30
+
+    fun endpoint(path: String) = "$apiUrl/$path"
+}
+
+// companion object — static members inside a class
+class User private constructor(val id: Int, val name: String) {
+    companion object {
+        private var nextId = 1
+
+        fun create(name: String) = User(nextId++, name)
+
+        const val MAX_NAME = 50
+    }
+    override fun toString() = "User($id, $name)"
+}
+
+// Anonymous object
+val handler = object : Runnable {
+    override fun run() = println("Running!")
+}
+
+fun main() {
+    println(Config.endpoint("users"))  // https://api.example.com/users
+
+    val alice = User.create("Alice")
+    val bob   = User.create("Bob")
+    println(alice)  // User(1, Alice)
+    println(bob)    // User(2, Bob)
+    println(User.MAX_NAME)  // 50
+}`,
+                description: "Singletons with object; static-like members with companion object",
+                simple_explanation: "object creates a singleton — one instance, ever. companion object holds 'static' members inside a class (Kotlin has no static keyword). Factory methods in companion objects are the idiomatic way to have named constructors."
+            },
+            {
+                language: "Kotlin",
+                domain: "Sealed Classes",
+                task: "Sealed Classes",
+                code_example: `sealed class Result<out T> {
+    data class Success<T>(val data: T)        : Result<T>()
+    data class Error(val msg: String, val code: Int = -1) : Result<Nothing>()
+    object Loading : Result<Nothing>()
+}
+
+sealed class Screen {
+    object Home    : Screen()
+    object Profile : Screen()
+    data class Detail(val id: Int) : Screen()
+}
+
+fun handle(result: Result<String>) {
+    when (result) {                          // exhaustive — no else needed
+        is Result.Success -> println("Data: \${result.data}")
+        is Result.Error   -> println("Error \${result.code}: \${result.msg}")
+        Result.Loading    -> println("Loading...")
+    }
+}
+
+fun main() {
+    handle(Result.Success("Hello"))
+    handle(Result.Error("Not found", 404))
+    handle(Result.Loading)
+}`,
+                description: "Sealed classes for type-safe state modeling",
+                simple_explanation: "Sealed classes are like enums where each variant can hold different data. The compiler knows all subclasses, so when exhaustive in when, no else is needed. Perfect for modeling Success/Error/Loading states, navigation, and events."
+            },
+            {
+                language: "Kotlin",
+                domain: "Scope Functions",
+                task: "Scope Functions",
+                code_example: `data class Button(var text: String = "", var color: String = "")
+
+fun main() {
+    // apply — configure an object, returns the object
+    val btn = Button().apply {
+        text  = "Click Me"
+        color = "#6366f1"
+    }
+    println(btn)
+
+    // also — side effects, returns the object
+    val nums = mutableListOf(1, 2, 3)
+        .also { println("Before: $it") }
+        .apply { add(4) }
+        .also { println("After: $it") }
+
+    // let — transform, returns lambda result (good with ?)
+    val name: String? = "Alice"
+    val len = name?.let {
+        println("Name is $it")
+        it.length    // returned value
+    }
+
+    // run — like let but 'this' = object
+    val label = btn.run { "\${text.uppercase()} (\$color)" }
+
+    // with — object as parameter, returns result
+    val summary = with(btn) { "Button: $text" }
+}`,
+                description: "Kotlin's five scope functions and when to use each",
+                simple_explanation: "Scope functions run a lambda in the context of an object. apply and also return the object (great for chaining). let and run return the lambda result. In apply and with, 'this' is the object. In let, also, and run standalone, 'it' is the object."
+            },
+            {
+                language: "Kotlin",
+                domain: "Coroutines",
+                task: "Coroutines — Basics",
+                code_example: `import kotlinx.coroutines.*
+
+fun main() = runBlocking {
+    // launch — fire and forget
+    val job = launch {
+        delay(500L)   // non-blocking delay
+        println("World!")
+    }
+    println("Hello,")
+    job.join()   // wait for completion
+
+    // async/await — returns a value
+    val result = async {
+        delay(200L)
+        "Async result"
+    }
+    println(result.await())
+
+    // Run multiple concurrently
+    val a = async { fetchData("users") }
+    val b = async { fetchData("posts") }
+    println("Got: \${a.await()} and \${b.await()}")
+}
+
+suspend fun fetchData(endpoint: String): String {
+    delay(100L)
+    return "data:$endpoint"
+}`,
+                description: "Coroutines for concurrent async code without callback hell",
+                simple_explanation: "Coroutines are Kotlin's built-in async framework. launch runs code concurrently (fire and forget). async returns a Deferred you await(). delay is like Thread.sleep but non-blocking. suspend means 'this function may pause'."
+            },
+            {
+                language: "Kotlin",
+                domain: "Lambdas",
+                task: "Lambdas and Higher-Order Functions",
+                code_example: `fun main() {
+    // Lambda: { params -> body }
+    val multiply = { a: Int, b: Int -> a * b }
+    println(multiply(3, 4))  // 12
+
+    // 'it' — implicit name for single-param lambdas
+    val double: (Int) -> Int = { it * 2 }
+    println(double(5))  // 10
+
+    val numbers = listOf(1, 2, 3, 4, 5)
+
+    // Trailing lambda (outside parentheses)
+    val evens   = numbers.filter { it % 2 == 0 }
+    val doubled = numbers.map { it * 2 }
+    val total   = numbers.reduce { acc, n -> acc + n }
+    val grouped = numbers.groupBy { if (it % 2 == 0) "even" else "odd" }
+
+    println(evens)    // [2, 4]
+    println(grouped)  // {odd=[1, 3, 5], even=[2, 4]}
+
+    // also, let, apply pipeline
+    numbers
+        .filter  { it > 2 }
+        .also    { println("Filtered: $it") }
+        .map     { it * 10 }
+        .also    { println("Mapped: $it") }
+}`,
+                description: "Lambdas, 'it' shorthand, and functional collection methods",
+                simple_explanation: "'it' is the implicit parameter name when a lambda takes exactly one argument. Trailing lambda syntax (last argument outside parentheses) makes code read naturally. groupBy categorizes items into a map of lists."
+            },
+
+// ─── EXTRA KOTLIN ───
+            {
+                language: "Kotlin",
+                domain: "Generics",
+                task: "Generics",
+                code_example: `// Generic class
+class Stack<T> {
+    private val items = mutableListOf<T>()
+
+    fun push(item: T) { items.add(item) }
+    fun pop():  T?    = if (items.isEmpty()) null else items.removeLast()
+    fun peek(): T?    = items.lastOrNull()
+    val size get()    = items.size
+    val isEmpty get() = items.isEmpty()
+}
+
+// Generic function with upper bound
+fun <T : Comparable<T>> maxOf(a: T, b: T): T = if (a > b) a else b
+
+// Reified — access type at runtime (requires inline)
+inline fun <reified T> List<*>.filterByType(): List<T> =
+    this.filterIsInstance<T>()
+
+fun main() {
+    val stack = Stack<Int>()
+    stack.push(1); stack.push(2); stack.push(3)
+    println(stack.pop())   // 3
+    println(stack.peek())  // 2
+
+    println(maxOf(10, 20))           // 20
+    println(maxOf("apple", "mango")) // mango
+
+    val mixed: List<Any> = listOf(1, "hello", 2.0, "world")
+    val strings = mixed.filterByType<String>()
+    println(strings)  // [hello, world]
+}`,
+                description: "Generic classes, bounded type parameters, and reified types",
+                simple_explanation: "Generics let you write code that works with any type. <T : Comparable<T>> means T must support comparison. reified is a Kotlin superpower — inline functions with reified T can check the actual type at runtime, which Java generics cannot."
+            },
+            {
+                language: "Kotlin",
+                domain: "Strings",
+                task: "String Operations",
+                code_example: `fun main() {
+    val text = "  Hello, Kotlin World!  "
+
+    // Common operations
+    println(text.trim())                       // "Hello, Kotlin World!"
+    println(text.lowercase())                  // "  hello, kotlin world!  "
+    println(text.uppercase())
+    println(text.contains("Kotlin"))           // true
+    println(text.replace("Kotlin", "Java"))
+    println(text.split(","))                   // [  Hello, Kotlin World!  ]
+
+    // String templates
+    val name = "Alice"
+    val greeting = "Hello, $name! Length: \${name.length}"
+
+    // multiline string (trimIndent removes common indent)
+    val json = """
+        {
+            "name": "$name",
+            "age": 30
+        }
+    """.trimIndent()
+    println(json)
+
+    // String methods
+    "hello".capitalize()                       // "Hello" (deprecated in newer Kotlin)
+    "hello world".split(" ").joinToString("-") // "hello-world"
+    "  ".isBlank()                             // true
+    "abc".reversed()                           // "cba"
+    "abcabc".count { it == 'a' }              // 2
+}`,
+                description: "String manipulation, multiline strings, and common methods",
+                simple_explanation: "Kotlin strings have dozens of useful methods. Triple-quoted strings (\"\"\") support multiline text. trimIndent() removes common leading spaces. joinToString() turns a list into a string with any separator."
+            },
+
+            // ─── EXTRA REACT ───
+            {
+                language: "React",
+                domain: "Patterns",
+                task: "Component Composition with children",
+                code_example: `// children — content passed between opening and closing tags
+function Card({ title, children, footer }) {
+    return (
+        <div className="card">
+            <div className="card-header"><h2>{title}</h2></div>
+            <div className="card-body">{children}</div>
+            {footer && <div className="card-footer">{footer}</div>}
+        </div>
+    );
+}
+
+// Layout with named slots
+function PageLayout({ topBar, sidebar, main }) {
+    return (
+        <div className="layout">
+            <header>{topBar}</header>
+            <aside>{sidebar}</aside>
+            <main>{main}</main>
+        </div>
+    );
+}
+
+// Usage
+function App() {
+    return (
+        <Card
+            title="Welcome"
+            footer={<button>Read More</button>}
+        >
+            <p>Anything can go here!</p>
+            <img src="photo.jpg" alt="example" />
+        </Card>
+    );
+}`,
+                description: "Compose flexible components using the children prop and named slots",
+                simple_explanation: "children is whatever you put between a component's opening and closing tags. This makes components flexible containers. Named prop slots (sidebar, main) let callers inject content into specific locations."
+            },
+
         ];
 
         // State
@@ -1777,15 +5622,18 @@ clearInterval(intervalId);`,
 
         // Update Stats
         function updateStats() {
-            const htmlCount = codeDatabase.filter(s => s.language === 'HTML').length;
-            const cssCount = codeDatabase.filter(s => s.language === 'CSS').length;
-            const jsCount = codeDatabase.filter(s => s.language === 'JavaScript').length;
+            const count = (lang) => codeDatabase.filter(s => s.language === lang).length;
 
             document.getElementById('total-snippets').textContent = `${codeDatabase.length} snippets`;
-            document.getElementById('html-count').textContent = `${htmlCount} HTML`;
-            document.getElementById('css-count').textContent = `${cssCount} CSS`;
-            document.getElementById('js-count').textContent = `${jsCount} JavaScript`;
-            document.getElementById('footer-count').textContent = codeDatabase.length;
+            document.getElementById('html-count').textContent    = `${count('HTML')} HTML`;
+            document.getElementById('css-count').textContent     = `${count('CSS')} CSS`;
+            document.getElementById('js-count').textContent      = `${count('JavaScript')} JavaScript`;
+            document.getElementById('py-count').textContent      = `${count('Python')} Python`;
+            document.getElementById('java-count').textContent    = `${count('Java')} Java`;
+            document.getElementById('rust-count').textContent    = `${count('Rust')} Rust`;
+            document.getElementById('react-count').textContent   = `${count('React')} React`;
+            document.getElementById('kotlin-count').textContent  = `${count('Kotlin')} Kotlin`;
+            document.getElementById('footer-count').textContent  = codeDatabase.length;
         }
 
         // Filter Snippets
