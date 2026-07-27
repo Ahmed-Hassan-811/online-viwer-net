@@ -1,3 +1,4 @@
+<img width="400" height="181" alt="レコーディング 2026-07-27 013040" src="https://github.com/user-attachments/assets/77d97e1b-9bf2-410d-85ac-b684d88c2488" />
 
 
 [Offline Coding Assistant](https://online-viwer-net.netlify.app/)
