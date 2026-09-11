@@ -1,840 +1,166 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Offline Coding Assistant - HTML, CSS, JavaScript Reference</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-            background: linear-gradient(to bottom right, #0f172a, #312e81, #0f172a);
-            color: white;
-            min-height: 100vh;
-            line-height: 1.6;
-        }
-
-        .container {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 20px;
-        }
-
-        /* Header */
-        .header {
-            text-align: center;
-            margin-bottom: 30px;
-        }
-
-        .header-title {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 12px;
-            margin-bottom: 8px;
-        }
-
-        .header-title h1 {
-            font-size: 2.5rem;
-            background: linear-gradient(to right, #818cf8, #a78bfa);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .header p {
-            color: #d1d5db;
-            margin: 10px 0;
-        }
-
-        .stats {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 8px 14px;
-            font-size: 0.85rem;
-            color: #9ca3af;
-        }
-
-        .stats .sep {
-            color: #4b5563;
-        }
-
-        /* Termux Guide */
-        .guide-card {
-            background: rgba(30, 41, 59, 0.5);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(99, 102, 241, 0.3);
-            border-radius: 12px;
-            padding: 20px;
-            margin-bottom: 24px;
-        }
-
-        .guide-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            cursor: pointer;
-            user-select: none;
-        }
-
-        .guide-title {
-            font-size: 1.1rem;
-            font-weight: 600;
-        }
-
-        .guide-content {
-            margin-top: 20px;
-            padding-top: 20px;
-            border-top: 1px solid rgba(99, 102, 241, 0.2);
-            display: none;
-        }
-
-        .guide-content.show {
-            display: block;
-        }
-
-        .guide-section {
-            margin-bottom: 20px;
-        }
-
-        .guide-section h4 {
-            color: #93c5fd;
-            margin-bottom: 10px;
-        }
-
-        .guide-section ol, .guide-section ul {
-            margin-left: 20px;
-            color: #d1d5db;
-        }
-
-        .guide-section li {
-            margin: 8px 0;
-        }
-
-        /* Search and Filters */
-        .search-card {
-            background: rgba(30, 41, 59, 0.5);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(99, 102, 241, 0.2);
-            border-radius: 12px;
-            padding: 24px;
-            margin-bottom: 24px;
-        }
-
-        .search-input-wrapper {
-            position: relative;
-            margin-bottom: 16px;
-        }
-
-        .search-input {
-            width: 100%;
-            padding: 12px 12px 12px 45px;
-            background: rgba(51, 65, 85, 0.5);
-            border: 1px solid rgba(99, 102, 241, 0.3);
-            border-radius: 8px;
-            color: white;
-            font-size: 1rem;
-        }
-
-        .search-input:focus {
-            outline: none;
-            border-color: #6366f1;
-            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.2);
-        }
-
-        .search-icon {
-            position: absolute;
-            left: 12px;
-            top: 50%;
-            transform: translateY(-50%);
-            color: #9ca3af;
-        }
-
-        .button-row {
-            display: flex;
-            gap: 12px;
-            flex-wrap: wrap;
-            margin-bottom: 16px;
-        }
-
-        .btn {
-            padding: 10px 16px;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-            font-size: 0.9rem;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            transition: all 0.2s;
-        }
-
-        .btn-primary {
-            background: #6366f1;
-            color: white;
-        }
-
-        .btn-primary:hover {
-            background: #4f46e5;
-        }
-
-        .btn-success {
-            background: #10b981;
-            color: white;
-        }
-
-        .btn-success:hover {
-            background: #059669;
-        }
-
-        .btn-secondary {
-            background: #475569;
-            color: white;
-        }
-
-        .btn-secondary:hover {
-            background: #334155;
-        }
-
-        .btn-danger {
-            background: #ef4444;
-            color: white;
-            margin-left: auto;
-        }
-
-        .btn-danger:hover {
-            background: #dc2626;
-        }
-
-        .filter-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 16px;
-            padding-top: 16px;
-            border-top: 1px solid rgba(99, 102, 241, 0.2);
-            display: none;
-        }
-
-        .filter-grid.show {
-            display: grid;
-        }
-
-        .filter-group label {
-            display: block;
-            font-size: 0.9rem;
-            color: #d1d5db;
-            margin-bottom: 8px;
-        }
-
-        .filter-group select {
-            width: 100%;
-            padding: 10px;
-            background: rgba(51, 65, 85, 0.5);
-            border: 1px solid rgba(99, 102, 241, 0.3);
-            border-radius: 8px;
-            color: white;
-            font-size: 0.9rem;
-        }
-
-        .filter-group select:focus {
-            outline: none;
-            border-color: #6366f1;
-        }
-
-        /* Quick Tips */
-        .tips-card {
-            background: linear-gradient(to right, rgba(6, 78, 59, 0.3), rgba(30, 58, 138, 0.3));
-            border: 1px solid rgba(34, 197, 94, 0.3);
-            border-radius: 12px;
-            padding: 16px;
-            margin-bottom: 24px;
-        }
-
-        .tips-content {
-            display: flex;
-            gap: 12px;
-        }
-
-        .tips-content ul {
-            margin-left: 20px;
-        }
-
-        /* Results */
-        .results-count {
-            color: #d1d5db;
-            font-size: 0.9rem;
-            margin-bottom: 16px;
-        }
-
-        /* Snippets Grid */
-        .snippets-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
-            gap: 24px;
-            margin-bottom: 40px;
-        }
-
-        @media (max-width: 768px) {
-            .snippets-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        .snippet-card {
-            background: rgba(30, 41, 59, 0.5);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(99, 102, 241, 0.2);
-            border-radius: 12px;
-            overflow: hidden;
-            transition: all 0.3s;
-        }
-
-        .snippet-card:hover {
-            border-color: rgba(99, 102, 241, 0.4);
-        }
-
-        .snippet-header {
-            background: linear-gradient(to right, rgba(99, 102, 241, 0.2), rgba(168, 85, 247, 0.2));
-            padding: 16px;
-            border-bottom: 1px solid rgba(99, 102, 241, 0.2);
-            display: flex;
-            justify-content: space-between;
-            align-items: start;
-            gap: 12px;
-        }
-
-        .snippet-title {
-            flex: 1;
-        }
-
-        .snippet-title h3 {
-            font-size: 1.1rem;
-            margin-bottom: 8px;
-        }
-
-        .snippet-tags {
-            display: flex;
-            gap: 8px;
-            flex-wrap: wrap;
-        }
-
-        .tag {
-            padding: 4px 8px;
-            border-radius: 4px;
-            font-size: 0.75rem;
-            font-weight: 500;
-        }
-
-        .tag-html { background: rgba(249, 115, 22, 0.5); }
-        .tag-css { background: rgba(59, 130, 246, 0.5); }
-        .tag-javascript { background: rgba(234, 179, 8, 0.5); }
-        .tag-python { background: rgba(168, 85, 247, 0.5); }
-        .tag-other { background: rgba(99, 102, 241, 0.5); }
-
-        .copy-btn {
-            padding: 8px;
-            background: transparent;
-            border: none;
-            cursor: pointer;
-            border-radius: 8px;
-            transition: background 0.2s;
-            color: white;
-        }
-
-        .copy-btn:hover {
-            background: rgba(99, 102, 241, 0.5);
-        }
-
-        .snippet-body {
-            padding: 16px;
-        }
-
-        .code-block {
-            background: rgba(15, 23, 42, 0.5);
-            padding: 16px;
-            border-radius: 8px;
-            overflow-x: auto;
-            border: 1px solid rgba(99, 102, 241, 0.1);
-            margin-bottom: 16px;
-        }
-
-        .code-block code {
-            color: #86efac;
-            font-family: 'Courier New', monospace;
-            font-size: 0.9rem;
-            white-space: pre-wrap;
-            word-wrap: break-word;
-        }
-
-        .explanation {
-            background: rgba(34, 197, 94, 0.2);
-            border: 1px solid rgba(34, 197, 94, 0.3);
-            border-radius: 8px;
-            padding: 12px;
-        }
-
-        .explanation h4 {
-            color: #86efac;
-            font-size: 0.9rem;
-            margin-bottom: 8px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .explanation p {
-            color: #d1d5db;
-            font-size: 0.9rem;
-            line-height: 1.6;
-        }
-
-        .tech-explanation {
-            background: rgba(99, 102, 241, 0.1);
-            border: 1px solid rgba(99, 102, 241, 0.3);
-            border-radius: 8px;
-            padding: 12px;
-        }
-
-        .tech-explanation h4 {
-            color: #a5b4fc;
-            font-size: 0.9rem;
-            margin-bottom: 8px;
-        }
-
-        .tech-explanation p {
-            color: #d1d5db;
-            font-size: 0.9rem;
-            line-height: 1.6;
-        }
-
-        /* No Results */
-        .no-results {
-            text-align: center;
-            padding: 60px 20px;
-        }
-
-        .no-results h3 {
-            color: #9ca3af;
-            font-size: 1.5rem;
-            margin: 16px 0 8px;
-        }
-
-        .no-results p {
-            color: #6b7280;
-            margin-bottom: 20px;
-        }
-
-        /* Footer */
-        .footer {
-            text-align: center;
-            color: #6b7280;
-            font-size: 0.9rem;
-            padding: 40px 20px;
-        }
-
-        .footer p {
-            margin: 8px 0;
-        }
-
-        /* Icons */
-        .icon {
-            width: 20px;
-            height: 20px;
-            display: inline-block;
-        }
-
-        .icon-lg {
-            width: 40px;
-            height: 40px;
-        }
-
-        /* Animations */
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .snippet-card {
-            animation: fadeIn 0.3s ease-out;
-        }
-
-        /* Code block background */
-        .code-highlight {
-            background: rgba(15, 23, 42, 0.7);
-        }
-
-        /* ── Splash Screen ── */
-        #splash {
-            position: fixed;
-            inset: 0;
-            z-index: 9999;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 50%, #0f172a 100%);
-            transition: opacity 0.6s ease, visibility 0.6s ease;
-        }
-
-        #splash.hidden {
-            opacity: 0;
-            visibility: hidden;
-            pointer-events: none;
-        }
-
-        /* Animated grid background */
-        #splash::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background-image:
-                linear-gradient(rgba(99,102,241,0.06) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(99,102,241,0.06) 1px, transparent 1px);
-            background-size: 40px 40px;
-            animation: gridScroll 8s linear infinite;
-        }
-
-        @keyframes gridScroll {
-            0%   { background-position: 0 0; }
-            100% { background-position: 40px 40px; }
-        }
-
-        /* Glowing orb behind logo */
-        .splash-glow {
-            position: absolute;
-            width: 340px;
-            height: 340px;
-            border-radius: 50%;
-            background: radial-gradient(circle, rgba(99,102,241,0.25) 0%, transparent 70%);
-            animation: pulse 2.4s ease-in-out infinite;
-        }
-
-        @keyframes pulse {
-            0%, 100% { transform: scale(1);   opacity: 0.7; }
-            50%       { transform: scale(1.15); opacity: 1;   }
-        }
-
-        /* Logo icon wrapper */
-        .splash-icon-ring {
-            position: relative;
-            width: 110px;
-            height: 110px;
-            border-radius: 28px;
-            background: linear-gradient(135deg, #4f46e5, #7c3aed);
-            box-shadow: 0 0 0 1px rgba(255,255,255,0.12),
-                        0 20px 60px rgba(99,102,241,0.5);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            animation: iconDrop 0.7s cubic-bezier(0.34,1.56,0.64,1) both;
-            margin-bottom: 32px;
-        }
-
-        @keyframes iconDrop {
-            from { opacity: 0; transform: translateY(-40px) scale(0.7); }
-            to   { opacity: 1; transform: translateY(0)     scale(1);   }
-        }
-
-        .splash-icon-ring svg {
-            width: 56px;
-            height: 56px;
-            color: white;
-            filter: drop-shadow(0 2px 8px rgba(0,0,0,0.4));
-        }
-
-        /* Orbit ring */
-        .splash-icon-ring::after {
-            content: '';
-            position: absolute;
-            inset: -12px;
-            border-radius: 38px;
-            border: 2px solid transparent;
-            border-top-color: rgba(129,140,248,0.8);
-            border-right-color: rgba(167,139,250,0.4);
-            animation: orbit 1.8s linear infinite;
-        }
-
-        @keyframes orbit {
-            to { transform: rotate(360deg); }
-        }
-
-        /* Text */
-        .splash-title {
-            font-size: 2.1rem;
-            font-weight: 700;
-            background: linear-gradient(to right, #818cf8, #a78bfa, #c4b5fd);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            letter-spacing: -0.5px;
-            animation: fadeUp 0.6s 0.3s ease both;
-            position: relative;
-        }
-
-        .splash-sub {
-            margin-top: 10px;
-            font-size: 1rem;
-            color: #94a3b8;
-            animation: fadeUp 0.6s 0.45s ease both;
-            position: relative;
-        }
-
-        @keyframes fadeUp {
-            from { opacity: 0; transform: translateY(16px); }
-            to   { opacity: 1; transform: translateY(0);    }
-        }
-
-        /* Progress bar */
-        .splash-progress-track {
-            position: relative;
-            width: 220px;
-            height: 3px;
-            background: rgba(99,102,241,0.15);
-            border-radius: 99px;
-            overflow: hidden;
-            margin-top: 40px;
-            animation: fadeUp 0.6s 0.6s ease both;
-        }
-
-        .splash-progress-fill {
-            height: 100%;
-            width: 0%;
-            border-radius: 99px;
-            background: linear-gradient(to right, #6366f1, #a78bfa);
-            box-shadow: 0 0 10px rgba(99,102,241,0.7);
-            animation: loadBar 1.6s 0.5s cubic-bezier(0.4,0,0.2,1) forwards;
-        }
-
-        @keyframes loadBar {
-            0%   { width: 0%; }
-            60%  { width: 75%; }
-            100% { width: 100%; }
-        }
-
-        /* Tag pills */
-        .splash-tags {
-            display: flex;
-            gap: 10px;
-            margin-top: 28px;
-            animation: fadeUp 0.6s 0.75s ease both;
-            position: relative;
-        }
-
-        .splash-tag {
-            padding: 4px 12px;
-            border-radius: 99px;
-            font-size: 0.75rem;
-            font-weight: 600;
-            letter-spacing: 0.5px;
-        }
-    </style>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Coding Assistant — Offline Dev Reference</title>
+<style>
+  :root{
+    --bg:#f6f8fa; --panel:#ffffff; --ink:#0f172a; --muted:#5b6b84; --line:#e3e8ef;
+    --brand:#04AA6D; --brand-d:#037a4f; --brand-gl:rgba(4,170,109,.10);
+    --code-bg:#0d1117; --code-ink:#e6edf3;
+    --t-kw:#ff7b72; --t-str:#a5d6ff; --t-num:#f2cc60; --t-com:#8b949e; --t-tag:#7ee787; --t-attr:#d2a8ff;
+    --r:10px; --font:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
+    --mono:'SFMono-Regular',ui-monospace,Consolas,'Liberation Mono',Menlo,monospace;
+    --sidebar:300px; --header:56px;
+  }
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  html,body{height:100%}
+  body{font-family:var(--font);background:var(--bg);color:var(--ink);line-height:1.65;-webkit-font-smoothing:antialiased}
+
+  /* header */
+  header{position:fixed;top:0;left:0;right:0;height:var(--header);z-index:40;display:flex;align-items:center;gap:12px;padding:0 16px;background:var(--panel);border-bottom:1px solid var(--line)}
+  .hamburger{display:none;background:none;border:none;font-size:22px;cursor:pointer;color:var(--ink);padding:4px 8px;border-radius:8px}
+  .hamburger:hover{background:var(--bg)}
+  .brand{display:flex;align-items:center;gap:9px;text-decoration:none;color:var(--ink)}
+  .brand-mark{width:30px;height:30px;border-radius:8px;background:linear-gradient(135deg,var(--brand),var(--brand-d));color:#fff;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:15px}
+  .brand-name{font-weight:800;letter-spacing:-.02em}
+  .brand-name span{color:var(--brand)}
+  .brand-tag{font-size:11px;color:var(--muted);margin-left:2px}
+  .header-count{margin-left:auto;font-size:12px;color:var(--muted)}
+
+  /* layout */
+  .shell{display:flex;padding-top:var(--header);min-height:100vh}
+  aside{position:fixed;top:var(--header);left:0;bottom:0;width:var(--sidebar);background:var(--panel);border-right:1px solid var(--line);overflow-y:auto;padding:14px;z-index:30}
+  main{flex:1;margin-left:var(--sidebar);padding:24px clamp(16px,4vw,44px);max-width:960px;width:100%}
+
+  /* search */
+  .search{position:relative;margin-bottom:14px}
+  .search input{width:100%;padding:.6rem .8rem .6rem 2.2rem;border:1.5px solid var(--line);border-radius:99px;font-family:var(--font);font-size:14px;background:var(--bg);outline:none;transition:border-color .15s,box-shadow .15s}
+  .search input:focus{border-color:var(--brand);box-shadow:0 0 0 3px var(--brand-gl);background:var(--panel)}
+  .search .ic{position:absolute;left:.75rem;top:50%;transform:translateY(-50%);color:var(--muted);font-size:14px}
+
+  /* category tree */
+  .cat{margin-bottom:4px}
+  .cat-head{display:flex;align-items:center;gap:8px;width:100%;background:none;border:none;cursor:pointer;font-family:var(--font);font-size:13px;font-weight:700;color:var(--ink);padding:.5rem .55rem;border-radius:8px;text-align:left}
+  .cat-head:hover{background:var(--bg)}
+  .cat-head .chev{margin-left:auto;color:var(--muted);transition:transform .15s;font-size:11px}
+  .cat.open .cat-head .chev{transform:rotate(90deg)}
+  .cat-icon{width:20px;text-align:center}
+  .cat-items{display:none;padding:2px 0 6px 8px;margin-left:12px;border-left:1px solid var(--line)}
+  .cat.open .cat-items{display:block}
+  .item{display:block;width:100%;text-align:left;background:none;border:none;cursor:pointer;font-family:var(--font);font-size:13px;color:var(--muted);padding:.36rem .55rem;border-radius:7px;line-height:1.4}
+  .item:hover{background:var(--bg);color:var(--ink)}
+  .item.active{background:var(--brand-gl);color:var(--brand-d);font-weight:600}
+  .no-results{font-size:13px;color:var(--muted);padding:.5rem}
+
+  /* main content */
+  .welcome{text-align:center;padding:6vh 0}
+  .welcome h1{font-size:clamp(24px,4vw,34px);font-weight:800;letter-spacing:-.03em;margin-bottom:10px}
+  .welcome h1 span{color:var(--brand)}
+  .welcome p{color:var(--muted);max-width:520px;margin:0 auto 24px}
+  .welcome-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;max-width:640px;margin:0 auto}
+  .wtile{background:var(--panel);border:1px solid var(--line);border-radius:var(--r);padding:16px;cursor:pointer;transition:border-color .15s,transform .15s;text-align:left}
+  .wtile:hover{border-color:var(--brand);transform:translateY(-2px)}
+  .wtile .wi{font-size:22px}
+  .wtile .wn{font-weight:700;margin-top:6px;font-size:14px}
+  .wtile .wc{font-size:12px;color:var(--muted)}
+
+  .crumbs{font-size:12px;color:var(--muted);margin-bottom:6px;text-transform:uppercase;letter-spacing:.06em}
+  .snip-title{font-size:clamp(20px,3vw,28px);font-weight:800;letter-spacing:-.02em;margin-bottom:10px}
+  .tags{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:16px}
+  .tag{font-size:11px;font-weight:600;color:var(--brand-d);background:var(--brand-gl);border-radius:99px;padding:3px 10px}
+  .note{background:var(--panel);border:1px solid var(--line);border-left:3px solid var(--brand);border-radius:var(--r);padding:14px 16px;color:var(--ink);margin-bottom:18px;font-size:14.5px}
+
+  .code-wrap{position:relative;margin-bottom:16px}
+  .code-bar{display:flex;align-items:center;justify-content:space-between;background:#161b22;border:1px solid #30363d;border-bottom:none;border-radius:var(--r) var(--r) 0 0;padding:.4rem .75rem}
+  .code-lang{font-family:var(--mono);font-size:11px;color:#8b949e;text-transform:uppercase;letter-spacing:.08em}
+  .copy-btn{background:#21262d;border:1px solid #30363d;color:#c9d1d9;font-family:var(--font);font-size:12px;font-weight:600;padding:.3rem .7rem;border-radius:6px;cursor:pointer;transition:background .15s}
+  .copy-btn:hover{background:#30363d}
+  .copy-btn.done{color:var(--brand);border-color:var(--brand)}
+  pre{background:var(--code-bg);color:var(--code-ink);border:1px solid #30363d;border-radius:0 0 var(--r) var(--r);padding:16px;overflow-x:auto;font-family:var(--mono);font-size:13px;line-height:1.6}
+  pre code{white-space:pre}
+  .t-kw{color:var(--t-kw)} .t-str{color:var(--t-str)} .t-num{color:var(--t-num)} .t-com{color:var(--t-com);font-style:italic} .t-tag{color:var(--t-tag)} .t-attr{color:var(--t-attr)}
+
+  .tryit{display:flex;align-items:center;gap:10px;margin-bottom:14px;flex-wrap:wrap}
+  .btn{background:var(--brand);color:#fff;border:none;font-family:var(--font);font-weight:700;font-size:13.5px;padding:.55rem 1.1rem;border-radius:8px;cursor:pointer;transition:background .15s,transform .12s}
+  .btn:hover{background:var(--brand-d)}
+  .btn:active{transform:scale(.97)}
+  .btn.ghost{background:var(--panel);color:var(--ink);border:1px solid var(--line)}
+  .btn.ghost:hover{background:var(--bg)}
+  .preview{display:none;border:1px solid var(--line);border-radius:var(--r);overflow:hidden;margin-bottom:16px;background:#fff}
+  .preview.show{display:block}
+  .preview-bar{background:var(--bg);border-bottom:1px solid var(--line);padding:.35rem .75rem;font-size:11px;color:var(--muted);font-weight:600;text-transform:uppercase;letter-spacing:.06em}
+  .preview iframe{width:100%;height:240px;border:none;display:block;background:#fff}
+
+  .pager{display:flex;justify-content:space-between;gap:12px;margin-top:28px;border-top:1px solid var(--line);padding-top:18px}
+  .pager button{flex:1;background:var(--panel);border:1px solid var(--line);border-radius:var(--r);padding:12px 14px;cursor:pointer;font-family:var(--font);text-align:left;transition:border-color .15s}
+  .pager button:hover:not(:disabled){border-color:var(--brand)}
+  .pager button:disabled{opacity:.4;cursor:default}
+  .pager .dir{font-size:11px;color:var(--muted)}
+  .pager .pt{font-size:14px;font-weight:700;color:var(--ink)}
+  .pager .next{text-align:right}
+
+  .scrim{display:none;position:fixed;inset:0;top:var(--header);background:rgba(0,0,0,.35);z-index:25}
+
+  @media(max-width:820px){
+    :root{--sidebar:270px}
+    .hamburger{display:block}
+    aside{transform:translateX(-100%);transition:transform .22s ease;box-shadow:0 0 40px rgba(0,0,0,.15)}
+    aside.open{transform:translateX(0)}
+    main{margin-left:0}
+    .scrim.show{display:block}
+  }
+</style>
 </head>
 <body>
+<header>
+  <button class="hamburger" id="hamburger" aria-label="Menu">☰</button>
+  <a class="brand" href="#" onclick="showHome();return false;">
+    <span class="brand-mark">&lt;/&gt;</span>
+    <span><span class="brand-name">Coding<span>Assistant</span></span> <span class="brand-tag">offline reference</span></span>
+  </a>
+  <span class="header-count" id="header-count"></span>
+</header>
 
-    <!-- ── Splash Screen ── -->
-    <div id="splash">
-        <div class="splash-glow"></div>
+<div class="scrim" id="scrim"></div>
 
-        <div class="splash-icon-ring">
-            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8"
-                      d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"/>
-            </svg>
-        </div>
-
-        <div class="splash-title">Offline Coding Assistant</div>
-        <div class="splash-sub">Your web development reference — works offline</div>
-
-        <div class="splash-tags">
-            <span class="splash-tag" style="background:rgba(249,115,22,0.25);color:#fb923c;">HTML</span>
-            <span class="splash-tag" style="background:rgba(59,130,246,0.25);color:#60a5fa;">CSS</span>
-            <span class="splash-tag" style="background:rgba(234,179,8,0.25);color:#facc15;">JavaScript</span>
-        </div>
-
-        <div class="splash-progress-track">
-            <div class="splash-progress-fill"></div>
-        </div>
+<div class="shell">
+  <aside id="sidebar">
+    <div class="search">
+      <span class="ic">🔍</span>
+      <input type="text" id="search" placeholder="Search snippets…" autocomplete="off" />
     </div>
+    <nav id="tree"></nav>
+  </aside>
 
-    <div class="container">
-        <!-- Header -->
-        <div class="header">
-            <div class="header-title">
-                <svg class="icon-lg" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path>
-                </svg>
-                <h1>Offline Coding Assistant</h1>
-            </div>
-            <p>Your complete coding reference — HTML, CSS, JS, Python, Java, Rust, React &amp; Kotlin. Works offline!</p>
-            <div class="stats">
-                <span id="total-snippets">0 snippets</span>
-                <span class="sep">•</span>
-                <span id="html-count">0 HTML</span>
-                <span class="sep">•</span>
-                <span id="css-count">0 CSS</span>
-                <span class="sep">•</span>
-                <span id="js-count">0 JavaScript</span>
-                <span class="sep">•</span>
-                <span id="py-count">0 Python</span>
-                <span class="sep">•</span>
-                <span id="java-count">0 Java</span>
-                <span class="sep">•</span>
-                <span id="rust-count">0 Rust</span>
-                <span class="sep">•</span>
-                <span id="react-count">0 React</span>
-                <span class="sep">•</span>
-                <span id="kotlin-count">0 Kotlin</span>
-            </div>
-        </div>
+  <main id="main"></main>
+</div>
 
-        <!-- Termux/Acode Guide -->
-        <div class="guide-card">
-            <div class="guide-header" onclick="toggleGuide()">
-                <div>
-                    <div class="guide-title">📱 Using with Termux & Acode</div>
-                    <p style="font-size: 0.9rem; color: #9ca3af; margin-top: 4px;">Click to see setup guide</p>
-                </div>
-                <span id="guide-arrow">▼</span>
-            </div>
-            <div class="guide-content" id="guideContent">
-                <div class="guide-section">
-                    <h4>🚀 Quick Setup:</h4>
-                    <ol>
-                        <li><strong>Save this page:</strong> In your browser, tap the menu → "Save page" or bookmark it</li>
-                        <li><strong>Access offline:</strong> Open the saved HTML file in any browser - works without internet!</li>
-                        <li><strong>In Acode:</strong> Create new HTML file → Copy a snippet → Paste → Preview it!</li>
-                    </ol>
-                </div>
+<script>
+/* ============================================================
+   SNIPPET LIBRARY  —  add entries here to grow the reference.
+   Each: { id, category, title, tags:[], note, code, lang }
+   lang ∈ html | css | js | python | react | git
+   Try-it live preview auto-enables for html / css / js.
+============================================================ */
+const CATEGORIES = [
+  { key:'HTML',       icon:'🌐' },
+  { key:'CSS',        icon:'🎨' },
+  { key:'JavaScript', icon:'⚡' },
+  { key:'Python',     icon:'🐍' },
+  { key:'React',      icon:'⚛️' },
+  { key:'Java',       icon:'☕' },
+  { key:'Kotlin',     icon:'🟣' },
+  { key:'Rust',       icon:'🦀' },
+];
 
-                <div class="guide-section">
-                    <h4>💡 Workflow Tips:</h4>
-                    <ul>
-                        <li><strong>Split screen:</strong> Open this assistant + Acode side-by-side on your phone</li>
-                        <li><strong>Quick copy:</strong> Tap the copy icon on any snippet to copy code instantly</li>
-                        <li><strong>Search fast:</strong> Use search for "button", "form", "color" etc.</li>
-                        <li><strong>Filter by need:</strong> Select HTML/CSS/JavaScript to focus on what you're building</li>
-                        <li><strong>Beginner mode:</strong> Turn on for simple explanations while learning</li>
-                    </ul>
-                </div>
-
-                <div class="guide-section">
-                    <h4>🎯 Common Tasks:</h4>
-                    <ul style="font-size: 0.85rem;">
-                        <li><strong>Make a form:</strong> Search "form" → Copy "Basic Form" snippet</li>
-                        <li><strong>Add a button:</strong> Search "button" → Add to HTML → Style with CSS</li>
-                        <li><strong>Change colors:</strong> Search "color" → Use CSS color examples</li>
-                        <li><strong>Make it interactive:</strong> Search "click" → Add JavaScript event</li>
-                        <li><strong>Make responsive:</strong> Search "media" → Add responsive CSS</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-
-        <!-- Search and Filters -->
-        <div class="search-card">
-            <div class="search-input-wrapper">
-                <svg class="icon search-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
-                </svg>
-                <input 
-                    type="text" 
-                    class="search-input" 
-                    id="searchInput" 
-                    placeholder="Search: 'button', 'form', 'color', 'click'..."
-                    onkeyup="filterSnippets()"
-                >
-            </div>
-
-            <div class="button-row">
-                <button class="btn btn-primary" onclick="toggleFilters()">
-                    <svg class="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z"></path>
-                    </svg>
-                    <span id="filterBtnText">Show Filters</span>
-                </button>
-                
-                <button class="btn btn-success" id="simpleModeBtn" onclick="toggleSimpleMode()">
-                    <svg class="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
-                    </svg>
-                    Beginner Mode ON
-                </button>
-
-                <button class="btn btn-danger" id="clearBtn" onclick="clearFilters()" style="display: none;">
-                    <svg class="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
-                    </svg>
-                    Clear
-                </button>
-            </div>
-
-            <div class="filter-grid" id="filterGrid">
-                <div class="filter-group">
-                    <label for="languageFilter">Language</label>
-                    <select id="languageFilter" onchange="filterSnippets()">
-                        <option value="All">All</option>
-                    </select>
-                </div>
-                <div class="filter-group">
-                    <label for="domainFilter">Domain/Category</label>
-                    <select id="domainFilter" onchange="filterSnippets()">
-                        <option value="All">All</option>
-                    </select>
-                </div>
-            </div>
-        </div>
-
-        <!-- Quick Tips -->
-        <div class="tips-card" id="quickTips">
-            <div class="tips-content">
-                <svg class="icon" style="color: #86efac; flex-shrink: 0; margin-top: 4px;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                </svg>
-                <div>
-                    <h4 style="color: #86efac; margin-bottom: 8px;">👋 New to coding? Start here:</h4>
-                    <ul style="color: #d1d5db; font-size: 0.9rem;">
-                        <li><strong>Building a website?</strong> Search "Basic HTML Document" → Copy it → That's your starting point!</li>
-                        <li><strong>Want to add a button?</strong> Search "button" or filter by HTML</li>
-                        <li><strong>Change colors?</strong> Search "color" and find CSS examples</li>
-                        <li><strong>Make things clickable?</strong> Search "click" for JavaScript events</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-
-        <!-- Results Count -->
-        <div class="results-count" id="resultsCount">Loading snippets...</div>
-
-        <!-- Snippets Grid -->
-        <div class="snippets-grid" id="snippetsGrid"></div>
-
-        <!-- No Results -->
-        <div class="no-results" id="noResults" style="display: none;">
-            <svg style="width: 64px; height: 64px; margin: 0 auto; color: #6b7280;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path>
-            </svg>
-            <h3>No snippets found</h3>
-            <p>Try adjusting your search or filters</p>
-            <button class="btn btn-primary" onclick="clearFilters()">Clear All Filters</button>
-        </div>
-
-        <!-- Footer -->
-        <div class="footer">
-            <p style="font-weight: 600;">💾 Works completely offline • Perfect for Termux & Acode</p>
-            <p><span id="footer-count">0</span> code examples • HTML5, CSS3, JavaScript & more</p>
-            <p style="font-size: 0.8rem;">Save this page to your device and code anywhere, anytime!</p>
-        </div>
-    </div>
-
-    <script>
-        // Code Database
-        const codeDatabase = [
+/* ============================================================
+   SNIPPET LIBRARY — all entries imported verbatim from the
+   original Coding Assistant. Add more with the same shape:
+   { language, domain, task, code_example, description, simple_explanation }
+============================================================ */
+const codeDatabase = [
             // HTML
             {
                 language: "HTML",
@@ -5551,258 +4877,180 @@ function App() {
 
         ];
 
-        // State
-        let simpleMode = true;
-        let allSnippets = [];
-        let filteredSnippets = [];
+const LANG_MAP = { HTML:'html', CSS:'css', JavaScript:'js', Python:'python', React:'react', Java:'java', Kotlin:'kotlin', Rust:'rust' };
+const SNIPPETS = codeDatabase.map((s, i) => ({
+  id:'sn-'+i, category:s.language, title:s.task || ('Snippet '+(i+1)),
+  tags:s.domain ? [s.domain] : [],
+  note:[s.description, s.simple_explanation].filter(Boolean).join('  ·  '),
+  code:s.code_example || '', lang:LANG_MAP[s.language] || 'js'
+}));
 
-        // Initialize
-        document.addEventListener('DOMContentLoaded', function() {
-            allSnippets = codeDatabase;
-            populateFilters();
-            updateStats();
-            renderSnippets();
-        });
+const $ = id => document.getElementById(id);
+let currentId = null;
+let filtered = SNIPPETS.slice();
 
-        // Toggle Guide
-        function toggleGuide() {
-            const content = document.getElementById('guideContent');
-            const arrow = document.getElementById('guide-arrow');
-            content.classList.toggle('show');
-            arrow.textContent = content.classList.contains('show') ? '▲' : '▼';
-        }
+function esc(s){ return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
 
-        // Toggle Filters
-        function toggleFilters() {
-            const grid = document.getElementById('filterGrid');
-            const btnText = document.getElementById('filterBtnText');
-            grid.classList.toggle('show');
-            btnText.textContent = grid.classList.contains('show') ? 'Hide Filters' : 'Show Filters';
-        }
+/* lightweight, single-pass highlighter (no CDN, offline) */
+function highlight(code, lang){
+  let s = esc(code);
+  if(lang === 'html' || lang === 'react'){
+    // tags, attributes, strings
+    s = s.replace(/(&lt;\/?[a-zA-Z][\w-]*|\/?&gt;|&gt;)/g, '<span class="t-tag">$1</span>')
+         .replace(/([\w-]+)=(&quot;[^&]*&quot;|"[^"]*")/g, '<span class="t-attr">$1</span>=<span class="t-str">$2</span>');
+    return s;
+  }
+  let re;
+  if(lang === 'python'){
+    re = /(#[^\n]*)|('[^']*'|"[^"]*")|(\b\d+(?:\.\d+)?\b)|(\b(?:def|return|import|from|for|in|if|elif|else|while|class|with|as|lambda|True|False|None|print|not|and|or)\b)/g;
+  } else if(lang === 'css'){
+    re = /(\/\*[\s\S]*?\*\/)|('[^']*'|"[^"]*")|(\b\d+(?:\.\d+)?(?:px|em|rem|%|s|fr|vh|vw)?\b|#[0-9a-fA-F]{3,8})|(@media|:root|:hover|var|!important)/g;
+  } else if(lang === 'git'){
+    re = /(#[^\n]*)|('[^']*'|"[^"]*")|()|(\b(?:git)\b)/g;
+  } else { // js
+    re = /(\/\/[^\n]*|\/\*[\s\S]*?\*\/)|(`[^`]*`|'[^']*'|"[^"]*")|(\b\d+(?:\.\d+)?\b)|(\b(?:const|let|var|function|return|if|else|for|while|async|await|import|export|from|new|class|try|catch|typeof|of|null|true|false)\b)/g;
+  }
+  return s.replace(re, (m, com, str, num, kw) => {
+    if(com) return '<span class="t-com">'+com+'</span>';
+    if(str) return '<span class="t-str">'+str+'</span>';
+    if(num) return '<span class="t-num">'+num+'</span>';
+    if(kw)  return '<span class="t-kw">'+kw+'</span>';
+    return m;
+  });
+}
 
-        // Toggle Simple Mode
-        function toggleSimpleMode() {
-            simpleMode = !simpleMode;
-            const btn = document.getElementById('simpleModeBtn');
-            if (simpleMode) {
-                btn.classList.remove('btn-secondary');
-                btn.classList.add('btn-success');
-                btn.innerHTML = `<svg class="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path></svg>Beginner Mode ON`;
-            } else {
-                btn.classList.remove('btn-success');
-                btn.classList.add('btn-secondary');
-                btn.innerHTML = `<svg class="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path></svg>Beginner Mode OFF`;
-            }
-            renderSnippets();
-        }
+/* build the runnable document for Try-it (html / css / js) */
+function buildRun(sn){
+  if(sn.lang === 'html') return sn.code;
+  if(sn.lang === 'css'){
+    return `<!DOCTYPE html><meta charset="utf-8"><style>body{font-family:sans-serif;padding:16px;margin:0}${sn.code}</style>`
+      + `<h3>Heading</h3><p>Paragraph text.</p><button class="btn">Button</button>`
+      + `<div class="box">Box</div><ul><li>One</li><li>Two</li><li>Three</li></ul>`;
+  }
+  if(sn.lang === 'js'){
+    return `<!DOCTYPE html><meta charset="utf-8"><body style="font-family:sans-serif;padding:16px;margin:0">`
+      + `<div id="app"></div><pre id="log" style="background:#0d1117;color:#e6edf3;padding:12px;border-radius:8px;white-space:pre-wrap;font-family:monospace;font-size:12px"></pre>`
+      + `<script>(function(){var L=document.getElementById('log');var _l=function(){L.textContent+=[].slice.call(arguments).map(function(x){return typeof x==='object'?JSON.stringify(x):String(x)}).join(' ')+'\\n'};console.log=_l;console.error=_l;try{\n${sn.code}\n}catch(e){_l('Error: '+e.message)}})();<\/script>`;
+  }
+  return '';
+}
+const canRun = sn => ['html','css','js'].includes(sn.lang);
 
-        // Populate Filters
-        function populateFilters() {
-            const languages = [...new Set(codeDatabase.map(s => s.language))].sort();
-            const domains = [...new Set(codeDatabase.map(s => s.domain))].sort();
+/* ---- rendering ---- */
+function renderTree(){
+  const q = $('search').value.trim().toLowerCase();
+  filtered = q
+    ? SNIPPETS.filter(s => (s.title+' '+s.category+' '+s.tags.join(' ')).toLowerCase().includes(q))
+    : SNIPPETS.slice();
+  $('header-count').textContent = SNIPPETS.length + ' snippets';
 
-            const langSelect = document.getElementById('languageFilter');
-            const domainSelect = document.getElementById('domainFilter');
+  const tree = $('tree');
+  const cats = CATEGORIES.filter(c => filtered.some(s => s.category === c.key));
+  if(!cats.length){ tree.innerHTML = '<div class="no-results">No snippets match “'+esc(q)+'”.</div>'; return; }
 
-            languages.forEach(lang => {
-                const count = codeDatabase.filter(s => s.language === lang).length;
-                const option = document.createElement('option');
-                option.value = lang;
-                option.textContent = `${lang} (${count})`;
-                langSelect.appendChild(option);
-            });
+  tree.innerHTML = cats.map(c => {
+    const items = filtered.filter(s => s.category === c.key);
+    const open = q || (currentId && items.some(s => s.id === currentId)) ? ' open' : '';
+    return `<div class="cat${open}" data-cat="${c.key}">
+      <button class="cat-head" onclick="toggleCat('${c.key}')"><span class="cat-icon">${c.icon}</span>${c.key}<span class="chev">▶</span></button>
+      <div class="cat-items">
+        ${items.map(s => `<button class="item${s.id===currentId?' active':''}" onclick="openSnippet('${s.id}')">${esc(s.title)}</button>`).join('')}
+      </div>
+    </div>`;
+  }).join('');
+}
 
-            domains.forEach(domain => {
-                const option = document.createElement('option');
-                option.value = domain;
-                option.textContent = domain;
-                domainSelect.appendChild(option);
-            });
-        }
+function toggleCat(key){
+  const el = document.querySelector('.cat[data-cat="'+CSS.escape(key)+'"]');
+  if(el) el.classList.toggle('open');
+}
 
-        // Update Stats
-        function updateStats() {
-            const count = (lang) => codeDatabase.filter(s => s.language === lang).length;
+function showHome(){
+  currentId = null;
+  renderTree();
+  $('main').innerHTML = `
+    <div class="welcome">
+      <h1>Your offline <span>code reference</span></h1>
+      <p>Handy, copy-ready snippets across the web stack — searchable, highlighted, and runnable, with no internet required. Pick a topic to begin.</p>
+      <div class="welcome-grid">
+        ${CATEGORIES.map(c => {
+          const n = SNIPPETS.filter(s => s.category===c.key).length;
+          return `<div class="wtile" onclick="openFirst('${c.key}')"><div class="wi">${c.icon}</div><div class="wn">${c.key}</div><div class="wc">${n} snippet${n!==1?'s':''}</div></div>`;
+        }).join('')}
+      </div>
+    </div>`;
+  closeDrawer();
+}
 
-            document.getElementById('total-snippets').textContent = `${codeDatabase.length} snippets`;
-            document.getElementById('html-count').textContent    = `${count('HTML')} HTML`;
-            document.getElementById('css-count').textContent     = `${count('CSS')} CSS`;
-            document.getElementById('js-count').textContent      = `${count('JavaScript')} JavaScript`;
-            document.getElementById('py-count').textContent      = `${count('Python')} Python`;
-            document.getElementById('java-count').textContent    = `${count('Java')} Java`;
-            document.getElementById('rust-count').textContent    = `${count('Rust')} Rust`;
-            document.getElementById('react-count').textContent   = `${count('React')} React`;
-            document.getElementById('kotlin-count').textContent  = `${count('Kotlin')} Kotlin`;
-            document.getElementById('footer-count').textContent  = codeDatabase.length;
-        }
+function openFirst(cat){ const s = SNIPPETS.find(x => x.category===cat); if(s) openSnippet(s.id); }
 
-        // Filter Snippets
-        function filterSnippets() {
-            const searchTerm = document.getElementById('searchInput').value.toLowerCase();
-            const language = document.getElementById('languageFilter').value;
-            const domain = document.getElementById('domainFilter').value;
+function openSnippet(id){
+  const sn = SNIPPETS.find(s => s.id === id); if(!sn) return;
+  currentId = id;
+  const list = SNIPPETS.filter(s => s.category === sn.category);
+  const idx = list.findIndex(s => s.id === id);
+  const prev = list[idx-1], next = list[idx+1];
 
-            filteredSnippets = codeDatabase.filter(snippet => {
-                const matchesSearch = searchTerm === '' || 
-                    snippet.task.toLowerCase().includes(searchTerm) ||
-                    snippet.language.toLowerCase().includes(searchTerm) ||
-                    snippet.description.toLowerCase().includes(searchTerm) ||
-                    (snippet.simple_explanation && snippet.simple_explanation.toLowerCase().includes(searchTerm));
-                
-                const matchesLanguage = language === 'All' || snippet.language === language;
-                const matchesDomain = domain === 'All' || snippet.domain === domain;
-                
-                return matchesSearch && matchesLanguage && matchesDomain;
-            });
+  $('main').innerHTML = `
+    <div class="crumbs">${sn.category}</div>
+    <h1 class="snip-title">${esc(sn.title)}</h1>
+    <div class="tags">${sn.tags.map(t=>`<span class="tag">#${esc(t)}</span>`).join('')}</div>
+    <div class="note">${esc(sn.note)}</div>
 
-            // Show/hide clear button
-            const clearBtn = document.getElementById('clearBtn');
-            if (searchTerm || language !== 'All' || domain !== 'All') {
-                clearBtn.style.display = 'flex';
-            } else {
-                clearBtn.style.display = 'none';
-            }
+    <div class="code-wrap">
+      <div class="code-bar">
+        <span class="code-lang">${sn.lang}</span>
+        <button class="copy-btn" id="copy">Copy</button>
+      </div>
+      <pre><code>${highlight(sn.code, sn.lang)}</code></pre>
+    </div>
 
-            // Show/hide quick tips
-            const tips = document.getElementById('quickTips');
-            if (filteredSnippets.length === codeDatabase.length && !searchTerm) {
-                tips.style.display = 'block';
-            } else {
-                tips.style.display = 'none';
-            }
+    ${canRun(sn) ? `<div class="tryit">
+        <button class="btn" id="run">▶ Try it yourself</button>
+        <button class="btn ghost" id="hide" style="display:none">Hide preview</button>
+      </div>
+      <div class="preview" id="preview"><div class="preview-bar">Live preview</div><iframe id="frame" sandbox="allow-scripts"></iframe></div>` : ''}
 
-            renderSnippets();
-        }
+    <div class="pager">
+      <button ${prev?'':'disabled'} onclick="${prev?`openSnippet('${prev.id}')`:''}"><div class="dir">← Previous</div><div class="pt">${prev?esc(prev.title):'—'}</div></button>
+      <button class="next" ${next?'':'disabled'} onclick="${next?`openSnippet('${next.id}')`:''}"><div class="dir">Next →</div><div class="pt">${next?esc(next.title):'—'}</div></button>
+    </div>`;
 
-        // Clear Filters
-        function clearFilters() {
-            document.getElementById('searchInput').value = '';
-            document.getElementById('languageFilter').value = 'All';
-            document.getElementById('domainFilter').value = 'All';
-            filterSnippets();
-        }
+  // copy
+  $('copy').addEventListener('click', () => {
+    const done = () => { const b=$('copy'); b.textContent='Copied!'; b.classList.add('done'); setTimeout(()=>{b.textContent='Copy';b.classList.remove('done');},1400); };
+    if(navigator.clipboard && navigator.clipboard.writeText){ navigator.clipboard.writeText(sn.code).then(done, fallbackCopy); }
+    else fallbackCopy();
+    function fallbackCopy(){ const ta=document.createElement('textarea'); ta.value=sn.code; document.body.appendChild(ta); ta.select(); try{document.execCommand('copy');}catch(e){} ta.remove(); done(); }
+  });
 
-        // Render Snippets
-        function renderSnippets() {
-            const grid = document.getElementById('snippetsGrid');
-            const noResults = document.getElementById('noResults');
-            const resultsCount = document.getElementById('resultsCount');
+  // try-it
+  if(canRun(sn)){
+    $('run').addEventListener('click', () => {
+      $('frame').srcdoc = buildRun(sn);
+      $('preview').classList.add('show');
+      $('run').style.display='none'; $('hide').style.display='inline-block';
+    });
+    $('hide').addEventListener('click', () => {
+      $('preview').classList.remove('show'); $('frame').srcdoc='';
+      $('hide').style.display='none'; $('run').style.display='inline-block';
+    });
+  }
 
-            const snippetsToShow = filteredSnippets.length > 0 ? filteredSnippets : 
-                                   (document.getElementById('searchInput').value || 
-                                    document.getElementById('languageFilter').value !== 'All' || 
-                                    document.getElementById('domainFilter').value !== 'All') ? [] : allSnippets;
+  renderTree();
+  closeDrawer();
+  window.scrollTo(0,0);
+}
 
-            resultsCount.textContent = `Found ${snippetsToShow.length} snippet${snippetsToShow.length !== 1 ? 's' : ''}`;
+/* ---- mobile drawer ---- */
+function openDrawer(){ $('sidebar').classList.add('open'); $('scrim').classList.add('show'); }
+function closeDrawer(){ $('sidebar').classList.remove('open'); $('scrim').classList.remove('show'); }
+$('hamburger').addEventListener('click', () => $('sidebar').classList.contains('open') ? closeDrawer() : openDrawer());
+$('scrim').addEventListener('click', closeDrawer);
+$('search').addEventListener('input', renderTree);
 
-            if (snippetsToShow.length === 0) {
-                grid.style.display = 'none';
-                noResults.style.display = 'block';
-                return;
-            }
-
-            grid.style.display = 'grid';
-            noResults.style.display = 'none';
-            grid.innerHTML = '';
-
-            snippetsToShow.forEach((snippet, index) => {
-                const card = createSnippetCard(snippet, index);
-                grid.appendChild(card);
-            });
-        }
-
-        // Create Snippet Card
-        function createSnippetCard(snippet, index) {
-            const card = document.createElement('div');
-            card.className = 'snippet-card';
-
-            const tagClass = snippet.language === 'HTML' ? 'tag-html' :
-                            snippet.language === 'CSS' ? 'tag-css' :
-                            snippet.language === 'JavaScript' ? 'tag-javascript' :
-                            snippet.language === 'Python' ? 'tag-python' : 'tag-other';
-
-            card.innerHTML = `
-                <div class="snippet-header">
-                    <div class="snippet-title">
-                        <h3>${snippet.task}</h3>
-                        <div class="snippet-tags">
-                            <span class="tag ${tagClass}">${snippet.language}</span>
-                            <span class="tag tag-other">${snippet.domain}</span>
-                        </div>
-                    </div>
-                    <button class="copy-btn" onclick="copyCode(${index})" title="Copy code">
-                        <svg class="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path>
-                        </svg>
-                    </button>
-                </div>
-                <div class="snippet-body">
-                    <div class="code-block">
-                        <code>${escapeHtml(snippet.code_example)}</code>
-                    </div>
-                    ${simpleMode && snippet.simple_explanation ? `
-                        <div class="explanation">
-                            <h4>
-                                <svg class="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
-                                </svg>
-                                Simple Explanation
-                            </h4>
-                            <p>${snippet.simple_explanation}</p>
-                        </div>
-                    ` : `
-                        <div class="tech-explanation">
-                            <h4>Technical Description</h4>
-                            <p>${snippet.description}</p>
-                        </div>
-                    `}
-                </div>
-            `;
-
-            return card;
-        }
-
-        // Copy Code
-        function copyCode(index) {
-            const snippets = filteredSnippets.length > 0 ? filteredSnippets : allSnippets;
-            const code = snippets[index].code_example;
-            
-            navigator.clipboard.writeText(code).then(() => {
-                // Visual feedback
-                const buttons = document.querySelectorAll('.copy-btn');
-                const btn = buttons[index];
-                const originalHTML = btn.innerHTML;
-                
-                btn.innerHTML = `<svg class="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" style="color: #86efac;">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-                </svg>`;
-                
-                setTimeout(() => {
-                    btn.innerHTML = originalHTML;
-                }, 2000);
-            });
-        }
-
-        // Escape HTML
-        function escapeHtml(text) {
-            const div = document.createElement('div');
-            div.textContent = text;
-            return div.innerHTML;
-        }
-
-        // ── Splash dismiss ──
-        (function () {
-            // The progress bar animation takes ~2.1s total (0.5s delay + 1.6s fill).
-            // Wait just a touch longer so the bar fully completes, then fade out.
-            const splash = document.getElementById('splash');
-            setTimeout(function () {
-                splash.classList.add('hidden');
-                // Remove from DOM after fade completes so it can't be tabbed into
-                splash.addEventListener('transitionend', function () {
-                    splash.remove();
-                }, { once: true });
-            }, 2400);
-        })();
-    </script>
+/* ---- start ---- */
+showHome();
+</script>
 </body>
 </html>
